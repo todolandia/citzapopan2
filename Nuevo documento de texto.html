@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CITZapopan - Cursos de Tecnología en Zapopan</title>
+    <style>
+        /* RESET Y ESTILOS GENERALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+/* Slider Styles */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+    max-width: 500px;
+    background: rgba(10, 25, 47, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    color: white;
+    animation: fadeInUp 1s ease;
+}
+
+.slide-label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #FF6B35;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.slider-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 10;
+}
+
+.control {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.control:hover {
+    background: #FF6B35;
+}
+
+.dots-container {
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: #FF6B35;
+    transform: scale(1.2);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide-content {
+        left: 5%;
+        right: 5%;
+        max-width: none;
+        bottom: 10%;
+        padding: 1rem;
+    }
+    
+    .hero-slider {
+        height: 60vh;
+    }
+}
+
+
+ 
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    animation: gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.logo-loading {
+    width: 20vw;
+    max-width: 200px;
+    min-width: 100px;
+    animation: heartbeat 1.5s infinite, float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+    /* Agrega estas 2 líneas: */
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.loading-text {
+    color: white;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Añade esto al final del CSS para ocultar el contenido inicialmente */
+body:not(.loaded) .main-content {
+    opacity: 0;
+}
+
+body.loaded .main-content {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* HEADER */
+       header {
+    background-color: #0a192f;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-header {
+    height: 60px; /* Tamaño aumentado */
+    transition: transform 0.3s;
+}
+
+.logo-header:hover {
+    transform: scale(1.05); /* Efecto hover sutil */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem; /* Espaciado uniforme */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #FF6B35;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Subrayado animado al hacer hover */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #FF6B35;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 60%;
+}
+
+/* Botón destacado para "Campus Virtual" */
+nav ul li:last-child a {
+    background: #FF6B35;
+    color: white;
+    padding: 0.5rem 1.5rem;
+}
+
+nav ul li:last-child a:hover {
+    background: #e05a2b;
+    box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+}
+        
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            padding: 4rem 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0a192f;
+        }
+        
+        .hero h1 span {
+            color: #FF6B35;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #FF6B35;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e05a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #0a192f;
+            color: #0a192f;
+        }
+        
+        .btn-secondary:hover {
+            background: #0a192f;
+            color: white;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* SECCIÓN CURSOS */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #0a192f;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #FF6B35;
+        }
+        
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .curso-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .curso-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .curso-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .curso-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .curso-card:hover .curso-img img {
+            transform: scale(1.1);
+        }
+        
+        .curso-info {
+            padding: 1.5rem;
+        }
+        
+        .curso-info h3 {
+            margin-bottom: 0.5rem;
+            color: #0a192f;
+        }
+        
+        .curso-info p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .btn-curso {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #0a192f;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .btn-curso:hover {
+            background: #FF6B35;
+        }
+        
+        /* SECCIÓN ALIADOS */
+        .aliados {
+            background: #f9f9f9;
+            padding: 4rem 0;
+        }
+        
+        .aliados-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .aliados-logos img {
+            height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .aliados-logos img:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: #0a192f;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #FF6B35;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #FF6B35;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #FF6B35;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                order: 2;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            nav ul {
+                display: none; /* Menú hamburguesa (implementar con JS) */
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="logo-container">
+        <img src="imagenes/logo.png" alt="CITZapopan" class="logo-loading">
+        <p class="loading-text">Centro de innovación tecnológica de Zapopan</p>
+    </div>
+</div>
+
+
+
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <img src="imagenes/logo.png" alt="CITZapopan" class="logo-header">
+            <nav>
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#aliados">Aliados</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#campus">Campus Virtual</a></li> <!-- Nueva sección -->
+    </ul>
+</nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <!-- Hero Section con Slider -->
+<section class="hero-slider">
+    <div class="slider-container">
+        <!-- Slide 1 - Niños -->
+        <div class="slide active">
+            <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\niños.jpg" alt="Niños aprendiendo robótica">
+            <div class="slide-content">
+                <h2>¡Niños!</h2>
+                <p>Cursos diseñados para niños de 8 a 12 años.</p>
+                <a href="#cursos-ninos" class="btn btn-primary">Ver cursos para niños</a>
+            </div>
+            <div class="slide-label">Niños</div>
+        </div>
+
+        <!-- Slide 2 - Jóvenes/Adultos -->
+        <div class="slide">
+            <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\jovenes.jpg" alt="Jóvenes en taller de programación">
+            <div class="slide-content">
+                <h2>Jovenes y adultos</h2>
+                <p>Domina tecnologías demandadas con proyectos reales.</p>
+                <a href="#cursos-adultos" class="btn btn-primary">Cursos para jóvenes/adultos</a>
+            </div>
+            <div class="slide-label">Jóvenes/Adultos</div>
+        </div>
+
+        <!-- Slide 3 - Escuelas -->
+        <div class="slide">
+            <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\escuelas.jpg" alt="Capacitación para docentes">
+            <div class="slide-content">
+                <h2>Soluciones educativas para instituciones</h2>
+                <p>Programas a medida para escuelas: clases curriculares, after school o capacitación docente.</p>
+                <a href="#paquetes-escuelas" class="btn btn-primary">Solicitar propuesta</a>
+            </div>
+            <div class="slide-label">Para Escuelas</div>
+        </div>
+    </div>
+
+    <!-- Controles del Slider -->
+    <div class="slider-controls">
+        <button class="control prev">❮</button>
+        <div class="dots-container">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <button class="control next">❯</button>
+    </div>
+</section>
+
+    <!-- SECCIÓN CURSOS -->
+    <section class="cursos-section" id="cursos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Cursos</h2>
+            </div>
+            <div class="cursos-grid">
+                <!-- Curso 1 -->
+                <div class="curso-card">
+                    <div class="curso-img">
+                        <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\masinfoNiños.jpg" alt="Programación para niños">
+                    </div>
+                    <div class="curso-info">
+                        <h3>Programación para Niños</h3>
+                        <p>Aprende lógica de programación con Scratch y Minecraft. Edades 8-12 años.</p>
+                        <a href="C:\Users\02\Documents\citz\PAgina web\ProgramacioParaNiños.html" class="btn-curso">Más información</a>
+                    </div>
+                </div>
+                
+                <!-- Curso 2 -->
+                <div class="curso-card">
+                    <div class="curso-img">
+                        <img src="imagenes/curso-robotica.jpg" alt="Robótica educativa">
+                    </div>
+                    <div class="curso-info">
+                        <h3>Robótica Educativa</h3>
+                        <p>Construye y programa robots con Arduino y LEGO Mindstorms.</p>
+                        <a href="#" class="btn-curso">Más información</a>
+                    </div>
+                </div>
+                
+                <!-- Curso 3 -->
+                <div class="curso-card">
+                    <div class="curso-img">
+                        <img src="imagenes/curso-diseno-3d.jpg" alt="Diseño 3D">
+                    </div>
+                    <div class="curso-info">
+                        <h3>Diseño 3D e Impresión</h3>
+                        <p>Domina TinkerCAD y Blender para crear tus propios modelos.</p>
+                        <a href="#" class="btn-curso">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ALIADOS -->
+    <section class="aliados" id="aliados">
+        <div class="container">
+            <div class="section-title">
+                <h2>Aliados Estratégicos</h2>
+            </div>
+            <div class="aliados-logos">
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\dif.png" alt="DIF Zapopan">
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\lin.png" alt="Laboratorio de Innovación">
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\taleny.png" alt="Colegio Taleny">
+                <img src=""C:\Users\02\Documents\citz\PAgina web\imagenes\newjeanpiaget.jpg"" alt="Colegio Kippling">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CITZapopan</h3>
+                    <p>Centro de Innovación Tecnológica de Zapopan. Formando creadores del futuro.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Tel: 33 1234 5678</li>
+                        <li>Email: info@citzapopan.edu.mx</li>
+                        <li>Dirección: Av. Tecnológico 123, Zapopan</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Redes Sociales</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CITZapopan. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para iconos (opcional) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+<script>
+    // Espera a que todo cargue (imágenes incluidas)
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.getElementById('loadingScreen').style.opacity = '0';
+            document.body.classList.add('loaded');
+            
+            // Elimina el loading del DOM después de la animación
+            setTimeout(function() {
+                document.getElementById('loadingScreen').remove();
+            }, 500);
+        }, 3000); // 3 segundos de loading (ajústalo)
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentIndex = 0;
+
+        // Mostrar slide actual
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        // Navegación
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        // Click en dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        // Autoplay (opcional)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, 5000);
+    });
+</script>
+
+</body>
+</html>

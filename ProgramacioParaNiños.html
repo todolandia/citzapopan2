@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación para Niños | CITZapopan</title>
+    <!-- Mismos estilos que index.html -->
+    <style>
+
+
+/* NAV MEJORADO */
+nav {
+    position: relative;
+    z-index: 1000;
+}
+
+.main-menu {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #FF6B35;
+    transition: width 0.4s ease;
+}
+
+.nav-link:hover::before {
+    width: 70%;
+}
+
+.nav-icon {
+    margin-right: 8px;
+    font-size: 1.1em;
+    transition: transform 0.3s;
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.2);
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    color: #0a192f !important;
+    padding: 0.8rem 1.5rem !important;
+    display: block !important;
+    transition: all 0.3s !important;
+    border-radius: 0 !important;
+}
+
+.dropdown-menu a:hover {
+    background: #f5f7fa !important;
+    color: #FF6B35 !important;
+    transform: none !important;
+}
+
+/* Botón especial */
+.cta-button {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    margin-left: 1rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .main-menu {
+        gap: 0.2rem;
+    }
+    .nav-link {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Aquí iría el estilo del menú hamburguesa */
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* HEADER (Igual que index.html) */
+        header {
+            background-color: #0a192f;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-header {
+            height: 60px;
+            transition: transform 0.3s;
+        }
+        
+        /* ... (Todos los mismos estilos del header que tienes en index.html) ... */
+
+        /* HERO ESPECÍFICO */
+        .hero-ninos {
+            background: linear-gradient(135deg, #4776E6 0%, #6e48aa 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-ninos h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-ninos p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* SECCIÓN CURSOS */
+        .curso-destacado {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .curso-destacado img {
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .curso-info {
+            width: 50%;
+        }
+        
+        .curso-info h2 {
+            color: #0a192f;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .curso-info ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .curso-info li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .edad-badge {
+            display: inline-block;
+            background: #FF6B35;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* TESTIMONIOS */
+        .testimonios {
+            background: #f9f9f9;
+            padding: 4rem 0;
+        }
+        
+        .testimonio-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 1rem;
+        }
+        
+        /* FOOTER (Igual que index.html) */
+        footer {
+            background: #0a192f;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .curso-destacado {
+                flex-direction: column;
+            }
+            
+            .curso-destacado img,
+            .curso-info {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER (Copiado de index.html) -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html">
+                <img src="imagenes/logo.png" alt="CITZapopan" class="logo-header">
+            </a>
+            <!-- NAV REDISEÑADO (reemplaza el nav actual) -->
+<nav>
+    <ul class="main-menu">
+        <li><a href="C:\Users\02\Documents\citz\PAgina web\Nuevo documento de texto.html" class="nav-link"><span class="nav-icon">🏠</span> Inicio</a></li>
+        <li><a href="programacion-ninos.html" class="nav-link"><span class="nav-icon">👧🏽</span> Para Niños</a></li>
+        <li class="dropdown">
+            <a href="index.html#cursos" class="nav-link"><span class="nav-icon">🎓</span> Cursos <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="programacion-ninos.html">Programación Kids</a></li>
+                <li><a href="#">Robótica</a></li>
+                <li><a href="#">Diseño 3D</a></li>
+                <li><a href="#">Videojuegos</a></li>
+            </ul>
+        </li>
+        <li><a href="index.html#aliados" class="nav-link"><span class="nav-icon">🤝</span> Aliados</a></li>
+        <li><a href="index.html#contacto" class="nav-link"><span class="nav-icon">📩</span> Contacto</a></li>
+        <li><a href="#campus" class="nav-link cta-button"><span class="nav-icon">🚀</span> Campus</a></li>
+    </ul>
+</nav>
+        </div>
+    </header>
+
+    <!-- HERO ESPECÍFICO -->
+    <section class="hero-ninos">
+        <div class="container">
+            <h1>Programación Creativa para Niños</h1>
+            <p>Desarrolla el pensamiento lógico y la creatividad de tus hijos mientras crean sus propios juegos y animaciones</p>
+            <a href="#inscripcion" class="btn btn-primary">¡Inscríbelo ahora!</a>
+        </div>
+    </section>
+
+    <!-- CURSO DESTACADO -->
+    <section class="container">
+        <div class="curso-destacado">
+            <img src="imagenes/curso-ninos.jpg" alt="Niños programando con Scratch">
+            <div class="curso-info">
+                <span class="edad-badge">8-12 años</span>
+                <h2>Aventuras en Scratch</h2>
+                <p>Introducción perfecta al mundo de la programación mediante bloques visuales:</p>
+                <ul>
+                    <li>Crea tus propios videojuegos interactivos</li>
+                    <li>Desarrolla animaciones con personajes</li>
+                    <li>Aprende lógica de programación sin código</li>
+                    <li>Proyectos con Minecraft Education</li>
+                </ul>
+                <a href="#inscripcion" class="btn btn-primary">Reservar lugar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Beneficios para tus hijos</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: #0a192f; margin-bottom: 1rem;">🧠 Desarrollo Cognitivo</h3>
+                <p>Mejora en resolución de problemas y pensamiento estructurado</p>
+            </div>
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: #0a192f; margin-bottom: 1rem;">🎨 Creatividad</h3>
+                <p>Transforma ideas en proyectos digitales tangibles</p>
+            </div>
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: #0a192f; margin-bottom: 1rem;">📚 Ventaja Académica</h3>
+                <p>Refuerza habilidades matemáticas y de lectura</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonios">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Lo que dicen los padres</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="testimonio-card">
+                    <p>"Mi hijo de 9 años ahora crea sus propios juegos. ¡Ya no solo los consume!"</p>
+                    <p style="font-weight: bold; margin-top: 1rem; color: #FF6B35;">- Ana M., mamá de Javier</p>
+                </div>
+                <div class="testimonio-card">
+                    <p>"Las clases son tan divertidas que mi hija no quiere que terminen."</p>
+                    <p style="font-weight: bold; margin-top: 1rem; color: #FF6B35;">- Carlos R., papá de Sofía</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE INSCRIPCIÓN -->
+    <section id="inscripcion" class="container" style="margin: 4rem auto;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Inscripción</h2>
+        <form style="max-width: 500px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Nombre del niño/a</label>
+                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Edad</label>
+                <input type="number" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Nombre del tutor</label>
+                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Teléfono</label>
+                <input type="tel" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar solicitud</button>
+        </form>
+    </section>
+
+    <!-- FOOTER (Copiado de index.html) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CITZapopan</h3>
+                    <p>Centro de Innovación Tecnológica de Zapopan. Formando creadores del futuro.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Tel: 33 1234 5678</li>
+                        <li>Email: info@citzapopan.edu.mx</li>
+                        <li>Dirección: Av. Tecnológico 123, Zapopan</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Redes Sociales</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CITZapopan. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
