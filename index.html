@@ -453,11 +453,20 @@ nav ul li:last-child a:hover {
             background: #FF6B35;
         }
         
-        .cursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+      /* Ajustes opcionales para mejor visualización */
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem; /* Agrega padding lateral en móviles */
+}
+
+/* Para pantallas muy pequeñas (opcional) */
+@media (max-width: 400px) {
+    .cursos-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+}
         
         .curso-card {
             background: white;
