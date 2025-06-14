@@ -29,7 +29,7 @@
       font-weight: bold;
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 2em auto;
       text-align: center;
     }
@@ -48,14 +48,31 @@
       cursor: pointer;
       margin-top: 1em;
       border-radius: 5px;
-      text-decoration: none;
-      display: inline-block;
     }
-    .activities a {
-      display: block;
-      margin: 0.3em 0;
-      color: #5c2d91;
-      text-decoration: underline;
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+      margin-top: 2em;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 1em;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 0.5em;
     }
     footer {
       text-align: center;
@@ -63,6 +80,15 @@
       background-color: #e0e0e0;
       margin-top: 3em;
     }
+
+function logout() {
+  localStorage.removeItem('usuario');
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('login-container').classList.remove('hidden');
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+}
+
   </style>
 </head>
 <body>
@@ -88,14 +114,29 @@
   <!-- DASHBOARD -->
   <div class="container hidden" id="dashboard">
     <h2 id="welcome-message">Bienvenido</h2>
+    <h3>Mi menú</h3>
 
-    <h2>Actividades para descargar</h2>
-    <div class="activities" id="activity-links"></div>
-
-    <h3>Subir actividad</h3>
-    <p>Haz clic en el siguiente botón para subir tu tarea en el formulario de Google:</p>
-    <a id="formulario-link" href="#" class="btn" target="_blank">Ir al formulario</a>
+    <div class="menu-grid">
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/6815/6815044.png" alt="Tutoriales">
+        <h4>Tutoriales</h4>
+        <p><a href="#" class="btn">Entrar</a></p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4726/4726018.png" alt="Actividades">
+        <h4>Actividades</h4>
+        <p><a href="#" class="btn">Entrar</a></p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2822/2822757.png" alt="Avance">
+        <h4>Mi avance</h4>
+        <p><a href="#" class="btn">Ver</a></p>
+      </div>
+    </div>
   </div>
+
+<button class="btn" onclick="logout()" style="margin-top: 2em;">Cerrar sesión</button>
+
 
   <footer>
     &copy; 2025 CITZAPOPAN - Todos los derechos reservados
@@ -113,45 +154,10 @@
       if (users[user] && users[user] === pass) {
         document.getElementById('login-container').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
-
-        // Personalizar dashboard
         document.getElementById('welcome-message').innerText = `Bienvenido, ${user}`;
         localStorage.setItem('usuario', user);
-        loadActivities(user);
-
-        // Asignar enlace a Google Form
-        const formLink = document.getElementById('formulario-link');
-
-        // REEMPLAZA ESTE ENLACE POR EL DE TU FORMULARIO DE GOOGLE
-        formLink.href = "https://forms.gle/TU_FORM_ID";
-
-        // Si quieres agregar nombre prellenado en el formulario:
-        // formLink.href = `https://docs.google.com/forms/d/e/TU_FORM_ID/viewform?usp=pp_url&entry.1234567890=${user}`;
       } else {
         document.getElementById('login-error').innerText = 'Usuario o contraseña incorrectos';
-      }
-    }
-
-    function loadActivities(usuario) {
-      const container = document.getElementById('activity-links');
-      container.innerHTML = ""; // Limpiar antes de cargar
-
-      const completadas = JSON.parse(localStorage.getItem(`${usuario}_completadas`) || '[]');
-
-      for (let i = 1; i <= 30; i++) {
-        const a = document.createElement('a');
-        a.href = `https://example.com/actividad${i}.pdf`; // Cambia esta URL si ya tienes actividades
-        a.innerText = `Actividad ${i}` + (completadas.includes(i) ? ' ✅' : '');
-        a.download = `actividad${i}.pdf`;
-
-        a.addEventListener('click', () => {
-          if (!completadas.includes(i)) {
-            completadas.push(i);
-            localStorage.setItem(`${usuario}_completadas`, JSON.stringify(completadas));
-          }
-        });
-
-        container.appendChild(a);
       }
     }
   </script>
