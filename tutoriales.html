@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tutoriales - Campus Virtual CITZAPOPAN</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f9;
+      color: #333;
+      padding: 1em;
+    }
+    header {
+      background-color: #5c2d91;
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+      margin-bottom: 1em;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      margin-bottom: 0.5em;
+    }
+    button {
+      background-color: #5c2d91;
+      color: white;
+      border: none;
+      padding: 0.6em 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 1.5em;
+      font-weight: bold;
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2em;
+    }
+    iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(92, 45, 145, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tutoriales - Campus Virtual CITZAPOPAN</h1>
+  </header>
+
+  <button id="btn-regresar">← Regresar al Dashboard</button>
+
+  <section id="scratch-section">
+    <h2>Scratch</h2>
+    <div class="videos-grid" id="scratch-videos">
+      <!-- Videos Scratch se insertan aquí -->
+    </div>
+  </section>
+
+  <section id="electronica-section">
+    <h2>Electrónica</h2>
+    <div class="videos-grid" id="electronica-videos">
+      <!-- Videos Electrónica se insertan aquí -->
+    </div>
+  </section>
+
+  <script>
+    // Links de videos de ejemplo para Scratch (puedes cambiar los enlaces)
+    const scratchVideos = [
+      "https://youtu.be/NuHGppx31k0?si=ZtYJuLjOSNtsnYLe",
+      "https://www.youtube.com/embed/2qdQyRe3o68",
+      "https://www.youtube.com/embed/BZmWxhU37ZM",
+      "https://www.youtube.com/embed/oWcP5pqkeb0",
+      "https://www.youtube.com/embed/kf9Sx2au4i4",
+      "https://www.youtube.com/embed/8ZzxZn6f53o",
+      "https://www.youtube.com/embed/iq20yJ2okMk",
+      "https://www.youtube.com/embed/3P3OC3vJlCQ",
+      "https://www.youtube.com/embed/QRMg-M7L3QU",
+      "https://www.youtube.com/embed/VC9l6h6p8To"
+    ];
+
+    // Links de videos de ejemplo para Electrónica (puedes cambiar los enlaces)
+    const electronicaVideos = [
+      "https://www.youtube.com/embed/EbK0ciwEYpY",
+      "https://www.youtube.com/embed/wi9KOB6qWgM",
+      "https://www.youtube.com/embed/Dd2w1GMCQFU",
+      "https://www.youtube.com/embed/aZtx4tuCP6M",
+      "https://www.youtube.com/embed/gDwTOgCkkOk",
+      "https://www.youtube.com/embed/JoEID4F3Xkk",
+      "https://www.youtube.com/embed/GV76L2V6Gq0",
+      "https://www.youtube.com/embed/5clnh4C-Qrg",
+      "https://www.youtube.com/embed/b9d3z4cUhSs",
+      "https://www.youtube.com/embed/32iVvO2nhSk"
+    ];
+
+    // Función para crear iframes de videos y agregarlos al contenedor
+    function loadVideos(videosArray, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = ""; // limpiar si hay contenido previo
+      videosArray.forEach(url => {
+        const iframe = document.createElement('iframe');
+        iframe.src = url + "?rel=0&modestbranding=1"; // Parámetros para mejor experiencia
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        container.appendChild(iframe);
+      });
+    }
+
+    // Carga los videos al cargar la página
+    window.onload = () => {
+      loadVideos(scratchVideos, 'scratch-videos');
+      loadVideos(electronicaVideos, 'electronica-videos');
+    };
+
+    // Botón regresar vuelve a index.html (dashboard)
+    document.getElementById('btn-regresar').addEventListener('click', () => {
+      // Para regresar manteniendo el usuario logueado, lo ideal es usar localStorage (si lo usas)
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
