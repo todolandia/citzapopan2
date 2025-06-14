@@ -48,6 +48,8 @@
       cursor: pointer;
       margin-top: 1em;
       border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
     }
     .activities a {
       display: block;
@@ -74,6 +76,7 @@
     <a href="#">Contacto</a>
   </nav>
 
+  <!-- LOGIN -->
   <div class="container" id="login-container">
     <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo" width="150">
     <input type="text" id="username" class="login-input" placeholder="Usuario">
@@ -82,11 +85,16 @@
     <p id="login-error" style="color:red;"></p>
   </div>
 
+  <!-- DASHBOARD -->
   <div class="container hidden" id="dashboard">
+    <h2 id="welcome-message">Bienvenido</h2>
+
     <h2>Actividades para descargar</h2>
     <div class="activities" id="activity-links"></div>
+
     <h3>Subir actividad</h3>
-    <input type="file" multiple>
+    <p>Haz clic en el siguiente botón para subir tu tarea en el formulario de Google:</p>
+    <a id="formulario-link" href="#" class="btn" target="_blank">Ir al formulario</a>
   </div>
 
   <footer>
@@ -105,19 +113,44 @@
       if (users[user] && users[user] === pass) {
         document.getElementById('login-container').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
-        loadActivities();
+
+        // Personalizar dashboard
+        document.getElementById('welcome-message').innerText = `Bienvenido, ${user}`;
+        localStorage.setItem('usuario', user);
+        loadActivities(user);
+
+        // Asignar enlace a Google Form
+        const formLink = document.getElementById('formulario-link');
+
+        // REEMPLAZA ESTE ENLACE POR EL DE TU FORMULARIO DE GOOGLE
+        formLink.href = "https://forms.gle/TU_FORM_ID";
+
+        // Si quieres agregar nombre prellenado en el formulario:
+        // formLink.href = `https://docs.google.com/forms/d/e/TU_FORM_ID/viewform?usp=pp_url&entry.1234567890=${user}`;
       } else {
         document.getElementById('login-error').innerText = 'Usuario o contraseña incorrectos';
       }
     }
 
-    function loadActivities() {
+    function loadActivities(usuario) {
       const container = document.getElementById('activity-links');
+      container.innerHTML = ""; // Limpiar antes de cargar
+
+      const completadas = JSON.parse(localStorage.getItem(`${usuario}_completadas`) || '[]');
+
       for (let i = 1; i <= 30; i++) {
         const a = document.createElement('a');
-        a.href = `https://example.com/actividad${i}.pdf`;
-        a.innerText = `Actividad ${i}`;
+        a.href = `https://example.com/actividad${i}.pdf`; // Cambia esta URL si ya tienes actividades
+        a.innerText = `Actividad ${i}` + (completadas.includes(i) ? ' ✅' : '');
         a.download = `actividad${i}.pdf`;
+
+        a.addEventListener('click', () => {
+          if (!completadas.includes(i)) {
+            completadas.push(i);
+            localStorage.setItem(`${usuario}_completadas`, JSON.stringify(completadas));
+          }
+        });
+
         container.appendChild(a);
       }
     }
