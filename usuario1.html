@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido Daniel Gómez</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 80px);
+      grid-template-rows: repeat(10, 80px);
+      justify-content: center;
+      gap: 15px;
+    }
+    .circle {
+      width: 70px;
+      height: 70px;
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenido Daniel Gómez</h1>
+  <div class="grid" id="gridContainer"></div>
+
+  <script>
+    // Verificar autenticación
+    const usuario = localStorage.getItem("usuarioAutenticado");
+    if (usuario !== "dgomez") {
+      alert("Acceso no autorizado");
+      window.location.href = "index.html";
+    }
+
+    // Generar matriz de círculos 10x5
+    const grid = document.getElementById("gridContainer");
+    for (let i = 1; i <= 50; i++) {
+      const circle = document.createElement("div");
+      circle.className = "circle";
+      circle.textContent = i;
+      grid.appendChild(circle);
+    }
+  </script>
+</body>
+</html>

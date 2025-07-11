@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido Alejandro Peña</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-top: 50px;
+    }
+    .contenido {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .cerrar-sesion {
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cerrar-sesion:hover {
+      background-color: #a93226;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenido Alejandro Peña</h1>
+  <div class="contenido">
+    <p>Has iniciado sesión correctamente como <strong>apeña</strong>.</p>
+    <p>Esta es tu página personal. Aquí puedes colocar contenido exclusivo.</p>
+  </div>
+
+  <button class="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+
+  <script>
+    const usuario = localStorage.getItem("usuarioAutenticado");
+    if (usuario !== "apeña") {
+      alert("Acceso no autorizado");
+      window.location.href = "index.html";
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("usuarioAutenticado");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
