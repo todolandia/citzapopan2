@@ -2,123 +2,103 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Inicio de Sesión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Virtual CITZapopan</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
+      background: white;
     }
-
-    /* Cabecera morada */
     header {
       background-color: #6a1b9a;
       color: white;
       padding: 20px;
       text-align: center;
-      font-size: 28px;
-      font-weight: bold;
     }
-
-    /* Menú morado claro */
-    nav {
-      background-color: #9c4dcc;
+    main {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      padding: 10px;
+      align-items: center;
+      height: calc(100vh - 100px);
     }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
     .login-container {
-      background-color: white;
+      background: #f4f4f9;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      width: 300px;
-      margin: 50px auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
     }
-
-    input {
+    .login-container h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-
     button {
+      margin-top: 20px;
       width: 100%;
       padding: 10px;
-      background-color: #4CAF50;
+      background-color: #6a1b9a;
       color: white;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
+      font-size: 16px;
     }
-
     button:hover {
-      background-color: #45a049;
+      background-color: #4a148c;
     }
-
     .error {
       color: red;
-      font-size: 0.9em;
+      text-align: center;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
   <header>
-    Campus Virtual CITZapopan
+    <h1>Campus Virtual CITZapopan</h1>
   </header>
 
-  <nav>
-    <a href="https://todolandia.github.io/citzapopan2/"><i class="fas fa-home"></i> Inicio</a>
-    <a href="https://todolandia.github.io/citzapopan2/actividades.html"><i class="fas fa-tasks"></i> Actividades</a>
-    <a href="https://todolandia.github.io/citzapopan2/subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
-    <a href="https://todolandia.github.io/citzapopan2/avance.html"><i class="fas fa-chart-line"></i> Avance</a>
-  </nav>
-
-  <div class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
-      <label for="username">Usuario:</label>
-      <input type="text" id="username" required>
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" required>
-      <button type="submit">Ingresar</button>
-      <p id="errorMessage" class="error"></p>
-    </form>
-  </div>
+  <main>
+    <div class="login-container">
+      <h2>Iniciar Sesión</h2>
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario">
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena">
+      <button onclick="iniciarSesion()">Ingresar</button>
+      <p class="error" id="errorMensaje"></p>
+    </div>
+  </main>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    function iniciarSesion() {
+      const usuario = document.getElementById("usuario").value;
+      const contrasena = document.getElementById("contrasena").value;
+      const errorMensaje = document.getElementById("errorMensaje");
 
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const error = document.getElementById("errorMessage");
-
-      if (username === "dgomez" && password === "Daniel2025") {
-        localStorage.setItem("usuarioAutenticado", "dgomez");
-        window.location.href = "usuario1.html";
-      } else if (username === "apeña" && password === "Alejandro2025") {
-        localStorage.setItem("usuarioAutenticado", "apeña");
-        window.location.href = "usuario2.html";
+      if (usuario === "daniel" && contrasena === "1234") {
+        window.location.href = "bienvenido.html";
+      } else if (usuario === "alejandro" && contrasena === "5678") {
+        window.location.href = "bienvenido2.html";
       } else {
-        error.textContent = "Usuario o contraseña incorrectos";
+        errorMensaje.textContent = "Usuario o contraseña incorrectos.";
       }
-    });
+    }
   </script>
-
 </body>
 </html>
