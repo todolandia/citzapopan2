@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Actividades</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    .catalogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .actividad {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 250px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .actividad:hover {
+      transform: scale(1.02);
+    }
+    .actividad h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .btn-activa {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .btn-desactivada {
+      background-color: #bdc3c7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Catálogo de Actividades</h1>
+
+  <div class="catalogo">
+    <!-- Actividad 1 Activa -->
+    <div class="actividad">
+      <h3>Actividad 1: Scratch</h3>
+      <a class="btn-activa" href="actividad1_scratch.html">Ver actividad</a>
+    </div>
+
+    <!-- Otras actividades desactivadas -->
+    <div class="actividad">
+      <h3>Actividad 2: Próximamente</h3>
+      <button class="btn-desactivada" disabled>No disponible</button>
+    </div>
+
+    <div class="actividad">
+      <h3>Actividad 3: Próximamente</h3>
+      <button class="btn-desactivada" disabled>No disponible</button>
+    </div>
+  </div>
+
+</body>
+</html>
