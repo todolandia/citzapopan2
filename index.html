@@ -929,5 +929,171 @@ nav ul li:last-child a:hover {
   <a href="https://todolandia.github.io/citzapopan2/campus.html"><i class="fas fa-user-graduate"></i><span>Campus</span></a>
 </nav>
 
+<!-- Botón flotante -->
+<button id="chat-toggle" aria-label="Abrir chat" style="position: fixed; bottom: 80px; right: 20px; background-color: #25D366; border: none; border-radius: 50%; width: 60px; height: 60px; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;">💬</button>
+
+<!-- Chatbot -->
+<div id="chatbot" style="position: fixed; bottom: 150px; right: 20px; width: 340px; max-width: 90vw; height: 460px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: none; flex-direction: column; z-index: 10000; font-family: Arial, sans-serif; overflow: hidden;">
+  <div style="background:#25D366; color:white; padding: 12px; font-weight: bold; font-size: 18px; text-align:center; position: relative;">
+    👋 Asistente Virtual
+    <button id="chat-close" style="position: absolute; right: 10px; top: 5px; background:transparent; border:none; color:white; font-size: 20px; cursor:pointer;">×</button>
+  </div>
+  <div id="chat-messages" style="flex:1; padding: 12px; overflow-y: auto; font-size: 15px; display: flex; flex-direction: column;"></div>
+  <form id="chat-form" style="display:flex; border-top:1px solid #ccc;">
+    <input id="chat-input" type="text" placeholder="Escribe aquí..." autocomplete="off" style="flex:1; border:none; padding: 12px; font-size: 15px;" required>
+    <button type="submit" style="background:#25D366; border:none; color:white; padding: 12px 16px; cursor:pointer;">Enviar</button>
+  </form>
+</div>
+
+<script>
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatBot = document.getElementById('chatbot');
+  const chatClose = document.getElementById('chat-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+
+  let step = 0;
+  let mainOption = '';
+
+  function addBotMessage(text, isOptions = false) {
+    const msg = document.createElement('div');
+    msg.style.background = '#f0f0f0';
+    msg.style.color = '#333';
+    msg.style.padding = '10px 14px';
+    msg.style.margin = '8px 0';
+    msg.style.borderRadius = '12px';
+    msg.style.maxWidth = '85%';
+    msg.style.alignSelf = 'flex-start';
+    msg.style.whiteSpace = 'pre-wrap';
+
+    if (isOptions) {
+      msg.innerHTML = text
+        .split('\n')
+        .map(line => {
+          if (line.match(/^\d/)) {
+            const number = line.charAt(0);
+            const content = line.slice(1).trim();
+            return `<div style="margin: 5px 0;"><span style="background:#2196F3; color:white; border-radius:50%; width:24px; height:24px; display:inline-block; text-align:center; font-weight:bold; margin-right:8px;">${number}</span>${content}</div>`;
+          } else {
+            return `<div>${line}</div>`;
+          }
+        }).join('');
+    } else {
+      msg.textContent = text;
+    }
+
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addUserMessage(text) {
+    const msg = document.createElement('div');
+    msg.style.background = '#25D366';
+    msg.style.color = 'white';
+    msg.style.padding = '10px 14px';
+    msg.style.margin = '8px 0';
+    msg.style.borderRadius = '12px';
+    msg.style.maxWidth = '85%';
+    msg.style.alignSelf = 'flex-end';
+    msg.style.whiteSpace = 'pre-wrap';
+    msg.textContent = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+// Reiniciar chatbot después de 15 segundos
+setTimeout(() => {
+  chatMessages.innerHTML = '';
+  chatBot.style.display = 'none';
+  chatToggle.style.display = 'block';
+  step = 0;
+  mainOption = '';
+}, 15000);
+
+  }
+
+  chatToggle.addEventListener('click', () => {
+    chatBot.style.display = 'flex';
+    chatToggle.style.display = 'none';
+    if (step === 0) {
+      addBotMessage("¡Hola! Soy tu asistente virtual. ¿Qué estás buscando hoy?\n1 Cursos presenciales\n2 Cursos en línea\n3 Servicios a escuelas\n\n(Escribe el número de opción)", true);
+      step = 1;
+    }
+  });
+
+  chatClose.addEventListener('click', () => {
+    chatBot.style.display = 'none';
+    chatToggle.style.display = 'block';
+    chatMessages.innerHTML = '';
+    step = 0;
+    mainOption = '';
+  });
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const input = chatInput.value.trim();
+    if (!input) return;
+    addUserMessage(input);
+    chatInput.value = '';
+
+    // Etapa 1 - opción principal
+    if (step === 1) {
+      if (input === "1") {
+        mainOption = "Cursos presenciales";
+        addBotMessage("¿Para quién estás buscando?\n1 Para niños\n2 Para jóvenes/adultos", true);
+        step = 2;
+      } else if (input === "2") {
+        mainOption = "Cursos en línea";
+        addBotMessage("¿Para quién estás buscando?\n1 Para niños\n2 Para jóvenes/adultos", true);
+        step = 3;
+      } else if (input === "3") {
+        mainOption = "Servicios a escuelas";
+        sendWhatsapp("Hola, estoy interesado en los servicios a escuelas de Citzapopan.");
+        step = 99;
+      } else {
+        addBotMessage("Por favor, responde con 1, 2 o 3.", false);
+      }
+    }
+    // Etapa 2 - cursos presenciales
+    else if (step === 2) {
+      if (input === "1") {
+        sendWhatsapp("Hola, estoy interesado en cursos presenciales para niños.");
+        step = 99;
+      } else if (input === "2") {
+        sendWhatsapp("Hola, estoy interesado en cursos presenciales para jóvenes o adultos.");
+        step = 99;
+      } else {
+        addBotMessage("Responde con 1 o 2.", false);
+      }
+    }
+    // Etapa 3 - cursos online
+    else if (step === 3) {
+      if (input === "1") {
+        sendWhatsapp("Hola, estoy interesado en cursos online para niños.");
+        step = 99;
+      } else if (input === "2") {
+        sendWhatsapp("Hola, estoy interesado en cursos online para jóvenes o adultos.");
+        step = 99;
+      } else {
+        addBotMessage("Responde con 1 o 2.", false);
+      }
+    }
+  });
+
+  function sendWhatsapp(texto) {
+    const url = `https://wa.me/5213312476413?text=${encodeURIComponent(texto)}`;
+    addBotMessage("🔗 ¡Gracias por tu interés! Da clic en el siguiente enlace para continuar por WhatsApp:");
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.textContent = "👉 Continuar en WhatsApp";
+    link.style.display = "block";
+    link.style.marginTop = "10px";
+    link.style.color = "#25D366";
+    link.style.fontWeight = "bold";
+    chatMessages.appendChild(link);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script>
 </body>
 </html>
