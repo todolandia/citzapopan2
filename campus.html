@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Campus Virtual CITZapopan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -77,9 +76,9 @@
     <div class="login-container">
       <h2>Iniciar Sesión</h2>
       <label for="usuario">Usuario:</label>
-      <input type="text" id="usuario">
+      <input type="text" id="usuario" autocomplete="username" />
       <label for="contrasena">Contraseña:</label>
-      <input type="password" id="contrasena">
+      <input type="password" id="contrasena" autocomplete="current-password" />
       <button onclick="iniciarSesion()">Ingresar</button>
       <p class="error" id="errorMensaje"></p>
     </div>
@@ -87,14 +86,16 @@
 
   <script>
     function iniciarSesion() {
-      const usuario = document.getElementById("usuario").value;
-      const contrasena = document.getElementById("contrasena").value;
+      const usuario = document.getElementById("usuario").value.trim();
+      const contrasena = document.getElementById("contrasena").value.trim();
       const errorMensaje = document.getElementById("errorMensaje");
 
-      if (usuario === "daniel" && contrasena === "1234") {
-        window.location.href = "bienvenido.html";
-      } else if (usuario === "alejandro" && contrasena === "5678") {
-        window.location.href = "bienvenido2.html";
+      if (usuario === "dgomez" && contrasena === "Daniel2025") {
+        localStorage.setItem("usuarioAutenticado", "dgomez");
+        window.location.href = "usuario1.html";
+      } else if (usuario === "apeña" && contrasena === "Alejandro2025") {
+        localStorage.setItem("usuarioAutenticado", "apeña");
+        window.location.href = "usuario2.html";
       } else {
         errorMensaje.textContent = "Usuario o contraseña incorrectos.";
       }
