@@ -96,7 +96,13 @@
       } else if (usuario === "apeña" && contrasena === "Alejandro2025") {
         localStorage.setItem("usuarioAutenticado", "apeña");
         window.location.href = "usuario2.html";
-      } else {
+      }else if (usuario === "csolano" && contrasena === "Carlos2025") {
+        localStorage.setItem("usuarioAutenticado", "csolano");
+        window.location.href = "carloSolano.html";
+      }  else if (usuario === "fzaragoza" && contrasena === "Felipe2025") {
+        localStorage.setItem("usuarioAutenticado", "fzaragoza");
+        window.location.href = "felipeZaragoza.html";
+      }  else {
         errorMensaje.textContent = "Usuario o contraseña incorrectos.";
       }
     }
