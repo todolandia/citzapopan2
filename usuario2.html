@@ -2,54 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Bienvenido Alejandro Peña</title>
+  <title>Bienvenido Profesor Alejandro</title>
   <style>
     body {
       background-color: #f4f4f4;
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 40px;
       text-align: center;
     }
     h1 {
-      color: #333;
-      margin-top: 50px;
+      color: #2c3e50;
+      margin-bottom: 40px;
+      font-size: 2.5em;
     }
-    .contenido {
-      margin-top: 30px;
-      font-size: 18px;
-    }
-    .cerrar-sesion {
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
       margin-top: 40px;
-      padding: 10px 20px;
-      background-color: #c0392b;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
     }
-    .cerrar-sesion:hover {
-      background-color: #a93226;
+    .menu a {
+      text-decoration: none;
+      background-color: #3498db;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .menu a:hover {
+      background-color: #2980b9;
     }
   </style>
 </head>
 <body>
-  <h1>Bienvenido Alejandro Peña</h1>
-  <div class="contenido">
-    <p>Has iniciado sesión correctamente como <strong>apeña</strong>.</p>
-    <p>Esta es tu página personal. Aquí puedes colocar contenido exclusivo.</p>
+  <h1>Bienvenido Profesor Alejandro</h1>
+
+  <div class="menu">
+    <a href="actividades.html">Actividades</a>
+    <a href="subir_archivos.html">Subir archivos</a>
+    <a href="avance.html">Avance</a>
   </div>
 
-  <button class="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
-
   <script>
+    // Verificar autenticación
     const usuario = localStorage.getItem("usuarioAutenticado");
     if (usuario !== "apeña") {
       alert("Acceso no autorizado");
-      window.location.href = "index.html";
-    }
-
-    function cerrarSesion() {
-      localStorage.removeItem("usuarioAutenticado");
       window.location.href = "index.html";
     }
   </script>
