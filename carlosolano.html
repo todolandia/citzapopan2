@@ -3,36 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Bienvenido Profesor Carlos Solano</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yI5oWWKJ2nTrhVZcyM5DKuKo3ZLBO3xPPmm5xMZPf9nv2q4KiXb8tGZ2tADjI4e+yU5dEx5uU/2Ayo0H3Fo2Mw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      text-align: center;
+      background: linear-gradient(135deg, #dbeafe, #f0f4ff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
+
     h1 {
       color: #2c3e50;
-      margin-bottom: 40px;
-      font-size: 2.5em;
+      margin-bottom: 50px;
+      font-size: 2.8em;
     }
+
     .menu {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 40px;
-      margin-top: 40px;
+      gap: 30px;
     }
+
     .menu a {
       text-decoration: none;
-      background-color: #3498db;
+      background-color: #6a0dad;
       color: white;
-      padding: 15px 30px;
-      border-radius: 10px;
-      font-size: 1.2em;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
+      padding: 18px 35px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
+
     .menu a:hover {
-      background-color: #2980b9;
+      background-color: #5a019c;
+      transform: translateY(-3px);
+    }
+
+    .menu i {
+      font-size: 1.4em;
+    }
+
+    @media (max-width: 600px) {
+      .menu {
+        flex-direction: column;
+        gap: 20px;
+      }
     }
   </style>
 </head>
@@ -40,9 +65,9 @@
   <h1>Bienvenido Profesor Carlos Solano</h1>
 
   <div class="menu">
-    <a href="actividades.html">Actividades</a>
-    <a href="subir_archivos.html">Subir archivos</a>
-    <a href="avance.html">Avance</a>
+    <a href="actividades.html"><i class="fas fa-book-open"></i>Actividades</a>
+    <a href="subir_archivos.html"><i class="fas fa-upload"></i>Subir archivos</a>
+    <a href="avance.html"><i class="fas fa-chart-line"></i>Avance</a>
   </div>
 
   <script>
@@ -55,3 +80,4 @@
   </script>
 </body>
 </html>
+
