@@ -595,6 +595,41 @@ nav ul li:last-child a:hover {
                 display: none; /* Menú hamburguesa (implementar con JS) */
             }
         }
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #0a192f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.3rem 0;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-align: center;
+    flex-grow: 1;
+    padding: 0.3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.bottom-nav a:hover {
+    color: #FF6B35;
+}
+
+.bottom-nav i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
     </style>
 </head>
 <body>
@@ -865,6 +900,14 @@ nav ul li:last-child a:hover {
         }, 5000);
     });
 </script>
+<!-- MENÚ INFERIOR RESPONSIVO -->
+<nav class="bottom-nav">
+  <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
+  <a href="#cursos"><i class="fas fa-laptop-code"></i><span>Cursos</span></a>
+  <a href="#aliados"><i class="fas fa-handshake"></i><span>Aliados</span></a>
+  <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+  <a href="https://todolandia.github.io/citzapopan2/campus.html"><i class="fas fa-user-graduate"></i><span>Campus</span></a>
+</nav>
 
 </body>
 </html>
