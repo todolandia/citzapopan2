@@ -21,8 +21,7 @@
       color: #555;
       margin-bottom: 40px;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
 
     .avance-container {
@@ -44,36 +43,54 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .verde {
-      background-color: #27ae60;
-    }
-
-    .amarillo {
-      background-color: #f1c40f;
-    }
-
-    .rojo {
-      background-color: #e74c3c;
-    }
-
-    .gris {
-      background-color: #bdc3c7;
-      cursor: not-allowed;
-    }
+    .verde { background-color: #27ae60; }
+    .amarillo { background-color: #f1c40f; }
+    .rojo { background-color: #e74c3c; }
+    .gris { background-color: #bdc3c7; }
   </style>
 </head>
 <body>
 
   <h1>Avance de Actividades</h1>
   <p class="descripcion">
-    Los círculos se colorearán <strong>verde</strong> si la actividad fue realizada en tiempo y forma, <strong>amarillo</strong> si no se lograron todas las rúbricas, y <strong>rojo</strong> si no fue entregada. Vista objetiva y resumida del avance.
+    Los círculos se colorearán <strong>verde</strong> si la actividad fue realizada en tiempo y forma, <strong>amarillo</strong> si no se lograron todas las rúbricas, y <strong>rojo</strong> si no fue entregada.
   </p>
 
   <div class="avance-container">
-    <div class="circle verde">1</div>
-    <div class="circle gris">2</div>
-    <div class="circle gris">3</div>
+    <div id="a1" class="circle">1</div>
+    <div id="a2" class="circle">2</div>
+    <div id="a3" class="circle">3</div>
   </div>
+
+  <script>
+    // Verificar autenticación
+    const usuario = localStorage.getItem("usuarioAutenticado");
+    if (!usuario) {
+      alert("Acceso no autorizado");
+      window.location.href = "index.html";
+    }
+
+    // Datos simulados de avance
+    const avances = {
+      "dgomez": {
+        actividad1: "verde",
+        actividad2: "gris",
+        actividad3: "gris"
+      },
+      "alejandro": {
+        actividad1: "amarillo",
+        actividad2: "rojo",
+        actividad3: "gris"
+      }
+    };
+
+    // Mostrar avance del usuario autenticado
+    const usuarioAvance = avances[usuario] || { actividad1: "gris", actividad2: "gris", actividad3: "gris" };
+
+    document.getElementById("a1").classList.add(usuarioAvance.actividad1);
+    document.getElementById("a2").classList.add(usuarioAvance.actividad2);
+    document.getElementById("a3").classList.add(usuarioAvance.actividad3);
+  </script>
 
 </body>
 </html>
