@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kits Educativos - CITZapopan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+    }
+    header {
+      background-color: #6a1b9a;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 1.8rem;
+    }
+    nav {
+      background-color: #9c4dcc;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #7e3cb4;
+    }
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      margin: 20px 0;
+    }
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .kit {
+      background-color: #f4f4f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    .imagenes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+    }
+    .imagenes img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .contenido {
+      flex-grow: 1;
+      padding: 15px;
+    }
+    .contenido h3 {
+      color: #4a148c;
+      margin-top: 0;
+    }
+    .contenido ul {
+      padding-left: 20px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    .btn-comprar {
+      background-color: #6a1b9a;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      border-top: 1px solid #ddd;
+      font-weight: bold;
+    }
+    .btn-comprar:hover {
+      background-color: #4a148c;
+    }
+  </style>
+</head>
+<body>
+
+<header>CITZapopan - Kits Educativos</header>
+<nav>
+  <a href="https://todolandia.github.io/citzapopan2/">Inicio</a>
+  <a href="https://todolandia.github.io/citzapopan2/#cursos">Cursos</a>
+  <a href="https://todolandia.github.io/citzapopan2/#aliados">Aliados</a>
+  <a href="https://todolandia.github.io/citzapopan2/#contacto">Contacto</a>
+</nav>
+
+<h1>Kits de Arduino y Robótica</h1>
+<div class="catalogo">
+  <!-- Kit 1 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit1_1.jpg" alt="">
+      <img src="img/kit1_2.jpg" alt="">
+      <img src="img/kit1_3.jpg" alt="">
+      <img src="img/kit1_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Kit Básico UNO R3</h3>
+      <ul>
+        <li>LED amarillo, verde, rojo, RGB</li>
+        <li>Thermistor, Interruptor inclinación, Fotoresistencias</li>
+        <li>Cables Dupont, resistencias, botones, potenciómetro</li>
+        <li>Buzzer activo/pasivo, DHT11, display 7 segmentos</li>
+        <li>Sensores varios (agua, humo, suelo), UNO R3 CH340</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20B%C3%A1sico%20UNO%20R3">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 2 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit2_1.jpg" alt="">
+      <img src="img/kit2_2.jpg" alt="">
+      <img src="img/kit2_3.jpg" alt="">
+      <img src="img/kit2_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Kit Tinkercad</h3>
+      <ul>
+        <li>Arduino UNO, LEDs, resistencias</li>
+        <li>Potenciómetro, buzzer, botones</li>
+        <li>Sensores de temperatura y luz</li>
+        <li>Servomotor, display 7 segmentos</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Tinkercad">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 3 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit3_1.jpg" alt="">
+      <img src="img/kit3_2.jpg" alt="">
+      <img src="img/kit3_3.jpg" alt="">
+      <img src="img/kit3_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Kit Vehículo Autónomo</h3>
+      <ul>
+        <li>Chasis con ruedas y motores DC</li>
+        <li>Ponente-multipuente L298N</li>
+        <li>Sensor ultrasónico HC-SR04 + servo</li>
+        <li>Alimentación, Arduino UNO, cables</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Veh%C3%ADculo%20Aut%C3%B3nomo">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 4 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit4_1.jpg" alt="">
+      <img src="img/kit4_2.jpg" alt="">
+      <img src="img/kit4_3.jpg" alt="">
+      <img src="img/kit4_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Kit Riego Automatizado</h3>
+      <ul>
+        <li>Sensor de humedad</li>
+        <li>Relé 1 canal y bomba mini</li>
+        <li>Manguera, Arduino UNO, cables</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Riego%20Automatizado">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 5 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit5_1.jpg" alt="">
+      <img src="img/kit5_2.jpg" alt="">
+      <img src="img/kit5_3.jpg" alt="">
+      <img src="img/kit5_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Kit Brazo Robótico</h3>
+      <ul>
+        <li>4‑6 servomotores SG90</li>
+        <li>Estructura de acrílico/MDF</li>
+        <li>Joystick o potenciómetros de control</li>
+        <li>Arduino UNO, cables y adaptador</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Brazo%20Rob%C3%B3tico">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 6 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit6_1.jpg" alt="">
+      <img src="img/kit6_2.jpg" alt="">
+      <img src="img/kit6_3.jpg" alt="">
+      <img src="img/kit6_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Calabaza de Halloween</h3>
+      <ul>
+        <li>Sensor ultrasónico</li>
+        <li>2 servos para mover ojos</li>
+        <li>LEDs en boca, Arduino UNO</li>
+        <li>Calabaza plástica y cables</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Calabaza%20Halloween">Comprar ahora</a>
+  </div>
+
+  <!-- Kit 7 -->
+  <div class="kit">
+    <div class="imagenes">
+      <img src="img/kit7_1.jpg" alt="">
+      <img src="img/kit7_2.jpg" alt="">
+      <img src="img/kit7_3.jpg" alt="">
+      <img src="img/kit7_4.jpg" alt="">
+    </div>
+    <div class="contenido">
+      <h3>Caja Sorpresa Navideña</h3>
+      <ul>
+        <li>Servo para abrir tapa</li>
+        <li>LEDs navideños + buzzer</li>
+        <li>Sensor sonido/distancia</li>
+        <li>Arduino UNO, cables y caja decorativa</li>
+      </ul>
+    </div>
+    <a class="btn-comprar" href="https://wa.me/5213312345678?text=Quiero%20comprar%20el%20Kit%20Caja%20Navide%C3%B1a">Comprar ahora</a>
+  </div>
+
+</div>
+</body>
+</html>
