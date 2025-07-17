@@ -3,46 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <title>Bienvenido Profesor Felipe Zaragoza</title>
+  <!-- Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
-      padding: 40px;
+      margin: 0;
+      padding: 0;
+      background: url('https://www.transparenttextures.com/patterns/white-carbon.png'), linear-gradient(135deg, #f0f4ff, #dbeafe);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+      max-width: 600px;
+      width: 90%;
     }
+
     h1 {
-      color: #2c3e50;
+      font-size: 2.8em;
+      background: linear-gradient(to right, #6a0dad, #a64ac9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 40px;
-      font-size: 2.5em;
     }
+
     .menu {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 40px;
-      margin-top: 40px;
+      gap: 25px;
+      margin-bottom: 30px;
     }
+
     .menu a {
       text-decoration: none;
-      background-color: #3498db;
+      background-color: #6a0dad;
       color: white;
-      padding: 15px 30px;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .menu a:hover {
+      background-color: #5a019c;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      margin-top: 10px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
       border-radius: 10px;
-      font-size: 1.2em;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-size: 1em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: background-color 0.3s ease;
     }
-    .menu a:hover {
-      background-color: #2980b9;
+
+    .logout-btn:hover {
+      background-color: #d9363e;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .menu {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Bienvenido Profesor Felipe Zaragoza</h1>
+  <div class="container">
+    <img src="ruta-del-logo/citzapopan-logo.png" alt="Logo CITZapopan" style="height: 80px; margin-bottom: 20px;">
+    <h1>Bienvenido Profesor Felipe Zaragoza</h1>
 
-  <div class="menu">
-    <a href="actividades.html">Actividades</a>
-    <a href="subir_archivos.html">Subir archivos</a>
-    <a href="avance.html">Avance</a>
+    <div class="menu">
+      <a href="actividades.html"><i class="fas fa-book-open"></i> Actividades</a>
+      <a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
+      <a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
+    </div>
+
+    <button class="logout-btn" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+    </button>
+
+    <footer>
+      &copy; 2025 Plataforma Educativa CITZapopan
+    </footer>
   </div>
 
   <script>
@@ -50,6 +128,11 @@
     const usuario = localStorage.getItem("usuarioAutenticado");
     if (usuario !== "fzaragoza") {
       alert("Acceso no autorizado");
+      window.location.href = "index.html";
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("usuarioAutenticado");
       window.location.href = "index.html";
     }
   </script>
