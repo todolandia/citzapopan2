@@ -3,15 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Inicio de Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f1f1f1;
+      background-color: #ffffff;
+      margin: 0;
+    }
+
+    /* Cabecera morada */
+    header {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    /* Menú morado claro */
+    nav {
+      background-color: #9c4dcc;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      gap: 20px;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     .login-container {
@@ -20,6 +46,7 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       width: 300px;
+      margin: 50px auto;
     }
 
     input {
@@ -49,6 +76,18 @@
   </style>
 </head>
 <body>
+
+  <header>
+    Campus Virtual CITZapopan
+  </header>
+
+  <nav>
+    <a href="https://todolandia.github.io/citzapopan2/"><i class="fas fa-home"></i> Inicio</a>
+    <a href="https://todolandia.github.io/citzapopan2/actividades.html"><i class="fas fa-tasks"></i> Actividades</a>
+    <a href="https://todolandia.github.io/citzapopan2/subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
+    <a href="https://todolandia.github.io/citzapopan2/avance.html"><i class="fas fa-chart-line"></i> Avance</a>
+  </nav>
+
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
     <form id="loginForm">
@@ -80,5 +119,6 @@
       }
     });
   </script>
+
 </body>
 </html>
