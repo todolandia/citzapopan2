@@ -112,7 +112,7 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    transition: all 3s;
+    transition: all 0.3s;
 }
 
 .dot.active {
@@ -134,53 +134,16 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    /* Estilos para el menú hamburguesa - TAMAÑO AUMENTADO */
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 40px;  /* Aumentado de 30px */
-        height: 35px; /* Aumentado de 25px */
-        cursor: pointer;
-        padding: 15px; /* Aumentado de 10px para mayor área de clic */
-        margin: 10px;
-        z-index: 1000;
+    .slide-content {
+        left: 5%;
+        right: 5%;
+        max-width: none;
+        bottom: 10%;
+        padding: 1rem;
     }
     
-    .hamburger span {
-        display: block;
-        width: 100%;
-        height: 4px; /* Aumentado de 3px */
-        background-color: #333;
-        transition: all 0.3s ease;
-        border-radius: 2px; /* Para que se vea más suave */
-    }
-    
-    /* Ajustar la posición del menú desplegable */
-    nav ul {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background: #f8f8f8;
-        position: absolute;
-        left: 0;
-        top: 80px; /* Aumentado de 60px para acomodar el botón más grande */
-        padding: 0;
-        margin: 0;
-        z-index: 999;
-    }
-    
-    /* Animación para el icono hamburguesa cuando está abierto */
-    .hamburger.open span:nth-child(1) {
-        transform: translateY(11px) rotate(45deg); /* Ajustado para el nuevo tamaño */
-    }
-    
-    .hamburger.open span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .hamburger.open span:nth-child(3) {
-        transform: translateY(-11px) rotate(-45deg); /* Ajustado para el nuevo tamaño */
+    .hero-slider {
+        height: 60vh;
     }
 }
 
@@ -453,20 +416,11 @@ nav ul li:last-child a:hover {
             background: #FF6B35;
         }
         
-      /* Ajustes opcionales para mejor visualización */
-.cursos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 0 1rem; /* Agrega padding lateral en móviles */
-}
-
-/* Para pantallas muy pequeñas (opcional) */
-@media (max-width: 400px) {
-    .cursos-grid {
-        grid-template-columns: 1fr; /* Una sola columna */
-    }
-}
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
         
         .curso-card {
             background: white;
@@ -622,78 +576,25 @@ nav ul li:last-child a:hover {
             font-size: 0.9rem;
         }
         
-      /* RESPONSIVE */
-@media (max-width: 768px) {
-    .hero-content {
-        flex-direction: column;
-    }
-    
-    .hero-text {
-        order: 2;
-        text-align: center;
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-    }
-    
-    /* Estilos para el menú hamburguesa */
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        cursor: pointer;
-        padding: 10px;
-    }
-    
-    .hamburger span {
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: #333;
-        transition: all 0.3s ease;
-    }
-    
-    nav ul {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background: #f8f8f8;
-        position: absolute;
-        left: 0;
-        top: 60px; /* Ajusta según la altura de tu header */
-        padding: 0;
-        margin: 0;
-    }
-    
-    nav ul.show {
-        display: flex;
-    }
-    
-    nav ul li {
-        text-align: center;
-        padding: 15px 0;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    nav ul li a {
-        width: 100%;
-        display: block;
-    }
-}
-
-/* En pantallas grandes, ocultamos el botón hamburguesa */
-@media (min-width: 769px) {
-    .hamburger {
-        display: none;
-    }
-    
-    nav ul {
-        display: flex !important;
-    }
-}
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                order: 2;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            nav ul {
+                display: none; /* Menú hamburguesa (implementar con JS) */
+            }
+        }
     </style>
 </head>
 <body>
@@ -704,7 +605,7 @@ nav ul li:last-child a:hover {
 <!-- Loading Screen -->
 <div class="loading-screen" id="loadingScreen">
     <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="CITZapopan" class="logo-loading">
+        <img src="imagenes/logo.png" alt="CITZapopan" class="logo-loading">
         <p class="loading-text">Centro de innovación tecnológica de Zapopan</p>
     </div>
 </div>
@@ -715,32 +616,24 @@ nav ul li:last-child a:hover {
     <!-- HEADER -->
     <header>
         <div class="container header-container">
-            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="CITZAPOPAN" class="logo-header">
+            <img src="imagenes/logo.png" alt="CITZAPOPAN" class="logo-header">
  <div class="logo-text">
             <h1>CITZAPOPAN</h1>
             <p>Centro de innovación tecnológica de Zapopan</p>
         </div>
- <header style="position: relative; min-height: 80px; display: flex; align-items: center; justify-content: space-between;">
-    <!-- Tu logo u otros elementos del header aquí -->
-    <nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul id="menu">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#aliados">Aliados</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="https://todolandia.github.io/citzapopan2/campus.html">Campus Virtual</a></li>
-        </ul>
-    </nav>
-</header>
+            <nav>
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#aliados">Aliados</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://todolandia.github.io/citzapopan2/campus.html">Campus Virtual</a></li> <!-- Nueva sección -->
+    </ul>
+</nav>
         </div>
     </header>
 
-   <!-- HERO SECTION -->
+    <!-- HERO SECTION -->
     <!-- Hero Section con Slider -->
 <section class="hero-slider">
     <div class="slider-container">
@@ -753,17 +646,14 @@ nav ul li:last-child a:hover {
                 <h2>Kit de Arduino</h2>
                 <p>Explora el mundo de la electrónica con Arduino</p>
 		<p>Kits completos con sensores, cables y tutoriales para aprender haciendo.</p>
-                <a href="https://todolandia.github.io/citzapopan2/kits_arduino.html" class="btn btn-primary">Ver Kits Arduino</a>
+                <a href="#cursos-ninos" class="btn btn-primary">Ver Kits Arduino</a>
             </div>
             <div class="slide-label">Ver kits de Arduino</div>
         </div>
-    
-  
-
 
         <!-- Slide 2 - Jóvenes/Adultos -->
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/roboticaLego.jpg" alt="Jóvenes en taller de programación">
+            <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\roboticaLego.jpg" alt="Jóvenes en taller de programación">
             <div class="slide-content">
                 <h2>Robotica Lego Educativo</h2>
                 <p>Robótica divertida y educativa para niño</p>
@@ -775,7 +665,7 @@ nav ul li:last-child a:hover {
 
         <!-- Slide 3 - Escuelas -->
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/pluma3D.png" alt="Capacitación para docentes">
+            <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\pluma3D.png" alt="Capacitación para docentes">
             <div class="slide-content">
                 <h2>Dibuja en el aire, crea en 3D</h2>
 		<p>Incluye libro, acetatos y filamento. Ideal para fomentar la creatividad.</p>
@@ -799,8 +689,6 @@ nav ul li:last-child a:hover {
 </section>
 
     <!-- SECCIÓN CURSOS -->
-
-
     <section class="cursos-section" id="cursos">
         <div class="container">
             <div class="section-title">
@@ -825,7 +713,7 @@ nav ul li:last-child a:hover {
                 <!-- Curso 1 -->
                 <div class="curso-card">
                     <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/masinfoNi%C3%B1os.jpg" alt="Programación para niños">
+                        <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\masinfoNiños.jpg" alt="Programación para niños">
                     </div>
                     <div class="curso-info">
                         <h3>Programación para Niños</h3>
@@ -837,7 +725,7 @@ nav ul li:last-child a:hover {
                 <!-- Curso 2 -->
                 <div class="curso-card">
                     <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/curso-robotica.jpg" alt="Jóvenes/Adultos">
+                        <img src="imagenes/curso-robotica.jpg" alt="Jóvenes/Adultos">
                     </div>
                     <div class="curso-info">
                         <h3>Jóvenes/adultos</h3>
@@ -849,7 +737,7 @@ nav ul li:last-child a:hover {
                 <!-- Curso 3 -->
                 <div class="curso-card">
                     <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/paraadutlos.jpg" alt="Diseño 3D">
+                        <img src="imagenes/paraadutlos.jpg" alt="Diseño 3D">
                     </div>
                     <div class="curso-info">
                         <h3>Para escuelas</h3>
@@ -868,10 +756,10 @@ nav ul li:last-child a:hover {
                 <h2>Aliados Estratégicos</h2>
             </div>
             <div class="aliados-logos">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/dif.png" alt="DIF Zapopan">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/lin.png" alt="Laboratorio de Innovación">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/b9f7bde94b0557e453bbcc9326b9ff2f9ffd68ad/taleny.png" alt="Colegio Taleny">
-                
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\dif.png" alt="DIF Zapopan">
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\lin.png" alt="Laboratorio de Innovación">
+                <img src="C:\Users\02\Documents\citz\PAgina web\imagenes\taleny.png" alt="Colegio Taleny">
+               
             </div>
         </div>
     </section>
