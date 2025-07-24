@@ -8,32 +8,43 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('https://www.transparenttextures.com/patterns/white-carbon.png'), linear-gradient(135deg, #f0f4ff, #dbeafe);
+      background: url('https://i.imgur.com/Xjk0CB6.jpg') center/cover no-repeat fixed, #0d0c1d;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      color: #fff;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       padding: 50px 40px;
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       text-align: center;
       animation: fadeIn 0.6s ease-in-out;
-      max-width: 600px;
+      max-width: 650px;
       width: 90%;
     }
 
     h1 {
-      font-size: 2.8em;
-      background: linear-gradient(to right, #6a0dad, #a64ac9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 40px;
+      font-size: 2.2em;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    h1:first-of-type {
+      font-weight: bold;
+      color: #ffde59;
+    }
+
+    h1:last-of-type {
+      font-size: 1.5em;
+      color: #00e0ff;
+      margin-bottom: 30px;
     }
 
     .menu {
@@ -54,13 +65,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(106, 13, 173, 0.4);
       transition: all 0.3s ease;
     }
 
     .menu a:hover {
       background-color: #5a019c;
       transform: translateY(-2px);
+      box-shadow: 0 0 15px #b26bff;
     }
 
     .logout-btn {
@@ -75,7 +87,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(255, 77, 79, 0.4);
       transition: background-color 0.3s ease;
     }
 
@@ -86,7 +98,7 @@
     footer {
       margin-top: 20px;
       font-size: 0.9em;
-      color: #555;
+      color: #ccc;
     }
 
     @keyframes fadeIn {
@@ -103,12 +115,11 @@
   </style>
 </head>
 <body>
-<img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" style="height: 80px; margin-bottom: 20px;">
+  <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" style="height: 80px; margin-bottom: 20px;">
 
   <div class="container">
     <h1>Bienvenido Fernando Alexis Pérez García</h1>
-    <h1>Curso: Scrpting Lua - Roblox studio</h1>
-
+    <h1>Curso: Scripting en Lua para Roblox Studio</h1>
 
     <div class="menu">
       <a href="actividades.html"><i class="fas fa-book-open"></i> Actividades</a>
@@ -126,7 +137,6 @@
   </div>
 
   <script>
-    // Verificar autenticación
     const usuario = localStorage.getItem("usuarioAutenticado");
     if (usuario !== "fperez") {
       alert("Acceso no autorizado");
