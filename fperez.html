@@ -1,151 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Bienvenido Fernando Alexis Pérez García</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <title>Bienvenido Fernando Alexis - Curso Roblox Lua</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: url('https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/fondoRoblox.jpg') center/cover no-repeat fixed, #0d0c1d;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
       color: #fff;
+      overflow-x: hidden;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      padding: 50px 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      text-align: center;
-      animation: fadeIn 0.6s ease-in-out;
-      max-width: 650px;
-      width: 90%;
+    .slider {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 2.2em;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    h1:first-of-type {
-      font-weight: bold;
-      color: #ffde59;
-    }
-
-    h1:last-of-type {
-      font-size: 1.5em;
-      color: #00e0ff;
-      margin-bottom: 30px;
-    }
-
-    .menu {
+    .slides {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 30px;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
     }
 
-    .menu a {
-      text-decoration: none;
-      background-color: #6a0dad;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 12px;
-      font-size: 1.1em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 12px rgba(106, 13, 173, 0.4);
-      transition: all 0.3s ease;
+    .slides img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
     }
 
-    .menu a:hover {
-      background-color: #5a019c;
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px #b26bff;
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-100vw); }
+      66% { transform: translateX(-200vw); }
+      100% { transform: translateX(0); }
     }
 
-    .logout-btn {
-      margin-top: 10px;
-      background-color: #ff4d4f;
-      color: white;
-      border: none;
-      padding: 12px 20px;
+    .lua-code {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 20px;
       border-radius: 10px;
+      font-family: 'Courier New', monospace;
       font-size: 1em;
+      white-space: pre-line;
+      color: #00ffcc;
+      max-width: 400px;
+    }
+
+    .music-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(255, 77, 79, 0.4);
-      transition: background-color 0.3s ease;
+      font-size: 1em;
+      z-index: 10;
     }
-
-    .logout-btn:hover {
-      background-color: #d9363e;
-    }
-
-    footer {
-      margin-top: 20px;
-      font-size: 0.9em;
-      color: #ccc;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .menu {
-        flex-direction: column;
-        gap: 15px;
-      }
+    .music-btn:hover {
+      background: #5a019c;
     }
   </style>
 </head>
 <body>
-  <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" style="height: 80px; margin-bottom: 20px;">
-
-  <div class="container">
-    <h1>Bienvenido Fernando Alexis Pérez García</h1>
-    <h1>Curso: Scripting en Lua para Roblox Studio</h1>
-
-    <div class="menu">
-      <a href="actividades.html"><i class="fas fa-book-open"></i> Actividades</a>
-      <a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
-      <a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
+  <div class="slider">
+    <div class="slides">
+      <img src="https://i.imgur.com/4dU5IEf.jpg" alt="Roblox fondo 1" />
+      <img src="https://i.imgur.com/sDzmubM.jpg" alt="Roblox fondo 2" />
+      <img src="https://i.imgur.com/HQsvzNG.jpg" alt="Roblox fondo 3" />
     </div>
-
-    <button class="logout-btn" onclick="cerrarSesion()">
-      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-    </button>
-
-    <footer>
-      &copy; 2025 Plataforma Educativa CITZapopan
-    </footer>
+    <div class="lua-code" id="code"></div>
+    <button class="music-btn" onclick="toggleMusic()" id="musicButton">🔊 Música</button>
   </div>
 
-  <script>
-    const usuario = localStorage.getItem("usuarioAutenticado");
-    if (usuario !== "fperez") {
-      alert("Acceso no autorizado");
-      window.location.href = "index.html";
-    }
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/30/audio_a7c5e1c1c5.mp3" type="audio/mpeg">
+  </audio>
 
-    function cerrarSesion() {
-      localStorage.removeItem("usuarioAutenticado");
-      window.location.href = "index.html";
+  <script>
+    // Código Lua animado
+    const codeElement = document.getElementById("code");
+    const luaCode = `local part = Instance.new("Part")\npart.Anchored = true\npart.BrickColor = BrickColor.new("Bright red")\npart.Position = Vector3.new(0, 5, 0)\npart.Parent = workspace`;
+    let i = 0;
+    function typeCode() {
+      if (i < luaCode.length) {
+        codeElement.textContent += luaCode.charAt(i);
+        i++;
+        setTimeout(typeCode, 50);
+      }
+    }
+    typeCode();
+
+    // Música
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicButton");
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicBtn.textContent = "🔊 Música";
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔇 Silencio";
+      }
     }
   </script>
 </body>
