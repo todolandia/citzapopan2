@@ -5,6 +5,53 @@
   <title>Bienvenido Fernando Alexis Pérez García</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+
+.music-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.music-btn {
+  background: #6a0dad;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+.music-btn:hover {
+  background: #5a019c;
+}
+
+/* Globo de diálogo (tooltip) */
+.tooltip {
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  margin-top: 8px;
+  max-width: 150px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  animation: fadeInTooltip 0.3s ease forwards;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes fadeInTooltip {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+
     * {
       margin: 0;
       padding: 0;
@@ -15,14 +62,18 @@
       background: #000;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
 
     .slider {
-      position: relative;
+      position: fixed;  /* fija el slider como fondo */
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      z-index: -1;
+      z-index: 0; /* detrás de todo */
     }
 
     .slides {
@@ -46,7 +97,7 @@
     }
 
     .lua-code {
-      position: absolute;
+      position: fixed; /* fijo para que se quede visible */
       top: 20px;
       left: 20px;
       background: rgba(0, 0, 0, 0.6);
@@ -57,11 +108,11 @@
       white-space: pre-line;
       color: #00ffcc;
       max-width: 400px;
-      z-index: 1;
+      z-index: 10; /* encima del slider */
     }
 
     .music-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       background: #6a0dad;
@@ -77,6 +128,14 @@
       background: #5a019c;
     }
 
+    img.logo {
+      height: 80px;
+      margin: 40px auto 20px;
+      display: block;
+      position: relative;
+      z-index: 10; /* para que quede arriba */
+    }
+
     .container {
       background: rgba(255, 255, 255, 0.95);
       padding: 50px 40px;
@@ -86,10 +145,10 @@
       animation: fadeIn 0.6s ease-in-out;
       max-width: 600px;
       width: 90%;
-      margin: 20px auto;
+      margin: 20px auto 40px;
       color: #000;
       position: relative;
-      z-index: 2;
+      z-index: 10; /* sobre el slider */
     }
 
     h1 {
@@ -151,6 +210,8 @@
       margin-top: 20px;
       font-size: 0.9em;
       color: #555;
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes fadeIn {
@@ -169,15 +230,18 @@
 <body>
   <div class="slider">
     <div class="slides">
-      <img src="https://i.imgur.com/4dU5IEf.jpg" alt="Roblox fondo 1" />
-      <img src="https://i.imgur.com/sDzmubM.jpg" alt="Roblox fondo 2" />
-      <img src="https://i.imgur.com/HQsvzNG.jpg" alt="Roblox fondo 3" />
+      <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg" />
+      <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large" />
+      <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp" />
     </div>
     <div class="lua-code" id="code"></div>
-    <button class="music-btn" onclick="toggleMusic()" id="musicButton">🔊 Música</button>
+    <div class="music-container">
+      <button class="music-btn" onclick="toggleMusic()" id="musicButton">🔊 Música</button>
+      <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
+    </div>
   </div>
 
-  <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" style="height: 80px; margin: 40px auto 0; display: block;">
+  <img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan">
 
   <div class="container">
     <h1>Bienvenido Fernando Alexis Pérez García</h1>
@@ -203,15 +267,17 @@
   </audio>
 
   <script>
-    // Verificar autenticación
-    const usuario = localStorage.getItem("usuarioAutenticado");
-    if (usuario !== "fperez") {
-      alert("Acceso no autorizado");
-      window.location.href = "index.html";
-    }
+    // Verificar autenticación al cargar la página
+    window.addEventListener('load', () => {
+      const usuario = localStorage.getItem("usuarioAutenticado");
+      if (usuario !== "fperez") {
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
+      }
+    });
 
     function cerrarSesion() {
-      localStorage.removeItem("usuarioAutenticado");
+      alert("Sesión cerrada");
       window.location.href = "index.html";
     }
 
@@ -231,6 +297,8 @@
     // Música
     const music = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicButton");
+    const tooltip = document.getElementById("musicTooltip");
+
     function toggleMusic() {
       if (music.paused) {
         music.play();
@@ -238,6 +306,10 @@
       } else {
         music.pause();
         musicBtn.textContent = "🔇 Silencio";
+      }
+      // Ocultar tooltip después del primer clic
+      if (tooltip) {
+        tooltip.style.display = "none";
       }
     }
   </script>
