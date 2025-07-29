@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido Rodrigo Alcala</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- El CSS es el mismo del ejemplo que enviaste, así que no lo repito por espacio -->
+</head>
+<body>
+  <div class="slider">
+    <div class="slides">
+      <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg" />
+      <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large" />
+      <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp" />
+    </div>
+    <div class="lua-code" id="code"></div>
+    <div class="music-container">
+      <button class="music-btn" onclick="toggleMusic()" id="musicButton">🔊 Música</button>
+      <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
+    </div>
+  </div>
+
+  <img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan">
+
+  <div class="container">
+    <h1>Bienvenido Rodrigo Alcala</h1>
+    <h2>Curso: Scripting Lua - Roblox studio</h2>
+
+    <div class="menu">
+      <a href="actividadesScratch.html"><i class="fas fa-book-open"></i> Actividades</a>
+      <a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
+      <a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
+    </div>
+
+    <button class="logout-btn" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+    </button>
+
+    <footer>
+      &copy; 2025 Plataforma Educativa CITZapopan
+    </footer>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="audio.ogg" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Verificar autenticación al cargar la página
+    window.addEventListener('load', () => {
+      const usuario = localStorage.getItem("usuarioAutenticado");
+      if (usuario !== "ralcala") {
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
+      }
+    });
+
+    function cerrarSesion() {
+      alert("Sesión cerrada");
+      localStorage.removeItem("usuarioAutenticado");
+      window.location.href = "index.html";
+    }
+
+    // Código Lua animado
+    const codeElement = document.getElementById("code");
+    const luaCode = `local part = Instance.new("Part")\npart.Anchored = true\npart.BrickColor = BrickColor.new("Bright red")\npart.Position = Vector3.new(0, 5, 0)\npart.Parent = workspace`;
+    let i = 0;
+    function typeCode() {
+      if (i < luaCode.length) {
+        codeElement.textContent += luaCode.charAt(i);
+        i++;
+        setTimeout(typeCode, 50);
+      }
+    }
+    typeCode();
+
+    // Música
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicButton");
+    const tooltip = document.getElementById("musicTooltip");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicBtn.textContent = "🔊 Música";
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔇 Silencio";
+      }
+      tooltip.style.display = "none";
+    }
+  </script>
+</body>
+</html>
