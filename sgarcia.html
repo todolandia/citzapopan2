@@ -5,7 +5,160 @@
   <title>Bienvenido Santiago García Sánchez</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
-    /* ... (todo el CSS permanece igual que el original) ... */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .slider {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
+    }
+    .slides img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-100vw); }
+      66% { transform: translateX(-200vw); }
+      100% { transform: translateX(0); }
+    }
+    .lua-code {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+      color: #00ffcc;
+      max-width: 400px;
+      z-index: 10;
+      white-space: pre-line;
+    }
+    .music-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .music-btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+    .music-btn:hover {
+      background: #5a019c;
+    }
+    .tooltip {
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 0.9em;
+      margin-top: 8px;
+      max-width: 150px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .container {
+      background: rgba(255,255,255,0.95);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      margin: 20px auto 40px;
+      color: #000;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      height: 80px;
+      margin: 40px auto 20px;
+      display: block;
+      position: relative;
+      z-index: 10;
+    }
+    h1 {
+      font-size: 2.2em;
+      background: linear-gradient(to right, #6a0dad, #a64ac9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+    .menu a {
+      text-decoration: none;
+      background-color: #6a0dad;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background-color: #5a019c;
+      transform: translateY(-2px);
+    }
+    .logout-btn {
+      margin-top: 10px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .logout-btn:hover {
+      background-color: #d9363e;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #555;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -62,7 +215,7 @@
     }
 
     const codeElement = document.getElementById("code");
-    const luaCode = `local part = Instance.new("Part")\npart.Anchored = true\npart.BrickColor = BrickColor.new("Bright red")\npart.Position = Vector3.new(0, 5, 0)\npart.Parent = workspace`;
+    const luaCode = `local part = Instance.new("Part")\\npart.Anchored = true\\npart.BrickColor = BrickColor.new("Bright red")\\npart.Position = Vector3.new(0, 5, 0)\\npart.Parent = workspace`;
     let i = 0;
     function typeCode() {
       if (i < luaCode.length) {
