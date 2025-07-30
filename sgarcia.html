@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido Santiago García Sánchez</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* ... (todo el CSS permanece igual que el original) ... */
+  </style>
+</head>
+<body>
+  <div class="slider">
+    <div class="slides">
+      <img src="https://l3tcrafteducacion.com/wp-content/uploads/2021/12/scratch-1.png" />
+      <img src="https://l3tcrafteducacion.com/wp-content/uploads/2021/12/0_356zWDYXZyGbmQxa_-1024x583.png" />
+      <img src="https://l3tcrafteducacion.com/wp-content/uploads/2021/12/scratch-logo-1024x538.png" />
+    </div>
+    <div class="lua-code" id="code"></div>
+    <div class="music-container">
+      <button class="music-btn" onclick="toggleMusic()" id="musicButton">🔊 Música</button>
+      <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
+    </div>
+  </div>
+
+  <img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan">
+
+  <div class="container">
+    <h1>Bienvenido Santiago García Sánchez</h1>
+    <h2>Curso: Scratch</h2>
+
+    <div class="menu">
+      <a href="actividadesScratch.html"><i class="fas fa-book-open"></i> Actividades</a>
+      <a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
+      <a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
+    </div>
+
+    <button class="logout-btn" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+    </button>
+
+    <footer>
+      &copy; 2025 Plataforma Educativa CITZapopan
+    </footer>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="audio.ogg" type="audio/mpeg">
+  </audio>
+
+  <script>
+    window.addEventListener('load', () => {
+      const usuario = localStorage.getItem("usuarioAutenticado");
+      if (usuario !== "sgarcia") {
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
+      }
+    });
+
+    function cerrarSesion() {
+      alert("Sesión cerrada");
+      window.location.href = "index.html";
+    }
+
+    const codeElement = document.getElementById("code");
+    const luaCode = `local part = Instance.new("Part")\npart.Anchored = true\npart.BrickColor = BrickColor.new("Bright red")\npart.Position = Vector3.new(0, 5, 0)\npart.Parent = workspace`;
+    let i = 0;
+    function typeCode() {
+      if (i < luaCode.length) {
+        codeElement.textContent += luaCode.charAt(i);
+        i++;
+        setTimeout(typeCode, 50);
+      }
+    }
+    typeCode();
+
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicButton");
+    const tooltip = document.getElementById("musicTooltip");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicBtn.textContent = "🔊 Música";
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔇 Silencio";
+      }
+      if (tooltip) {
+        tooltip.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
