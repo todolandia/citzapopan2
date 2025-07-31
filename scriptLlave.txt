@@ -1,4 +1,30 @@
-llaveRecogida = true
+local boton = game.Workspace:WaitForChild("boton")
+local puerta = game.Workspace:WaitForChild("Puerta")
+local llave = game.Workspace:WaitForChild("Llave")
+
+local tweenService = game:GetService("TweenService")
+local puertaAbierta = false
+local llaveRecogida = false
+
+-- Guardamos la posición original de la puerta
+local posInicial = puerta.Position
+-- Definimos la posición abierta (por ejemplo, 10 unidades arriba)
+local posAbierto = posInicial + Vector3.new(0, 10, 0)
+
+-- Configuramos los tweens para subir y bajar
+local infoAnimacion = TweenInfo.new(
+	1, -- duración en segundos
+	Enum.EasingStyle.Quad,
+	Enum.EasingDirection.Out
+)
+
+local tweenAbrir = tweenService:Create(puerta, infoAnimacion, {Position = posAbierto})
+local tweenCerrar = tweenService:Create(puerta, infoAnimacion, {Position = posInicial})
+
+-- Cuando el jugador toca la llave
+llave.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") and not llaveRecogida then
+		llaveRecogida = true
 		llave.Transparency = 1
 		llave.CanCollide = false
 		print("Llave recogida")
@@ -19,3 +45,4 @@ boton.Touched:Connect(function(hit)
 		print("Necesitas la llave para abrir la puerta")
 	end
 end)
+
