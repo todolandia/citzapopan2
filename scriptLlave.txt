@@ -1,0 +1,21 @@
+llaveRecogida = true
+		llave.Transparency = 1
+		llave.CanCollide = false
+		print("Llave recogida")
+	end
+end)
+
+-- Cuando el jugador toca el botón
+boton.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") and llaveRecogida and not puertaAbierta then
+		puertaAbierta = true
+		print("Puerta abierta")
+		tweenAbrir:Play()
+		wait(3)
+		tweenCerrar:Play()
+		wait(1)
+		puertaAbierta = false
+	elseif not llaveRecogida then
+		print("Necesitas la llave para abrir la puerta")
+	end
+end)
