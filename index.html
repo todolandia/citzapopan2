@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CITZapopan - Cursos de Tecnología en Zapopan</title>
-    <style>
-        /* RESET Y ESTILOS GENERALES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-
-
+<style>
+   /* RESET Y ESTILOS GENERALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
 
 /* Slider Styles */
 .hero-slider {
@@ -150,8 +147,6 @@
     }
 }
 
-
- 
 /* Loading Screen */
 .loading-screen {
     position: fixed;
@@ -181,7 +176,6 @@
     min-width: 100px;
     animation: heartbeat 1.5s infinite, float 3s ease-in-out infinite;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
-    /* Agrega estas 2 líneas: */
     display: block;
     margin: 0 auto;
 }
@@ -219,22 +213,21 @@ body.loaded .main-content {
     transition: opacity 0.5s ease;
 }
 
+/* General styles */
+body {
+    color: #333;
+    line-height: 1.6;
+}
 
-        
-        body {
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-        
-        /* HEADER */
-       header {
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* HEADER */
+header {
     background-color: #0a192f;
     color: white;
     padding: 1rem 0;
@@ -251,18 +244,18 @@ body.loaded .main-content {
 }
 
 .logo-header {
-    height: 60px; /* Tamaño aumentado */
+    height: 60px;
     transition: transform 0.3s;
 }
 
 .logo-header:hover {
-    transform: scale(1.05); /* Efecto hover sutil */
+    transform: scale(1.05);
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 1.5rem; /* Espaciado uniforme */
+    gap: 1.5rem;
     margin: 0;
     padding: 0;
 }
@@ -316,177 +309,174 @@ nav ul li:last-child a:hover {
     background: #e05a2b;
     box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
 }
-        
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-            padding: 4rem 0;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #0a192f;
-        }
-        
-        .hero h1 span {
-            color: #FF6B35;
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background: #FF6B35;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #e05a2b;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        .btn-secondary {
-            border: 2px solid #0a192f;
-            color: #0a192f;
-        }
-        
-        .btn-secondary:hover {
-            background: #0a192f;
-            color: white;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* SECCIÓN CURSOS */
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: #0a192f;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: #FF6B35;
-        }
-        
-        .cursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .curso-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .curso-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .curso-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .curso-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .curso-card:hover .curso-img img {
-            transform: scale(1.1);
-        }
-        
-        .curso-info {
-            padding: 1.5rem;
-        }
-        
-        .curso-info h3 {
-            margin-bottom: 0.5rem;
-            color: #0a192f;
-        }
-        
-        .curso-info p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
-        
-        .btn-curso {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #0a192f;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
-        
-        .btn-curso:hover {
-            background: #FF6B35;
-        }
 
+/* HERO SECTION */
+.hero {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    padding: 4rem 0;
+}
 
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
 
+.hero-text {
+    flex: 1;
+}
 
-<style>
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #0a192f;
+}
+
+.hero h1 span {
+    color: #FF6B35;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #FF6B35;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #e05a2b;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-secondary {
+    border: 2px solid #0a192f;
+    color: #0a192f;
+}
+
+.btn-secondary:hover {
+    background: #0a192f;
+    color: white;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* SECCIÓN CURSOS */
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: #0a192f;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #FF6B35;
+}
+
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.curso-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.curso-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.curso-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.curso-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.curso-card:hover .curso-img img {
+    transform: scale(1.1);
+}
+
+.curso-info {
+    padding: 1.5rem;
+}
+
+.curso-info h3 {
+    margin-bottom: 0.5rem;
+    color: #0a192f;
+}
+
+.curso-info p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.btn-curso {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #0a192f;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-curso:hover {
+    background: #FF6B35;
+}
+
+/* Testimonios */
 .testimonios-container {
     position: relative;
     width: 80%;
@@ -519,124 +509,123 @@ nav ul li:last-child a:hover {
 
 .prev { left: 0; }
 .next { right: 0; }
-</style>
 
-        
-        /* SECCIÓN ALIADOS */
-        .aliados {
-            background: #f9f9f9;
-            padding: 4rem 0;
-        }
-        
-        .aliados-logos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-        }
-        
-        .aliados-logos img {
-            height: 60px;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s;
-        }
-        
-        .aliados-logos img:hover {
-            filter: grayscale(0);
-            opacity: 1;
-        }
-        
-        /* FOOTER */
-        footer {
-            background: #0a192f;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: #FF6B35;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-column ul li a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column ul li a:hover {
-            color: #FF6B35;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: #FF6B35;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .hero-text {
-                order: 2;
-                text-align: center;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            nav ul {
-                display: none; /* Menú hamburguesa (implementar con JS) */
-            }
-        }
+/* SECCIÓN ALIADOS */
+.aliados {
+    background: #f9f9f9;
+    padding: 4rem 0;
+}
+
+.aliados-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.aliados-logos img {
+    height: 60px;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+.aliados-logos img:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* FOOTER */
+footer {
+    background: #0a192f;
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-column h3 {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #FF6B35;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #FF6B35;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #FF6B35;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-text {
+        order: 2;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    nav ul {
+        display: none; /* Menú hamburguesa (implementar con JS) */
+    }
+}
+
 /* MENÚ INFERIOR RESPONSIVO */
 .bottom-nav {
     position: fixed;
@@ -684,15 +673,14 @@ nav ul li:last-child a:hover {
     transform: scale(1.3);
 }
 
-/* Mostrar solo en pantallas menores a 992px */
+/* Mostrar solo en pantallas mayores o iguales a 992px */
 @media (min-width: 992px) {
     .bottom-nav {
         display: none;
     }
 }
-
-
-    </style>
+</style>
+    
 </head>
 <body>
 
@@ -1217,6 +1205,7 @@ setInterval(() => {
 
 </body>
 </html>
+
 
 
 
