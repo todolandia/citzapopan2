@@ -13,41 +13,7 @@
             font-family: 'Arial', sans-serif;
         }
 
-/*Testimonios Styles */
-<style>
-.testimonios-container {
-    position: relative;
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    text-align: center;
-}
 
-.testimonio {
-    display: none;
-    padding: 20px;
-    font-size: 1.2em;
-    transition: opacity 0.5s ease;
-}
-
-.testimonio.activo {
-    display: block;
-}
-
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.prev { left: 0; }
-.next { right: 0; }
-</style>
 
 
 /* Slider Styles */
@@ -866,21 +832,7 @@ nav ul li:last-child a:hover {
         </div>
     </section>
 
-/* Testimonios */
-<!-- Sección de Testimonios -->
-<div class="testimonios-container">
-    <div class="testimonio activo">
-        <p>"Excelente curso, mi hijo aprendió muchísimo y se divirtió."</p>
-        <h4>- María López</h4>
-    </div>
-    <div class="testimonio">
-        <p>"El maestro explica muy bien, recomendado al 100%."</p>
-        <h4>- Juan Pérez</h4>
-    </div>
-    <div class="testimonio">
-        <p>"Los proyectos con Arduino fueron mi parte favorita."</p>
-        <h4>- Sofía Ramírez</h4>
-    </div>
+
 
     <!-- Botones de navegación -->
     <button class="prev">❮</button>
@@ -1154,15 +1106,7 @@ setTimeout(() => {
   }
 </script>
 
-/*Script testimonios*/
-<script>
-let testimonios = document.querySelectorAll(".testimonio");
-let indice = 0;
 
-function mostrarTestimonio(n) {
-    testimonios.forEach(t => t.classList.remove("activo"));
-    testimonios[n].classList.add("activo");
-}
 
 // Botones de navegación
 document.querySelector(".prev").addEventListener("click", () => {
@@ -1184,4 +1128,5 @@ setInterval(() => {
 
 </body>
 </html>
+
 
