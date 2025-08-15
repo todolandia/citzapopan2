@@ -18,7 +18,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
             position: relative;
         }
         .testimonial-slider {
@@ -42,10 +41,12 @@
         .navigation {
             position: absolute;
             top: 50%;
+            left: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
+            pointer-events: none;
         }
         .nav-button {
             background: rgba(0,0,0,0.5);
@@ -54,11 +55,13 @@
             padding: 10px;
             cursor: pointer;
             font-size: 18px;
+            pointer-events: auto;
         }
     </style>
 </head>
 <body>
 
+<!-- SLIDER DE TESTIMONIOS -->
 <div class="testimonial-container">
     <div class="testimonial-slider" id="slider">
         <div class="testimonial-slide">
@@ -79,6 +82,14 @@
         <button class="nav-button next">&#10095;</button>
     </div>
 </div>
+
+<!-- CONTENIDO QUE SIGUE -->
+<section style="max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px;">
+    <h2>Sobre nosotros</h2>
+    <p>
+        Somos una empresa dedicada a ofrecer servicios de alta calidad. Nuestra misión es superar las expectativas de nuestros clientes.
+    </p>
+</section>
 
 <script>
     const slider = document.getElementById("slider");
