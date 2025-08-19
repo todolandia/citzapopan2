@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Roblox - Sesión #1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #8c52ff;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #5ce1e6;
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .steps {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .steps li {
+            margin-bottom: 10px;
+        }
+        
+        .block-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .block {
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .block-1 {
+            background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
+            height: 60px;
+        }
+        
+        .block-2 {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            height: 100px;
+        }
+        
+        .block-3 {
+            background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+            height: 40px;
+        }
+        
+        .block-4 {
+            background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
+            height: 120px;
+        }
+        
+        .block-5 {
+            background: linear-gradient(135deg, #607D8B 0%, #78909C 100%);
+            height: 80px;
+        }
+        
+        .delivery {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+            }
+            
+            header, .instructions, .example, .delivery {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+            }
+            
+            .buttons {
+                display: none;
+            }
+            
+            .print-only {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                font-style: italic;
+                color: #777;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">ROBLOX</div>
+            <h1>Sesión #1: Creación de Bloques</h1>
+            <p class="subtitle">Actividad de diseño y construcción básica</p>
+        </header>
+        
+        <div class="content">
+            <div class="instructions">
+                <h2>Instrucciones de la Actividad</h2>
+                <p>En esta primera sesión, aprenderás a crear y manipular bloques básicos en Roblox Studio. Sigue estas instrucciones cuidadosamente:</p>
+                
+                <h3>Pasos a seguir:</h3>
+                <ol class="steps">
+                    <li>Abre Roblox Studio y crea un nuevo proyecto base</li>
+                    <li>En la pestaña "Model", selecciona la herramienta "Part"</li>
+                    <li>Crea 5 bloques de diferentes características como se especifica a continuación</li>
+                    <li>Guarda tu proyecto con el nombre "Sesion1_[TuNombre]"</li>
+                </ol>
+                
+                <h3>Requisitos de los bloques:</h3>
+                <ul class="steps">
+                    <li><strong>Bloque 1:</strong> Altura pequeña, color rojo, material plástico</li>
+                    <li><strong>Bloque 2:</strong> Altura mediana, color verde, material madera</li>
+                    <li><strong>Bloque 3:</strong> Altura grande, color azul, metalico</li>
+                    <li><strong>Bloque 4:</strong> Altura muy grande, color morado, material neón</li>
+                    <li><strong>Bloque 5:</strong> Altura variable, color gris, material roca</li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <h2>Ejemplo Visual</h2>
+                <p>Los bloques deben verse similar a este ejemplo:</p>
+                
+                <div class="block-grid">
+                    <div class="block block-1">BLOQUE 1</div>
+                    <div class="block block-2">BLOQUE 2</div>
+                    <div class="block block-3">BLOQUE 3</div>
+                    <div class="block block-4">BLOQUE 4</div>
+                    <div class="block block-5">BLOQUE 5</div>
+                </div>
+                
+                <p>Recuerda variar las propiedades de cada bloque según los requisitos.</p>
+            </div>
+        </div>
+        
+        <div class="delivery">
+            <h2>Entrega de la Actividad</h2>
+            <p>Una vez completados los 5 bloques con las características solicitadas:</p>
+            <ul class="steps">
+                <li>Guarda tu proyecto</li>
+                <li>Abre tu proyecto en Roblox Studio durante la clase</li>
+                <li>Muéstraselo al profesor para su revisión</li>
+                <li>El profesor verificará que cumples con todos los requisitos</li>
+            </ul>
+            <p><strong>Fecha de entrega:</strong> Al final de la sesión #1</p>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn" onclick="window.print()">Imprimir PDF</button>
+            <a class="btn no-print" href="javascript:window.print()">Descargar como PDF</a>
+        </div>
+        
+        <p class="print-only">Actividad de Roblox - Sesión #1 - Entregar al profesor en clase</p>
+    </div>
+    
+    <script>
+        // Script para mejorar la experiencia de impresión
+        document.addEventListener('DOMContentLoaded', function() {
+            // Agregar información antes de imprimir
+            const originalPrint = window.print;
+            window.print = function() {
+                const body = document.body;
+                const originalBody = body.innerHTML;
+                
+                // Agregar mensaje para impresión
+                body.innerHTML = document.querySelector('.container').outerHTML;
+                originalPrint.call(window);
+                
+                // Restaurar contenido original
+                body.innerHTML = originalBody;
+            };
+        });
+    </script>
+</body>
+</html>
