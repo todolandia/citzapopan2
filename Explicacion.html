@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explicación: PlayerGui y WaitForChild</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #8c52ff;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #5ce1e6;
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        ul.steps, ol.steps {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        ul.steps li, ol.steps li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #8c52ff;
+        }
+
+        .note {
+            background: #f9f9f9;
+            border-left: 5px solid #8c52ff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* --- Diagrama --- */
+        .diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #8c52ff;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">ROBLOX</div>
+            <h1>Explicación: PlayerGui y WaitForChild</h1>
+            <p class="subtitle">Referencia de uso de GUI en Roblox Studio</p>
+        </header>
+        
+        <div class="instructions">
+            <h2>¿Qué hace esta línea de código?</h2>
+            <p>El código <code>gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")</code> coloca un objeto de interfaz gráfica (<code>gui</code>) dentro de la pantalla del jugador local.</p>
+            
+            <h3>Desglose paso a paso:</h3>
+            <ul class="steps">
+                <li><code>gui.Parent = ...</code> → Asigna el “padre” del objeto GUI.</li>
+                <li><code>game.Players</code> → Servicio que contiene a todos los jugadores conectados.</li>
+                <li><code>LocalPlayer</code> → El jugador local que ejecuta el script.</li>
+                <li><code>:WaitForChild("PlayerGui")</code> → Espera a que exista el <strong>PlayerGui</strong> del jugador antes de meter el GUI ahí.</li>
+            </ul>
+
+            <h3>Diagrama visual</h3>
+            <div class="diagram">
+                <div class="box">game.Players</div>
+                <div class="arrow">➜</div>
+                <div class="box">LocalPlayer</div>
+                <div class="arrow">➜</div>
+                <div class="box">PlayerGui</div>
+                <div class="arrow">➜</div>
+                <div class="box">gui</div>
+            </div>
+            
+            <h3>¿Por qué esperar?</h3>
+            <p>Cuando inicia el juego, <code>PlayerGui</code> puede tardar en crearse.  
+            <strong>Sin esperar:</strong> el script falla porque intenta acceder a algo que no existe.  
+            <strong>Con WaitForChild:</strong> el script espera hasta que esté listo.</p>
+            
+            <div class="note">
+                ✅ Puedes indicar un tiempo límite: <code>WaitForChild("PlayerGui", 5)</code>
+            </div>
+            
+            <h3>En castellano simple</h3>
+            <p>“Pon mi GUI dentro de la mochila gráfica del jugador (<code>PlayerGui</code>) y espera a que esa mochila exista antes de guardarlo ahí.”</p>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn" onclick="window.print()">Imprimir PDF</button>
+            <a class="btn no-print" href="javascript:window.print()">Descargar como PDF</a>
+        </div>
+    </div>
+</body>
+</html>
