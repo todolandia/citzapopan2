@@ -1,0 +1,66 @@
+local part = script.Parent
+local ServerStorage = game:GetService("ServerStorage")
+local sword = ServerStorage:FindFirstChild("ClassicSword")
+Fernando Alexis Perez Garcia
+15:44
+-- Creamos leaderstats para mostrar dinero 
+game.Players.PlayerAdded:Connect(function(player) 
+	local leaderstats = Instance.new("Folder") 
+	leaderstats.Name = "leaderstats" 
+	leaderstats.Parent = player 
+	local dinero = Instance.new("IntValue") 
+	dinero.Name = "Dinero" 
+	dinero.Value = 0 
+	dinero.Parent = leaderstats 
+end) -- Obtenemos el grupo de monedas 
+local monedas = workspace.Monedas:GetChildren() -- Contador 
+local cantidad = 0 -- Recorremos todas las monedas con un for 
+for i = 1, #monedas do 
+	if monedas[i]:IsA("Part") then 
+		cantidad = cantidad + 1 
+	end 
+end -- Mostramos cuántas hay 
+print("Cantidad de monedas:", cantidad) 
+-- Función para dar dinero y eliminar moneda 
+local function recogerMoneda(moneda, hit) 
+	local player = game.Players:GetPlayerFromCharacter(hit.Parent) 
+	if player and player:FindFirstChild("leaderstats") then 
+		player.leaderstats.Dinero.Value += 1 -- Aumenta en 1 
+		moneda:Destroy() -- Elimina la moneda 
+	end 
+end 
+
+if cantidad > 5 then 
+	print("¡Hay muchas monedas!") 
+	-- Cambiar color a dorado y agregar evento de desaparición 
+	for i = 1, #monedas do 
+		if monedas[i]:IsA("Part") then 
+			monedas[i].BrickColor = BrickColor.new("Bright yellow") 
+			monedas[i].Touched:Connect(function(hit) 
+				recogerMoneda(monedas[i], hit) 
+			end) 
+		end 
+	end 
+
+	-- Hacer que giren 
+	while true do 
+		for i = 1, #monedas do 
+			if monedas[i] and monedas[i]:IsA("Part") then 
+				monedas[i].CFrame = monedas[i].CFrame * CFrame.Angles(0, math.rad(5), 0) 
+			end 
+		end 
+		wait(0.03) 
+	end 
+
+else 
+	print("Pocas monedas, sigue buscando.") 
+	-- Cambiar color a gris y agregar evento de desaparición 
+	for i = 1, #monedas do 
+		if monedas[i]:IsA("Part") then 
+			monedas[i].BrickColor = BrickColor.new("Medium stone grey") 
+			monedas[i].Touched:Connect(function(hit) 
+				recogerMoneda(monedas[i], hit) 
+			end) 
+		end 
+	end 
+end
