@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campus Virtual CITZapopan - Emilio Santiago Cervantes González</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .header-info h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .user-info {
+      text-align: right;
+    }
+    .user-info p {
+      margin: 2px 0;
+      font-size: 0.9rem;
+    }
+    .logout-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .logout-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .container {
+      display: flex;
+      min-height: calc(100vh - 70px);
+    }
+    .sidebar {
+      width: 250px;
+      background: #4a148c;
+      color: white;
+      padding: 20px 0;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .sidebar li:hover, .sidebar li.active {
+      background: rgba(255,255,255,0.1);
+    }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+    .welcome-section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .welcome-section h2 {
+      color: #6a1b9a;
+      margin-top: 0;
+    }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      color: #6a1b9a;
+      margin-top: 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .grades-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .grades-table th, .grades-table td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .grades-table th {
+      background: #f9f9f9;
+      color: #555;
+    }
+    .progress-bar {
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: #6a1b9a;
+      border-radius: 5px;
+    }
+    .assignment-list {
+      list-style: none;
+      padding: 0;
+    }
+    .assignment-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .assignment-list li:last-child {
+      border-bottom: none;
+    }
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+    .status.pending {
+      background: #ffeb3b;
+      color: #333;
+    }
+    .status.completed {
+      background: #4caf50;
+      color: white;
+    }
+    .status.overdue {
+      background: #f44336;
+      color: white;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .calendar-day {
+      padding: 8px;
+      text-align: center;
+      border-radius: 4px;
+      background: #f9f9f9;
+    }
+    .calendar-day.event {
+      background: #e1bee7;
+      font-weight: bold;
+    }
+    .calendar-day.today {
+      background: #6a1b9a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-info">
+      <h1>Campus Virtual CITZapopan</h1>
+      <p>Centro de Innovación Tecnológica</p>
+    </div>
+    <div class="user-info">
+      <p><strong>Emilio Santiago Cervantes González</strong></p>
+      <p>Usuario: ecervantes</p>
+      <button class="logout-btn" onclick="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <ul>
+        <li class="active" onclick="mostrarSeccion('inicio')">Inicio</li>
+        <li onclick="mostrarSeccion('calificaciones')">Calificaciones</li>
+        <li onclick="mostrarSeccion('asignaturas')">Asignaturas</li>
+        <li onclick="mostrarSeccion('tareas')">Tareas Pendientes</li>
+        <li onclick="mostrarSeccion('horario')">Horario</li>
+        <li onclick="mostrarSeccion('perfil')">Perfil</li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <section id="inicio" class="content-section">
+        <div class="welcome-section">
+          <h2>Bienvenido, Emilio</h2>
+          <p>Estás conectado al Campus Virtual del CITZapopan. Aquí puedes consultar tu información académica, calificaciones, tareas pendientes y más.</p>
+        </div>
+
+        <div class="dashboard">
+          <div class="card">
+            <h3>Resumen Académico</h3>
+            <p><strong>Promedio General:</strong> 8.7</p>
+            <p><strong>Asignaturas Inscritas:</strong> 6</p>
+            <p><strong>Próximo Examen:</strong> Matemáticas Avanzadas - 15 de Mayo</p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 75%"></div>
+            </div>
+            <p>Progreso del Semestre: 75%</p>
+          </div>
+
+          <div class="card">
+            <h3>Calificaciones Recientes</h3>
+            <table class="grades-table">
+              <tr>
+                <th>Asignatura</th>
+                <th>Calificación</th>
+              </tr>
+              <tr>
+                <td>Programación Web</td>
+                <td>9.2</td>
+              </tr>
+              <tr>
+                <td>Bases de Datos</td>
+                <td>8.5</td>
+              </tr>
+              <tr>
+                <td>Matemáticas Avanzadas</td>
+                <td>8.8</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>Tareas Pendientes</h3>
+            <ul class="assignment-list">
+              <li>Proyecto Final Programación Web <span class="status pending">Pendiente</span></li>
+              <li>Examen Parcial Matemáticas <span class="status pending">Pendiente</span></li>
+              <li>Investigación Bases de Datos <span class="status completed">Entregado</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Calendario Académico</h3>
+            <div class="calendar">
+              <div class="calendar-day">Lun</div>
+              <div class="calendar-day">Mar</div>
+              <div class="calendar-day">Mié</div>
+              <div class="calendar-day">Jue</div>
+              <div class="calendar-day">Vie</div>
+              <div class="calendar-day">Sáb</div>
+              <div class="calendar-day">Dom</div>
+              
+              <!-- Días del mes (ejemplo simplificado) -->
+              <div class="calendar-day">28</div>
+              <div class="calendar-day">29</div>
+              <div class="calendar-day">30</div>
+              <div class="calendar-day">1</div>
+              <div class="calendar-day today">2</div>
+              <div class="calendar-day">3</div>
+              <div class="calendar-day">4</div>
+              <div class="calendar-day event">5</div>
+              <div class="calendar-day">6</div>
+              <div class="calendar-day">7</div>
+              <div class="calendar-day">8</div>
+              <div class="calendar-day">9</div>
+              <div class="calendar-day">10</div>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+              <strong>Próximo evento:</strong> Examen Parcial - 5 de Mayo
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="calificaciones" class="content-section" style="display: none;">
+        <div class="welcome-section">
+          <h2>Calificaciones</h2>
+          <p>Consulta tus calificaciones por asignatura y período académico.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Calificaciones del Semestre</h3>
+          <table class="grades-table">
+            <tr>
+              <th>Asignatura</th>
+              <th>Parcial 1</th>
+              <th>Parcial 2</th>
+              <th>Parcial 3</th>
+              <th>Promedio</th>
+            </tr>
+            <tr>
+              <td>Programación Web</td>
+              <td>9.0</td>
+              <td>9.5</td>
+              <td>-</td>
+              <td>9.2</td>
+            </tr>
+            <tr>
+              <td>Bases de Datos</td>
+              <td>8.0</td>
+              <td>9.0</td>
+              <td>-</td>
+              <td>8.5</td>
+            </tr>
+            <tr>
+              <td>Matemáticas Avanzadas</td>
+              <td>8.5</td>
+              <td>9.0</td>
+              <td>-</td>
+              <td>8.8</td>
+            </tr>
+            <tr>
+              <td>Redes de Computadoras</td>
+              <td>8.8</td>
+              <td>9.2</td>
+              <td>-</td>
+              <td>9.0</td>
+            </tr>
+            <tr>
+              <td>Ingeniería de Software</td>
+              <td>8.7</td>
+              <td>8.5</td>
+              <td>-</td>
+              <td>8.6</td>
+            </tr>
+            <tr>
+              <td>Ética Profesional</td>
+              <td>9.5</td>
+              <td>9.0</td>
+              <td>-</td>
+              <td>9.2</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="asignaturas" class="content-section" style="display: none;">
+        <div class="welcome-section">
+          <h2>Asignaturas</h2>
+          <p>Información detallada de las asignaturas que cursas este semestre.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Mis Asignaturas</h3>
+          <ul class="assignment-list">
+            <li>
+              <strong>Programación Web</strong><br>
+              Profesor: Dr. Roberto Martínez<br>
+              Horario: Lunes y Miércoles 10:00 - 12:00<br>
+              Aula: A-204
+            </li>
+            <li>
+              <strong>Bases de Datos</strong><br>
+              Profesor: Mtra. Laura González<br>
+              Horario: Martes y Jueves 9:00 - 11:00<br>
+              Aula: B-105
+            </li>
+            <li>
+              <strong>Matemáticas Avanzadas</strong><br>
+              Profesor: Dr. Carlos Ruiz<br>
+              Horario: Lunes y Viernes 14:00 - 16:00<br>
+              Aula: A-301
+            </li>
+            <li>
+              <strong>Redes de Computadoras</strong><br>
+              Profesor: Ing. Fernando López<br>
+              Horario: Miércoles y Viernes 11:00 - 13:00<br>
+              Aula: Lab-3
+            </li>
+            <li>
+              <strong>Ingeniería de Software</strong><br>
+              Profesor: Mtra. Ana Sánchez<br>
+              Horario: Martes y Jueves 16:00 - 18:00<br>
+              Aula: A-202
+            </li>
+            <li>
+              <strong>Ética Profesional</strong><br>
+              Profesor: Lic. Patricia Ramírez<br>
+              Horario: Lunes 18:00 - 20:00<br>
+              Aula: B-201
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="tareas" class="content-section" style="display: none;">
+        <div class="welcome-section">
+          <h2>Tareas Pendientes</h2>
+          <p>Gestiona tus tareas y actividades académicas.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Lista de Tareas</h3>
+          <ul class="assignment-list">
+            <li>
+              <strong>Proyecto Final - Programación Web</strong><br>
+              Descripción: Desarrollo de aplicación web completa<br>
+              Fecha de entrega: 30 de Mayo<br>
+              <span class="status pending">Pendiente</span>
+            </li>
+            <li>
+              <strong>Examen Parcial - Matemáticas Avanzadas</strong><br>
+              Descripción: Unidades 1-4<br>
+              Fecha: 15 de Mayo<br>
+              <span class="status pending">Pendiente</span>
+            </li>
+            <li>
+              <strong>Investigación - Bases de Datos</strong><br>
+              Descripción: Normalización de bases de datos<br>
+              Fecha de entrega: 10 de Mayo<br>
+              <span class="status completed">Entregado</span>
+            </li>
+            <li>
+              <strong>Práctica de Laboratorio - Redes</strong><br>
+              Descripción: Configuración de routers<br>
+              Fecha de entrega: 8 de Mayo<br>
+              <span class="status completed">Entregado</span>
+            </li>
+            <li>
+              <strong>Ensayo - Ética Profesional</strong><br>
+              Descripción: Dilemas éticos en TI<br>
+              Fecha de entrega: 20 de Mayo<br>
+              <span class="status pending">Pendiente</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="horario" class="content-section" style="display: none;">
+        <div class="welcome-section">
+          <h2>Horario de Clases</h2>
+          <p>Consulta tu horario semanal de clases.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Horario Semanal</h3>
+          <table class="grades-table">
+            <tr>
+              <th>Hora</th>
+              <th>Lunes</th>
+              <th>Martes</th>
+              <th>Miércoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+            </tr>
+            <tr>
+              <td>9:00 - 11:00</td>
+              <td></td>
+              <td>Bases de Datos<br>Aula B-105</td>
+              <td></td>
+              <td>Bases de Datos<br>Aula B-105</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>10:00 - 12:00</td>
+              <td>Programación Web<br>Aula A-204</td>
+              <td></td>
+              <td>Programación Web<br>Aula A-204</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>11:00 - 13:00</td>
+              <td></td>
+              <td></td>
+              <td>Redes de Computadoras<br>Lab-3</td>
+              <td></td>
+              <td>Redes de Computadoras<br>Lab-3</td>
+            </tr>
+            <tr>
+              <td>14:00 - 16:00</td>
+              <td>Matemáticas Avanzadas<br>Aula A-301</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Matemáticas Avanzadas<br>Aula A-301</td>
+            </tr>
+            <tr>
+              <td>16:00 - 18:00</td>
+              <td></td>
+              <td>Ingeniería de Software<br>Aula A-202</td>
+              <td></td>
+              <td>Ingeniería de Software<br>Aula A-202</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>18:00 - 20:00</td>
+              <td>Ética Profesional<br>Aula B-201</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="perfil" class="content-section" style="display: none;">
+        <div class="welcome-section">
+          <h2>Perfil del Estudiante</h2>
+          <p>Información personal y académica.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Datos Personales</h3>
+          <p><strong>Nombre completo:</strong> Emilio Santiago Cervantes González</p>
+          <p><strong>Usuario:</strong> ecervantes</p>
+          <p><strong>Matrícula:</strong> 202312345</p>
+          <p><strong>Carrera:</strong> Ingeniería en Sistemas Computacionales</p>
+          <p><strong>Semestre:</strong> 5°</p>
+          <p><strong>Correo electrónico:</strong> ecervantes@citzapopan.edu.mx</p>
+          <p><strong>Teléfono:</strong> 33-1234-5678</p>
+        </div>
+        
+        <div class="card">
+          <h3>Estadísticas Académicas</h3>
+          <p><strong>Promedio General:</strong> 8.7</p>
+          <p><strong>Asignaturas Aprobadas:</strong> 24</p>
+          <p><strong>Créditos Obtenidos:</strong> 180</p>
+          <p><strong>Porcentaje de Avance:</strong> 62%</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Función para mostrar la sección seleccionada
+    function mostrarSeccion(seccion) {
+      // Ocultar todas las secciones
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Mostrar la sección seleccionada
+      document.getElementById(seccion).style.display = 'block';
+      
+      // Actualizar la clase activa en el menú
+      document.querySelectorAll('.sidebar li').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Encontrar y activar el elemento del menú correspondiente
+      const menuItems = document.querySelectorAll('.sidebar li');
+      for (let i = 0; i < menuItems.length; i++) {
+        if (menuItems[i].getAttribute('onclick').includes(seccion)) {
+          menuItems[i].classList.add('active');
+          break;
+        }
+      }
+    }
+    
+    // Función para cerrar sesión
+    function cerrarSesion() {
+      localStorage.removeItem('usuarioAutenticado');
+      window.location.href = 'index.html';
+    }
+    
+    // Verificar autenticación al cargar la página
+    window.onload = function() {
+      const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+      if (usuarioAutenticado !== 'ecervantes') {
+        window.location.href = 'index.html';
+      }
+    };
+  </script>
+</body>
+</html>
