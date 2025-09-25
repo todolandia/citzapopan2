@@ -3,582 +3,318 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Campus Virtual CITZapopan - Emilio Santiago Cervantes González</title>
+  <title>Bienvenido Emilio Santiago Cervantes González</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-      color: #333;
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
-    header {
-      background-color: #6a1b9a;
-      color: white;
-      padding: 15px 20px;
+
+    /* Slider de fondo */
+    .slider {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .slides {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
     }
-    .header-info {
+    .slides img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      33%  { transform: translateX(-100vw); }
+      66%  { transform: translateX(-200vw); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Código Lua animado */
+    .lua-code {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-family: 'Courier New', ui-monospace, monospace;
+      font-size: 1em;
+      white-space: pre-line;
+      color: #00ffcc;
+      max-width: 400px;
+      z-index: 10;
+    }
+
+    /* Música + tooltip */
+    .music-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
-    .header-info h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    .user-info {
-      text-align: right;
-    }
-    .user-info p {
-      margin: 2px 0;
-      font-size: 0.9rem;
-    }
-    .logout-btn {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-    .logout-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .container {
-      display: flex;
-      min-height: calc(100vh - 70px);
-    }
-    .sidebar {
-      width: 250px;
-      background: #4a148c;
-      color: white;
-      padding: 20px 0;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .sidebar li {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .sidebar li:hover, .sidebar li.active {
-      background: rgba(255,255,255,0.1);
-    }
-    .main-content {
-      flex: 1;
-      padding: 20px;
-    }
-    .welcome-section {
-      background: white;
+    .music-btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
       border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease, transform 0.15s ease;
     }
-    .welcome-section h2 {
-      color: #6a1b9a;
-      margin-top: 0;
-    }
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .card h3 {
-      color: #6a1b9a;
-      margin-top: 0;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-    }
-    .grades-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    .grades-table th, .grades-table td {
-      padding: 8px 10px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-    .grades-table th {
-      background: #f9f9f9;
-      color: #555;
-    }
-    .progress-bar {
-      height: 10px;
-      background: #eee;
-      border-radius: 5px;
-      margin: 10px 0;
-      overflow: hidden;
-    }
-    .progress {
-      height: 100%;
-      background: #6a1b9a;
-      border-radius: 5px;
-    }
-    .assignment-list {
-      list-style: none;
-      padding: 0;
-    }
-    .assignment-list li {
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .assignment-list li:last-child {
-      border-bottom: none;
-    }
-    .status {
-      display: inline-block;
-      padding: 3px 8px;
+    .music-btn:hover { background: #5a019c; }
+    .music-btn:active { transform: translateY(1px); }
+
+    .tooltip {
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 8px 12px;
       border-radius: 12px;
-      font-size: 0.8rem;
-      margin-left: 10px;
-    }
-    .status.pending {
-      background: #ffeb3b;
-      color: #333;
-    }
-    .status.completed {
-      background: #4caf50;
-      color: white;
-    }
-    .status.overdue {
-      background: #f44336;
-      color: white;
-    }
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-      margin-top: 10px;
-    }
-    .calendar-day {
-      padding: 8px;
+      font-size: 0.9em;
+      margin-top: 8px;
+      max-width: 180px;
       text-align: center;
-      border-radius: 4px;
-      background: #f9f9f9;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      animation: fadeInTooltip 0.3s ease forwards;
+      user-select: none;
+      pointer-events: none;
     }
-    .calendar-day.event {
-      background: #e1bee7;
-      font-weight: bold;
+    @keyframes fadeInTooltip {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .calendar-day.today {
-      background: #6a1b9a;
+
+    /* Logo y contenedor principal */
+    img.logo {
+      height: 80px;
+      margin: 40px auto 20px;
+      display: block;
+      position: relative;
+      z-index: 10;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+      max-width: 600px;
+      width: 90%;
+      margin: 20px auto 40px;
+      color: #000;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      background: linear-gradient(to right, #6a0dad, #a64ac9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+    .menu a {
+      text-decoration: none;
+      background-color: #6a0dad;
       color: white;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 1.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
+    }
+    .menu a:hover {
+      background-color: #5a019c;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      margin-top: 6px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .logout-btn:hover { background-color: #d9363e; }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.9em;
+      color: #555;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .menu { flex-direction: column; gap: 12px; }
+      .lua-code { max-width: 80vw; font-size: 0.95em; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-info">
-      <h1>Campus Virtual CITZapopan</h1>
-      <p>Centro de Innovación Tecnológica</p>
+  <!-- Fondo con slider -->
+  <div class="slider" aria-hidden="true">
+    <div class="slides">
+      <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg" alt="" />
+      <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large" alt="" />
+      <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp" alt="" />
     </div>
-    <div class="user-info">
-      <p><strong>Emilio Santiago Cervantes González</strong></p>
-      <p>Usuario: ecervantes</p>
-      <button class="logout-btn" onclick="cerrarSesion()">Cerrar Sesión</button>
+
+    <div class="lua-code" id="code" aria-live="polite"></div>
+
+    <div class="music-container">
+      <button class="music-btn" onclick="toggleMusic()" id="musicButton" aria-controls="bgMusic" aria-pressed="false">
+        🔊 Música
+      </button>
+      <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
     </div>
-  </header>
-
-  <div class="container">
-    <nav class="sidebar">
-      <ul>
-        <li class="active" onclick="mostrarSeccion('inicio')">Inicio</li>
-        <li onclick="mostrarSeccion('calificaciones')">Calificaciones</li>
-        <li onclick="mostrarSeccion('asignaturas')">Asignaturas</li>
-        <li onclick="mostrarSeccion('tareas')">Tareas Pendientes</li>
-        <li onclick="mostrarSeccion('horario')">Horario</li>
-        <li onclick="mostrarSeccion('perfil')">Perfil</li>
-      </ul>
-    </nav>
-
-    <main class="main-content">
-      <section id="inicio" class="content-section">
-        <div class="welcome-section">
-          <h2>Bienvenido, Emilio</h2>
-          <p>Estás conectado al Campus Virtual del CITZapopan. Aquí puedes consultar tu información académica, calificaciones, tareas pendientes y más.</p>
-        </div>
-
-        <div class="dashboard">
-          <div class="card">
-            <h3>Resumen Académico</h3>
-            <p><strong>Promedio General:</strong> 8.7</p>
-            <p><strong>Asignaturas Inscritas:</strong> 6</p>
-            <p><strong>Próximo Examen:</strong> Matemáticas Avanzadas - 15 de Mayo</p>
-            <div class="progress-bar">
-              <div class="progress" style="width: 75%"></div>
-            </div>
-            <p>Progreso del Semestre: 75%</p>
-          </div>
-
-          <div class="card">
-            <h3>Calificaciones Recientes</h3>
-            <table class="grades-table">
-              <tr>
-                <th>Asignatura</th>
-                <th>Calificación</th>
-              </tr>
-              <tr>
-                <td>Programación Web</td>
-                <td>9.2</td>
-              </tr>
-              <tr>
-                <td>Bases de Datos</td>
-                <td>8.5</td>
-              </tr>
-              <tr>
-                <td>Matemáticas Avanzadas</td>
-                <td>8.8</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="card">
-            <h3>Tareas Pendientes</h3>
-            <ul class="assignment-list">
-              <li>Proyecto Final Programación Web <span class="status pending">Pendiente</span></li>
-              <li>Examen Parcial Matemáticas <span class="status pending">Pendiente</span></li>
-              <li>Investigación Bases de Datos <span class="status completed">Entregado</span></li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Calendario Académico</h3>
-            <div class="calendar">
-              <div class="calendar-day">Lun</div>
-              <div class="calendar-day">Mar</div>
-              <div class="calendar-day">Mié</div>
-              <div class="calendar-day">Jue</div>
-              <div class="calendar-day">Vie</div>
-              <div class="calendar-day">Sáb</div>
-              <div class="calendar-day">Dom</div>
-              
-              <!-- Días del mes (ejemplo simplificado) -->
-              <div class="calendar-day">28</div>
-              <div class="calendar-day">29</div>
-              <div class="calendar-day">30</div>
-              <div class="calendar-day">1</div>
-              <div class="calendar-day today">2</div>
-              <div class="calendar-day">3</div>
-              <div class="calendar-day">4</div>
-              <div class="calendar-day event">5</div>
-              <div class="calendar-day">6</div>
-              <div class="calendar-day">7</div>
-              <div class="calendar-day">8</div>
-              <div class="calendar-day">9</div>
-              <div class="calendar-day">10</div>
-            </div>
-            <p style="margin-top: 10px; font-size: 0.9rem;">
-              <strong>Próximo evento:</strong> Examen Parcial - 5 de Mayo
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="calificaciones" class="content-section" style="display: none;">
-        <div class="welcome-section">
-          <h2>Calificaciones</h2>
-          <p>Consulta tus calificaciones por asignatura y período académico.</p>
-        </div>
-        
-        <div class="card">
-          <h3>Calificaciones del Semestre</h3>
-          <table class="grades-table">
-            <tr>
-              <th>Asignatura</th>
-              <th>Parcial 1</th>
-              <th>Parcial 2</th>
-              <th>Parcial 3</th>
-              <th>Promedio</th>
-            </tr>
-            <tr>
-              <td>Programación Web</td>
-              <td>9.0</td>
-              <td>9.5</td>
-              <td>-</td>
-              <td>9.2</td>
-            </tr>
-            <tr>
-              <td>Bases de Datos</td>
-              <td>8.0</td>
-              <td>9.0</td>
-              <td>-</td>
-              <td>8.5</td>
-            </tr>
-            <tr>
-              <td>Matemáticas Avanzadas</td>
-              <td>8.5</td>
-              <td>9.0</td>
-              <td>-</td>
-              <td>8.8</td>
-            </tr>
-            <tr>
-              <td>Redes de Computadoras</td>
-              <td>8.8</td>
-              <td>9.2</td>
-              <td>-</td>
-              <td>9.0</td>
-            </tr>
-            <tr>
-              <td>Ingeniería de Software</td>
-              <td>8.7</td>
-              <td>8.5</td>
-              <td>-</td>
-              <td>8.6</td>
-            </tr>
-            <tr>
-              <td>Ética Profesional</td>
-              <td>9.5</td>
-              <td>9.0</td>
-              <td>-</td>
-              <td>9.2</td>
-            </tr>
-          </table>
-        </div>
-      </section>
-
-      <section id="asignaturas" class="content-section" style="display: none;">
-        <div class="welcome-section">
-          <h2>Asignaturas</h2>
-          <p>Información detallada de las asignaturas que cursas este semestre.</p>
-        </div>
-        
-        <div class="card">
-          <h3>Mis Asignaturas</h3>
-          <ul class="assignment-list">
-            <li>
-              <strong>Programación Web</strong><br>
-              Profesor: Dr. Roberto Martínez<br>
-              Horario: Lunes y Miércoles 10:00 - 12:00<br>
-              Aula: A-204
-            </li>
-            <li>
-              <strong>Bases de Datos</strong><br>
-              Profesor: Mtra. Laura González<br>
-              Horario: Martes y Jueves 9:00 - 11:00<br>
-              Aula: B-105
-            </li>
-            <li>
-              <strong>Matemáticas Avanzadas</strong><br>
-              Profesor: Dr. Carlos Ruiz<br>
-              Horario: Lunes y Viernes 14:00 - 16:00<br>
-              Aula: A-301
-            </li>
-            <li>
-              <strong>Redes de Computadoras</strong><br>
-              Profesor: Ing. Fernando López<br>
-              Horario: Miércoles y Viernes 11:00 - 13:00<br>
-              Aula: Lab-3
-            </li>
-            <li>
-              <strong>Ingeniería de Software</strong><br>
-              Profesor: Mtra. Ana Sánchez<br>
-              Horario: Martes y Jueves 16:00 - 18:00<br>
-              Aula: A-202
-            </li>
-            <li>
-              <strong>Ética Profesional</strong><br>
-              Profesor: Lic. Patricia Ramírez<br>
-              Horario: Lunes 18:00 - 20:00<br>
-              Aula: B-201
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="tareas" class="content-section" style="display: none;">
-        <div class="welcome-section">
-          <h2>Tareas Pendientes</h2>
-          <p>Gestiona tus tareas y actividades académicas.</p>
-        </div>
-        
-        <div class="card">
-          <h3>Lista de Tareas</h3>
-          <ul class="assignment-list">
-            <li>
-              <strong>Proyecto Final - Programación Web</strong><br>
-              Descripción: Desarrollo de aplicación web completa<br>
-              Fecha de entrega: 30 de Mayo<br>
-              <span class="status pending">Pendiente</span>
-            </li>
-            <li>
-              <strong>Examen Parcial - Matemáticas Avanzadas</strong><br>
-              Descripción: Unidades 1-4<br>
-              Fecha: 15 de Mayo<br>
-              <span class="status pending">Pendiente</span>
-            </li>
-            <li>
-              <strong>Investigación - Bases de Datos</strong><br>
-              Descripción: Normalización de bases de datos<br>
-              Fecha de entrega: 10 de Mayo<br>
-              <span class="status completed">Entregado</span>
-            </li>
-            <li>
-              <strong>Práctica de Laboratorio - Redes</strong><br>
-              Descripción: Configuración de routers<br>
-              Fecha de entrega: 8 de Mayo<br>
-              <span class="status completed">Entregado</span>
-            </li>
-            <li>
-              <strong>Ensayo - Ética Profesional</strong><br>
-              Descripción: Dilemas éticos en TI<br>
-              Fecha de entrega: 20 de Mayo<br>
-              <span class="status pending">Pendiente</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="horario" class="content-section" style="display: none;">
-        <div class="welcome-section">
-          <h2>Horario de Clases</h2>
-          <p>Consulta tu horario semanal de clases.</p>
-        </div>
-        
-        <div class="card">
-          <h3>Horario Semanal</h3>
-          <table class="grades-table">
-            <tr>
-              <th>Hora</th>
-              <th>Lunes</th>
-              <th>Martes</th>
-              <th>Miércoles</th>
-              <th>Jueves</th>
-              <th>Viernes</th>
-            </tr>
-            <tr>
-              <td>9:00 - 11:00</td>
-              <td></td>
-              <td>Bases de Datos<br>Aula B-105</td>
-              <td></td>
-              <td>Bases de Datos<br>Aula B-105</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>10:00 - 12:00</td>
-              <td>Programación Web<br>Aula A-204</td>
-              <td></td>
-              <td>Programación Web<br>Aula A-204</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>11:00 - 13:00</td>
-              <td></td>
-              <td></td>
-              <td>Redes de Computadoras<br>Lab-3</td>
-              <td></td>
-              <td>Redes de Computadoras<br>Lab-3</td>
-            </tr>
-            <tr>
-              <td>14:00 - 16:00</td>
-              <td>Matemáticas Avanzadas<br>Aula A-301</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Matemáticas Avanzadas<br>Aula A-301</td>
-            </tr>
-            <tr>
-              <td>16:00 - 18:00</td>
-              <td></td>
-              <td>Ingeniería de Software<br>Aula A-202</td>
-              <td></td>
-              <td>Ingeniería de Software<br>Aula A-202</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>18:00 - 20:00</td>
-              <td>Ética Profesional<br>Aula B-201</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
-        </div>
-      </section>
-
-      <section id="perfil" class="content-section" style="display: none;">
-        <div class="welcome-section">
-          <h2>Perfil del Estudiante</h2>
-          <p>Información personal y académica.</p>
-        </div>
-        
-        <div class="card">
-          <h3>Datos Personales</h3>
-          <p><strong>Nombre completo:</strong> Emilio Santiago Cervantes González</p>
-          <p><strong>Usuario:</strong> ecervantes</p>
-          <p><strong>Matrícula:</strong> 202312345</p>
-          <p><strong>Carrera:</strong> Ingeniería en Sistemas Computacionales</p>
-          <p><strong>Semestre:</strong> 5°</p>
-          <p><strong>Correo electrónico:</strong> ecervantes@citzapopan.edu.mx</p>
-          <p><strong>Teléfono:</strong> 33-1234-5678</p>
-        </div>
-        
-        <div class="card">
-          <h3>Estadísticas Académicas</h3>
-          <p><strong>Promedio General:</strong> 8.7</p>
-          <p><strong>Asignaturas Aprobadas:</strong> 24</p>
-          <p><strong>Créditos Obtenidos:</strong> 180</p>
-          <p><strong>Porcentaje de Avance:</strong> 62%</p>
-        </div>
-      </section>
-    </main>
   </div>
 
+  <!-- Logo -->
+  <img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" />
+
+  <!-- Contenido principal -->
+  <div class="container" role="main">
+    <h1>Bienvenido Emilio Santiago Cervantes González</h1>
+    <h2>Curso: Scripting Lua - Roblox Studio</h2>
+
+    <nav class="menu" aria-label="Menú principal">
+      <a href="actividadesRoblox2.html"><i class="fas fa-book-open" aria-hidden="true"></i> Actividades</a>
+      <a href="subir_archivos.html"><i class="fas fa-upload" aria-hidden="true"></i> Subir archivos</a>
+      <a href="avance.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Avance</a>
+    </nav>
+
+    <button class="logout-btn" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Cerrar sesión
+    </button>
+
+    <footer>
+      &copy; 2025 Plataforma Educativa CITZapopan
+    </footer>
+  </div>
+
+  <!-- Audio (ogg + mp3 de respaldo) -->
+  <audio id="bgMusic" loop>
+    <source src="audio.ogg" type="audio/ogg" />
+    <source src="audio.mp3" type="audio/mpeg" />
+  </audio>
+
   <script>
-    // Función para mostrar la sección seleccionada
-    function mostrarSeccion(seccion) {
-      // Ocultar todas las secciones
-      document.querySelectorAll('.content-section').forEach(section => {
-        section.style.display = 'none';
-      });
-      
-      // Mostrar la sección seleccionada
-      document.getElementById(seccion).style.display = 'block';
-      
-      // Actualizar la clase activa en el menú
-      document.querySelectorAll('.sidebar li').forEach(item => {
-        item.classList.remove('active');
-      });
-      
-      // Encontrar y activar el elemento del menú correspondiente
-      const menuItems = document.querySelectorAll('.sidebar li');
-      for (let i = 0; i < menuItems.length; i++) {
-        if (menuItems[i].getAttribute('onclick').includes(seccion)) {
-          menuItems[i].classList.add('active');
-          break;
-        }
+    // --- Autenticación ---
+    window.addEventListener('load', () => {
+      const usuario = localStorage.getItem("usuarioAutenticado");
+      if (usuario !== "ecervantes") {
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
       }
-    }
-    
-    // Función para cerrar sesión
+      // Intento de autoplay (puede ser bloqueado por el navegador)
+      const music = document.getElementById("bgMusic");
+      if (music) {
+        music.play().catch(() => {
+          // Si falla, dejamos el tooltip visible hasta que el usuario haga clic
+        });
+      }
+      typeCode(); // inicia animación de código
+    });
+
     function cerrarSesion() {
-      localStorage.removeItem('usuarioAutenticado');
-      window.location.href = 'index.html';
+      alert("Sesión cerrada");
+      window.location.href = "index.html";
     }
-    
-    // Verificar autenticación al cargar la página
-    window.onload = function() {
-      const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
-      if (usuarioAutenticado !== 'ecervantes') {
-        window.location.href = 'index.html';
+
+    // --- Código Lua animado ---
+    const codeElement = document.getElementById("code");
+    const luaCode =
+`local part = Instance.new("Part")
+part.Anchored = true
+part.BrickColor = BrickColor.new("Bright red")
+part.Position = Vector3.new(0, 5, 0)
+part.Parent = workspace`;
+    let i = 0;
+    function typeCode() {
+      if (!codeElement) return;
+      if (i < luaCode.length) {
+        codeElement.textContent += luaCode.charAt(i);
+        i++;
+        setTimeout(typeCode, 50);
       }
-    };
+    }
+
+    // --- Música ---
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicButton");
+    const tooltip = document.getElementById("musicTooltip");
+
+    function toggleMusic() {
+      if (!music) return;
+      if (music.paused) {
+        music.play().then(() => {
+          musicBtn.textContent = "🔊 Música";
+          musicBtn.setAttribute("aria-pressed", "true");
+        }).catch(() => {
+          // Si el navegador bloquea, no hacemos nada especial
+        });
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔇 Silencio";
+        musicBtn.setAttribute("aria-pressed", "false");
+      }
+      if (tooltip) tooltip.style.display = "none";
+    }
   </script>
 </body>
 </html>
