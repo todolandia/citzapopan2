@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bienvenido Ian Amilcar Zepeda Balcazar</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-pAp+gD0bA3G8l0F8P7Z7iEVZV4mRy7mbj2zKfpIQ3FeSH8ojVqArQQb+fZqgR9SKWJZyKX1vA6EmvVkaMkmJxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Slider de fondo */
+    .slider {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
+    }
+    .slides img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      33%  { transform: translateX(-100vw); }
+      66%  { transform: translateX(-200vw); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Código Lua animado */
+    .lua-code {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-family: 'Courier New', ui-monospace, monospace;
+      font-size: 1em;
+      white-space: pre-line;
+      color: #00ffcc;
+      max-width: 400px;
+      z-index: 10;
+    }
+
+    /* Música + tooltip */
+    .music-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .music-btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+    }
+    .music-btn:hover { background: #5a019c; }
+    .music-btn:active { transform: translateY(1px); }
+
+    .tooltip {
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 0.9em;
+      margin-top: 8px;
+      max-width: 180px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      animation: fadeInTooltip 0.3s ease forwards;
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes fadeInTooltip {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo y contenedor principal */
+    img.logo {
+      height: 80px;
+      margin: 40px auto 20px;
+      display: block;
+      position: relative;
+      z-index: 10;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+      max-width: 600px;
+      width: 90%;
+      margin: 20px auto 40px;
+      color: #000;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      background: linear-gradient(to right, #6a0dad, #a64ac9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+    .menu a {
+      text-decoration: none;
+      background-color: #6a0dad;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 1.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
+    }
+    .menu a:hover {
+      background-color: #5a019c;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      margin-top: 6px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .logout-btn:hover { background-color: #d9363e; }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.9em;
+      color: #555;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .menu { flex-direction: column; gap: 12px; }
+      .lua-code { max-width: 80vw; font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo con slider -->
+  <div class="slider" aria-hidden="true">
+    <div class="slides">
+      <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg" alt="" />
+      <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large" alt="" />
+      <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp" alt="" />
+    </div>
+
+    <div class="lua-code" id="code" aria-live="polite"></div>
+
+    <div class="music-container">
+      <button class="music-btn" onclick="toggleMusic()" id="musicButton" aria-controls="bgMusic" aria-pressed="false">
+        🔊 Música
+      </button>
+      <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
+    </div>
+  </div>
+
+  <!-- Logo -->
+  <img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="Logo CITZapopan" />
+
+  <!-- Contenido principal -->
+  <div class="container" role="main">
+    <h1>Bienvenido Ian Amilcar Zepeda Balcazar</h1>
+    <h2>Curso: Scripting Lua - Roblox Studio</h2>
+
+    <nav class="menu" aria-label="Menú principal">
+      <a href="actividadesRoblox2.html"><i class="fas fa-book-open" aria-hidden="true"></i> Actividades</a>
+      <a href="subir_archivos.html"><i class="fas fa-upload" aria-hidden="true"></i> Subir archivos</a>
+      <a href="avance.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Avance</a>
+    </nav>
+
+    <button class="logout-btn" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Cerrar sesión
+    </button>
+
+    <footer>
+      &copy; 2025 Plataforma Educativa CITZapopan
+    </footer>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="audio.ogg" type="audio/ogg" />
+    <source src="audio.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // --- Autenticación ---
+    window.addEventListener('load', () => {
+      const usuario = localStorage.getItem("usuarioAutenticado");
+      if (usuario !== "ialmicar") {
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
+      }
+      const music = document.getElementById("bgMusic");
+      if (music) {
+        music.play().catch(() => {
+          // Si falla autoplay, se espera al clic
+        });
+      }
+      typeCode();
+    });
+
+    function cerrarSesion() {
+      alert("Sesión cerrada");
+      window.location.href = "index.html";
+    }
+
+    // --- Código Lua animado ---
+    const codeElement = document.getElementById("code");
+    const luaCode =
+`local part = Instance.new("Part")
+part.Anchored = true
+part.BrickColor = BrickColor.new("Bright blue")
+part.Position = Vector3.new(0, 5, 0)
+part.Parent = workspace`;
+    let i = 0;
+    function typeCode() {
+      if (!codeElement) return;
+      if (i < luaCode.length) {
+        codeElement.textContent += luaCode.charAt(i);
+        i++;
+        setTimeout(typeCode, 50);
+      }
+    }
+
+    // --- Música ---
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicButton");
+    const tooltip = document.getElementById("musicTooltip");
+
+    function toggleMusic() {
+      if (!music) return;
+      if (music.paused) {
+        music.play().then(() => {
+          musicBtn.textContent = "🔊 Música";
+          musicBtn.setAttribute("aria-pressed", "true");
+        });
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔇 Silencio";
+        musicBtn.setAttribute("aria-pressed", "false");
+      }
+      if (tooltip) tooltip.style.display = "none";
+    }
+  </script>
+</body>
+</html>
