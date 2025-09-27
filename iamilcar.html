@@ -252,22 +252,30 @@
     <source src="audio.mp3" type="audio/mpeg" />
   </audio>
 
-  <script>
-    // --- Autenticación ---
-    window.addEventListener('load', () => {
-      const usuario = localStorage.getItem("usuarioAutenticado");
-      if (usuario !== "iamilcar") {
-        alert("Acceso no autorizado");
+ <script>
+  // --- Autenticación ---
+  window.addEventListener('load', () => {
+    const usuario = localStorage.getItem("usuarioAutenticado");
+
+    if (usuario !== "iamilcar") {
+      // Mensaje de advertencia, pero no bloquea completamente la página
+      console.warn("⚠️ Usuario no autenticado. Por favor inicia sesión primero.");
+      alert("⚠️ Acceso limitado: inicia sesión correctamente para tener todas las funcionalidades.");
+      // Opcional: redirigir al login después de 3 segundos
+      setTimeout(() => {
         window.location.href = "index.html";
-      }
-      const music = document.getElementById("bgMusic");
-      if (music) {
-        music.play().catch(() => {
-          // Si falla autoplay, se espera al clic
-        });
-      }
-      typeCode();
-    });
+      }, 3000);
+    }
+
+    const music = document.getElementById("bgMusic");
+    if (music) {
+      music.play().catch(() => {
+        // Si falla autoplay, se espera al clic
+      });
+    }
+
+    typeCode();
+  });
 
     function cerrarSesion() {
       alert("Sesión cerrada");
@@ -314,5 +322,6 @@ part.Parent = workspace`;
   </script>
 </body>
 </html>
+
 
 
