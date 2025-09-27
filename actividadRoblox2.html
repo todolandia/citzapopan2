@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Roblox - Sesión #2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333; line-height: 1.6; padding: 20px; min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+      text-align: center; margin-bottom: 30px; padding: 20px;
+      background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+      border-radius: 15px; color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem; margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .subtitle { font-size: 1.4rem; opacity: 0.9; }
+    .instructions, .example, .delivery {
+      background-color: white; border-radius: 15px;
+      padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif; color: #8c52ff;
+      margin-bottom: 20px; font-size: 1.8rem;
+    }
+    h3 {
+      font-family: 'Montserrat', sans-serif; color: #5ce1e6;
+      margin: 15px 0 10px; font-size: 1.3rem;
+    }
+    .steps { margin-left: 20px; margin-bottom: 20px; }
+    .steps li { margin-bottom: 10px; }
+    .code {
+      background: #1e1e1e; color: #dcdcdc;
+      padding: 15px; border-radius: 10px;
+      font-family: monospace; font-size: 0.95rem;
+      overflow-x: auto; margin-bottom: 15px;
+    }
+    .buttons { text-align: center; margin-top: 30px; }
+    .btn {
+      display: inline-block; padding: 15px 30px;
+      background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+      color: white; text-decoration: none; border-radius: 50px;
+      font-weight: bold; font-size: 1.2rem; border: none; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin: 0 10px;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+    .btn:active { transform: translateY(1px); }
+    .print-only { display: none; }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { max-width: 100%; box-shadow: none; }
+      header, .instructions, .example, .delivery {
+        box-shadow: none; border: 1px solid #ddd; margin-bottom: 20px;
+      }
+      .buttons { display: none; }
+      .print-only {
+        display: block; text-align: center;
+        margin-top: 20px; font-style: italic; color: #777;
+      }
+      .no-print { display: none; }
+    }
+    .logo {
+      font-weight: bold; font-size: 2.5rem;
+      color: white; margin-bottom: 15px;
+      display: inline-block; background-color: rgba(0,0,0,0.3);
+      padding: 5px 15px; border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ROBLOX</div>
+      <h1>Sesión #2: Mi primer Script</h1>
+      <p class="subtitle">Aprendiendo a programar en LUA</p>
+    </header>
+
+    <div class="instructions">
+      <h2>¿Qué es un Script?</h2>
+      <p>Un <strong>script</strong> es un pequeño programa que le da instrucciones al juego sobre qué hacer. En Roblox, los scripts se escriben en el lenguaje <strong>LUA</strong> y sirven para crear acciones, reglas y comportamientos dentro de tu mundo.</p>
+    </div>
+
+    <div class="example">
+      <h2>Ejemplo: Bloque que mata al jugador</h2>
+      <p>Vamos a crear un script sencillo para que, cuando el jugador toque un bloque, muera automáticamente.</p>
+      <div class="code">
+-- Coloca este Script dentro del bloque<br>
+script.Parent.Touched:Connect(function(hit)<br>
+&nbsp;&nbsp;local humanoid = hit.Parent:FindFirstChild("Humanoid")<br>
+&nbsp;&nbsp;if humanoid then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;humanoid.Health = 0<br>
+&nbsp;&nbsp;end<br>
+end)
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h2>Actividad 1</h2>
+      <p>Crea un script que muestre un mensaje en la consola utilizando el comando <code>print()</code>. Ejemplo:</p>
+      <div class="code">
+print("Hola, este es mi primer script en Roblox!")
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h2>Variables Locales</h2>
+      <p>Una <strong>variable local</strong> es como una “cajita” donde guardamos información temporal. Por ejemplo:</p>
+      <div class="code">
+local nombre = "Roblox"<br>
+print("Bienvenido a " .. nombre)
+      </div>
+      <p>El operador <code>..</code> sirve para <strong>unir texto con variables</strong>.</p>
+    </div>
+
+    <div class="instructions">
+      <h2>Condiciones con IF</h2>
+      <p>El <code>if</code> nos permite tomar decisiones en el juego. Por ejemplo:</p>
+      <div class="code">
+local puntos = 10<br>
+if puntos >= 10 then<br>
+&nbsp;&nbsp;print("¡Felicidades, ganaste!")<br>
+end
+      </div>
+    </div>
+
+    <div class="delivery">
+      <h2>Actividad 2</h2>
+      <ul class="steps">
+        <li>Crea una variable local con tu nombre.</li>
+        <li>Imprime un mensaje que diga: <code>print("Hola, mi nombre es ...")</code> usando tu variable.</li>
+        <li>Crea una variable llamada <code>puntos</code> y asígnale un número.</li>
+        <li>Usa un <code>if</code> para que, si tienes 5 puntos o más, muestre el mensaje: <em>"Ya puedes pasar al siguiente nivel"</em>.</li>
+      </ul>
+    </div>
+
+    <div class="buttons">
+      <button class="btn" onclick="window.print()">Imprimir PDF</button>
+      <a class="btn no-print" href="javascript:window.print()">Descargar como PDF</a>
+    </div>
+
+    <p class="print-only">Actividad de Roblox - Sesión #2 - Entregar al profesor en clase</p>
+  </div>
+</body>
+</html>
