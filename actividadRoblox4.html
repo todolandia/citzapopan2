@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Roblox - Sesión #4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333; line-height: 1.6; padding: 20px; min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+      text-align: center; margin-bottom: 30px; padding: 20px;
+      background: linear-gradient(135deg, #ff6f61 0%, #ffcc70 100%);
+      border-radius: 15px; color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem; margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .subtitle { font-size: 1.4rem; opacity: 0.9; }
+    .instructions, .example, .delivery {
+      background-color: white; border-radius: 15px;
+      padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif; color: #ff6f61;
+      margin-bottom: 20px; font-size: 1.8rem;
+    }
+    h3 {
+      font-family: 'Montserrat', sans-serif; color: #ffcc70;
+      margin: 15px 0 10px; font-size: 1.3rem;
+    }
+    .steps { margin-left: 20px; margin-bottom: 20px; }
+    .steps li { margin-bottom: 10px; }
+    .buttons { text-align: center; margin-top: 30px; }
+    .btn {
+      display: inline-block; padding: 15px 30px;
+      background: linear-gradient(135deg, #ff6f61 0%, #ffcc70 100%);
+      color: white; text-decoration: none; border-radius: 50px;
+      font-weight: bold; font-size: 1.2rem; border: none; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin: 0 10px;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+    .btn:active { transform: translateY(1px); }
+    .print-only { display: none; }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { max-width: 100%; box-shadow: none; }
+      header, .instructions, .example, .delivery {
+        box-shadow: none; border: 1px solid #ddd; margin-bottom: 20px;
+      }
+      .buttons { display: none; }
+      .print-only {
+        display: block; text-align: center;
+        margin-top: 20px; font-style: italic; color: #777;
+      }
+      .no-print { display: none; }
+    }
+    .logo {
+      font-weight: bold; font-size: 2.5rem;
+      color: white; margin-bottom: 15px;
+      display: inline-block; background-color: rgba(0,0,0,0.3);
+      padding: 5px 15px; border-radius: 10px;
+    }
+    pre {
+      background: #f4f4f4; padding: 15px; border-radius: 10px;
+      overflow-x: auto; font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ROBLOX</div>
+      <h1>Sesión #4: Agregar Sonido de Fondo</h1>
+      <p class="subtitle">Dale vida a tu juego con música de fondo</p>
+    </header>
+
+    <div class="instructions">
+      <h2>¿Qué son los sonidos en Roblox?</h2>
+      <p>En Roblox podemos usar <strong>sonidos</strong> para mejorar la experiencia de los jugadores. Estos pueden ser música de fondo, efectos de pasos, explosiones o cualquier audio. Los sonidos se insertan con el objeto <code>Sound</code> y se pueden controlar con scripts.</p>
+    </div>
+
+    <div class="example">
+      <h2>Pasos para agregar música de fondo</h2>
+      <ol class="steps">
+        <li>En el <strong>Explorador</strong>, selecciona <code>Workspace</code>.</li>
+        <li>Haz clic en el botón <strong>+</strong> y agrega un objeto <code>Sound</code>.</li>
+        <li>En las propiedades de <strong>Sound</strong>:
+          <ul>
+            <li>Cambia <strong>SoundId</strong> por el ID de un audio (<code>rbxassetid://ID</code>).</li>
+            <li>Activa <strong>Looped</strong> para que se repita.</li>
+            <li>Ajusta el <strong>Volume</strong> (ejemplo: <code>0.5</code>).</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <h2>Ejemplo de Script</h2>
+      <pre><code>-- Script para música de fondo
+local musica = Instance.new("Sound")
+musica.SoundId = "rbxassetid://1843521328" -- Cambia este ID por tu audio
+musica.Looped = true -- Se repite
+musica.Volume = 0.5 -- Volumen del 0 al 1
+musica.Parent = game.Workspace
+musica:Play() -- Reproduce la música</code></pre>
+    </div>
+
+    <div class="delivery">
+      <h2>Actividad de la Sesión</h2>
+      <p>Completa las siguientes tareas:</p>
+      <ul class="steps">
+        <li>Agrega una música de fondo en tu juego.</li>
+        <li>Cambia el <strong>SoundId</strong> por otro audio.</li>
+        <li>Modifica el volumen y pruébalo.</li>
+        <li>Haz que la música se <strong>detenga</strong> al presionar la tecla <strong>E</strong>.</li>
+      </ul>
+      <p><strong>Entrega:</strong> Guarda tu proyecto con el nombre <code>Sesion4_[TuNombre]</code> y muéstralo al profesor al final de la clase.</p>
+    </div>
+
+    <div class="buttons">
+      <button class="btn" onclick="window.print()">Imprimir PDF</button>
+      <a class="btn no-print" href="javascript:window.print()">Descargar como PDF</a>
+    </div>
+
+    <p class="print-only">Actividad de Roblox - Sesión #4 - Entregar al profesor en clase</p>
+  </div>
+</body>
+</html>
