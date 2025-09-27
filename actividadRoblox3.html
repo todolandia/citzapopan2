@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Roblox - Sesión #3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333; line-height: 1.6; padding: 20px; min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+      text-align: center; margin-bottom: 30px; padding: 20px;
+      background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+      border-radius: 15px; color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem; margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .subtitle { font-size: 1.4rem; opacity: 0.9; }
+    .instructions, .example, .delivery {
+      background-color: white; border-radius: 15px;
+      padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif; color: #8c52ff;
+      margin-bottom: 20px; font-size: 1.8rem;
+    }
+    h3 {
+      font-family: 'Montserrat', sans-serif; color: #5ce1e6;
+      margin: 15px 0 10px; font-size: 1.3rem;
+    }
+    .steps { margin-left: 20px; margin-bottom: 20px; }
+    .steps li { margin-bottom: 10px; }
+    .buttons { text-align: center; margin-top: 30px; }
+    .btn {
+      display: inline-block; padding: 15px 30px;
+      background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+      color: white; text-decoration: none; border-radius: 50px;
+      font-weight: bold; font-size: 1.2rem; border: none; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin: 0 10px;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+    .btn:active { transform: translateY(1px); }
+    .print-only { display: none; }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { max-width: 100%; box-shadow: none; }
+      header, .instructions, .example, .delivery {
+        box-shadow: none; border: 1px solid #ddd; margin-bottom: 20px;
+      }
+      .buttons { display: none; }
+      .print-only {
+        display: block; text-align: center;
+        margin-top: 20px; font-style: italic; color: #777;
+      }
+      .no-print { display: none; }
+    }
+    .logo {
+      font-weight: bold; font-size: 2.5rem;
+      color: white; margin-bottom: 15px;
+      display: inline-block; background-color: rgba(0,0,0,0.3);
+      padding: 5px 15px; border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ROBLOX</div>
+      <h1>Sesión #3: Generar Terreno</h1>
+      <p class="subtitle">Explorando la herramienta Terrain en Roblox Studio</p>
+    </header>
+
+    <div class="instructions">
+      <h2>¿Qué es el Terreno?</h2>
+      <p>En Roblox Studio, el <strong>Terreno</strong> nos permite crear ambientes naturales como montañas, lagos, ríos, cuevas y más. Con esta herramienta, tu mundo se verá más realista y atractivo.</p>
+    </div>
+
+    <div class="example">
+      <h2>Herramientas principales del Terrain</h2>
+      <ul class="steps">
+        <li><strong>Add:</strong> Agrega terreno sólido (tierra, roca, arena, etc.).</li>
+        <li><strong>Subtract:</strong> Quita terreno (sirve para hacer cuevas o túneles).</li>
+        <li><strong>Paint:</strong> Cambia el material del terreno (agua, hierba, roca).</li>
+        <li><strong>Grow / Erode:</strong> Aumenta o desgasta montañas.</li>
+        <li><strong>Region:</strong> Permite seleccionar áreas grandes de terreno para editarlas.</li>
+      </ul>
+    </div>
+
+    <div class="instructions">
+      <h2>Pasos para crear tu primer Terreno</h2>
+      <ol class="steps">
+        <li>En Roblox Studio, abre la pestaña <strong>Editor de Terreno</strong> (Terrain Editor).</li>
+        <li>Selecciona la opción <strong>Add</strong> y dibuja montañas en tu mapa.</li>
+        <li>Con la opción <strong>Paint</strong>, cambia el material a hierba, agua o roca.</li>
+        <li>Usa <strong>Subtract</strong> para excavar una cueva o un lago.</li>
+        <li>Explora tu terreno dentro del juego moviendo a tu personaje.</li>
+      </ol>
+    </div>
+
+    <div class="delivery">
+      <h2>Actividad de la Sesión</h2>
+      <p>Crea un escenario con las siguientes características:</p>
+      <ul class="steps">
+        <li>Una montaña con hierba.</li>
+        <li>Un lago de agua junto a la montaña.</li>
+        <li>Una cueva debajo de la montaña.</li>
+      </ul>
+      <p><strong>Entrega:</strong> Guarda tu proyecto con el nombre <code>Sesion3_[TuNombre]</code> y muéstralo al profesor al final de la clase.</p>
+    </div>
+
+    <div class="buttons">
+      <button class="btn" onclick="window.print()">Imprimir PDF</button>
+      <a class="btn no-print" href="javascript:window.print()">Descargar como PDF</a>
+    </div>
+
+    <p class="print-only">Actividad de Roblox - Sesión #3 - Entregar al profesor en clase</p>
+  </div>
+</body>
+</html>
