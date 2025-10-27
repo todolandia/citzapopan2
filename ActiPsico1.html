@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 1 - Psicomotricidad Computacional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #d0e2ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #0078d7 0%, #00bcd4 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 2.2rem;
+            background-color: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.4rem;
+            margin-top: 10px;
+        }
+
+        .subtitle { font-size: 1.3rem; opacity: 0.9; }
+
+        .instructions, .example, .delivery {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0078d7;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #00bcd4;
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+
+        ol.steps, ul.steps { margin-left: 25px; margin-bottom: 20px; }
+        .steps li { margin-bottom: 10px; }
+
+        .example img {
+            width: 90%;
+            border-radius: 15px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #0078d7 0%, #00bcd4 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+
+        .buttons { text-align: center; margin-top: 30px; }
+
+        .print-only { display: none; }
+
+        @media print {
+            .buttons { display: none; }
+            .print-only { display: block; text-align: center; margin-top: 20px; font-style: italic; color: #777; }
+        }
+
+        .keyboard {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .key {
+            background: linear-gradient(145deg, #ffffff, #dfe6f0);
+            border: 2px solid #0078d7;
+            border-radius: 8px;
+            padding: 15px 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: #0078d7;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">PSICOMOTRICIDAD</div>
+            <h1>Actividad 1: Registro en Code.org</h1>
+            <p class="subtitle">Curso de Psicomotricidad Computacional - Prof. Germán Isaac Licea Magaña (Usuario: glicea)</p>
+        </header>
+
+        <div class="instructions">
+            <h2>Instrucciones de la Actividad</h2>
+            <p>En esta primera actividad aprenderás a crear tu cuenta en la plataforma <strong>Code.org</strong>, que usaremos para nuestros ejercicios de programación y psicomotricidad digital.</p>
+
+            <h3>Pasos para realizar el registro:</h3>
+            <ol class="steps">
+                <li>Abre tu navegador web (Google Chrome o Edge).</li>
+                <li>Entra a la página <a href="https://studio.code.org/users/sign_up/account_type" target="_blank">https://code.org/signup</a>.</li>
+                <li>Selecciona la opción “Estudiante”.</li>
+                <li>Escribe tu nombre real y elige una contraseña segura.</li>
+                <li>Guarda o anota tu correo y contraseña para futuras sesiones.</li>
+                <li>Una vez dentro, explora la interfaz y verifica que puedes acceder a tus cursos.</li>
+            </ol>
+        </div>
+
+        <div class="example">
+            <h2>Ejemplo Visual</h2>
+            <p>Así se ve la pantalla de registro en Code.org:</p>
+                        <div class="keyboard">
+                <div class="key">🖱️ Click</div>
+                <div class="key">⌨️ Escribe tu usuario</div>
+                <div class="key">🔐 Contraseña</div>
+                <div class="key">✅ Confirmar</div>
+            </div>
+        </div>
+
+        <div class="delivery">
+            <h2>Entrega de la Actividad</h2>
+            <p>Cuando hayas completado el registro:</p>
+            <ul class="steps">
+                <li>Verifica que puedes iniciar sesión correctamente.</li>
+                <li>Toma nota de tu correo y contraseña en un lugar seguro.</li>
+                <li><strong>Notifica al profesor Germán Isaac Licea Magaña (usuario: glicea)</strong> que ya completaste tu registro.</li>
+            </ul>
+            <p><strong>Fecha límite:</strong> Durante la primera sesión del curso.</p>
+        </div>
+
+        <div class="buttons">
+            <button class="btn" onclick="window.print()">Imprimir PDF</button>
+        </div>
+
+        <p class="print-only">Actividad 1 - Psicomotricidad Computacional - Code.org</p>
+    </div>
+</body>
+</html>
