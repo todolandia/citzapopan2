@@ -151,6 +151,11 @@
       localStorage.setItem("usuarioAutenticado", "glicea");
       window.location.href = "glicea.html";
     } 
+
+         else if (usuario === "cescobar" && contrasena === "Carlos2025") {
+      localStorage.setItem("usuarioAutenticado", "cescobar");
+      window.location.href = "cescobar.html";
+    } 
     else {
       errorMensaje.textContent = "Usuario o contraseña incorrectos.";
     }
@@ -159,6 +164,7 @@
 
 </body>
 </html>
+
 
 
 
