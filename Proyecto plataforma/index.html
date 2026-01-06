@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma Educativa | Acceso</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg,#0f172a,#1e3a8a);
+      color: white;
+    }
+
+    .login-box {
+      background: white;
+      color: #111827;
+      padding: 40px;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.3);
+    }
+
+    h1 { text-align: center; margin-bottom: 10px; }
+    p { text-align: center; margin-bottom: 30px; color: #374151; }
+
+    label { font-weight: bold; display: block; margin-bottom: 6px; }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .error {
+      color: #dc2626;
+      text-align: center;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h1>Plataforma Educativa</h1>
+    <p>Acceso a la plataforma</p>
+
+    <label>Usuario</label>
+    <input type="text" id="user" />
+
+    <label>Contraseña</label>
+    <input type="password" id="pass" />
+
+    <button onclick="login()">Iniciar sesión</button>
+
+    <div id="error" class="error">Usuario o contraseña incorrectos</div>
+  </div>
+
+  <script>
+    function login() {
+      const userInput = document.getElementById('user').value;
+      const passInput = document.getElementById('pass').value;
+      const error = document.getElementById('error');
+
+      const user = userInput.trim().toLowerCase();
+      const pass = passInput.trim().toLowerCase();
+
+      error.style.display = 'none';
+
+      console.log('Usuario:', user, 'Password:', pass);
+
+      if (user === 'admin' && pass === 'admin') {
+        window.location.replace('admin1.html');
+        return;
+      }
+
+      if (user === 'profesor' && pass === 'profesor') {
+        window.location.replace('profesor.html');
+        return;
+      }
+
+      if (user === 'alumno' && pass === 'alumno') {
+        window.location.replace('alumno.html');
+        return;
+      }
+
+      error.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alumno | Plataforma Educativa</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#f2f4f8}
+
+/* TOPBAR */
+.topbar{
+background:#4b6cb7;
+color:white;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+.topbar button{
+background:#c0392b;
+border:none;
+color:white;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer
+}
+
+/* LAYOUT */
+.container{display:flex;min-height:calc(100vh - 60px)}
+
+/* SIDEBAR */
+.sidebar{
+width:240px;
+background:#1e272e;
+color:white;
+padding:20px
+}
+.sidebar button{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+background:#2f3640;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+text-align:left
+}
+
+/* MAIN */
+.main{flex:1;padding:25px}
+
+/* UI */
+.card,.item{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 6px 14px rgba(0,0,0,.1);
+margin-bottom:15px
+}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px
+}
+.tag{
+padding:4px 10px;
+border-radius:12px;
+font-size:12px;
+background:#4b6cb7;
+color:white
+}
+.ok{background:#27ae60}
+.warn{background:#e67e22}
+
+.progress{
+height:8px;
+background:#ddd;
+border-radius:6px;
+overflow:hidden;
+margin-top:6px
+}
+.progress div{height:100%;background:#4b6cb7}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<h2>🎓 Alumno · Plataforma Demo</h2>
+<button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<div class="container">
+
+<div class="sidebar">
+<button onclick="inicio()">🏠 Inicio</button>
+<button onclick="recursos()">📚 Recursos</button>
+<button onclick="actividades()">📝 Actividades</button>
+<button onclick="calificaciones()">📊 Calificaciones</button>
+<button onclick="avisos()">📢 Avisos</button>
+<button onclick="perfil()">👤 Perfil</button>
+</div>
+
+<div class="main" id="contenido"></div>
+
+</div>
+
+<script>
+/* ==== DATOS DE EJEMPLO ==== */
+let recursosDemo=[
+{titulo:"Introducción a Scratch",desc:"Guía PDF básica",tipo:"PDF"},
+{titulo:"Arduino Básico",desc:"Presentación de sensores",tipo:"PPT"},
+{titulo:"Diseño 3D",desc:"Modelado en Tinkercad",tipo:"VIDEO"}
+];
+
+let actividadesDemo=[
+{nombre:"Proyecto Scratch",fecha:"15/02/2026"},
+{nombre:"Circuito LED",fecha:"20/02/2026"},
+{nombre:"Modelo 3D",fecha:"25/02/2026"}
+];
+
+let avisosDemo=[
+"📌 No hay clases el viernes",
+"📝 Entrega de proyecto Scratch",
+"🚀 Nuevo recurso disponible"
+];
+
+/* ==== PANTALLAS ==== */
+function inicio(){
+contenido.innerHTML=`
+<div class="card">
+<h2>👋 Bienvenido</h2>
+<p>Consulta tu avance y actividades.</p>
+</div>
+
+<div class="cards">
+<div class="card">📚 Recursos<br><strong>3</strong></div>
+<div class="card">📝 Actividades<br><strong>3</strong></div>
+<div class="card">📊 Promedio<br><strong>8.6</strong></div>
+<div class="card">🔥 Progreso<br><strong>70%</strong></div>
+</div>
+
+<div class="card">
+<h3>📈 Progreso general</h3>
+<div class="progress"><div style="width:70%"></div></div>
+</div>
+`;
+}
+
+function recursos(){
+let html="<h2>📚 Recursos</h2>";
+recursosDemo.forEach(r=>{
+html+=`
+<div class="item">
+<strong>${r.titulo}</strong><br>
+<small>${r.desc}</small><br>
+<span class="tag">${r.tipo}</span>
+</div>`;
+});
+contenido.innerHTML=html;
+}
+
+function actividades(){
+let html="<h2>📝 Actividades</h2>";
+actividadesDemo.forEach(a=>{
+html+=`
+<div class="item">
+<strong>${a.nombre}</strong><br>
+<small>Fecha límite: ${a.fecha}</small>
+<div class="progress"><div style="width:40%"></div></div>
+<span class="tag warn">Pendiente</span>
+</div>`;
+});
+contenido.innerHTML=html;
+}
+
+function calificaciones(){
+contenido.innerHTML=`
+<h2>📊 Calificaciones</h2>
+<div class="item">Programación <span class="tag ok">9.0</span></div>
+<div class="item">Robótica <span class="tag ok">8.5</span></div>
+<div class="item">Electrónica <span class="tag warn">7.8</span></div>
+`;
+}
+
+function avisos(){
+let html="<h2>📢 Avisos</h2>";
+avisosDemo.forEach(a=>{
+html+=`<div class="item">${a}</div>`;
+});
+contenido.innerHTML=html;
+}
+
+function perfil(){
+contenido.innerHTML=`
+<h2>👤 Perfil</h2>
+<div class="item"><strong>Nombre:</strong> Alumno Demo</div>
+<div class="item"><strong>Grupo:</strong> Robótica Secundaria</div>
+<div class="item"><strong>Estado:</strong> Activo</div>
+`;
+}
+
+function logout(){
+window.location.href="index.html";
+}
+
+/* INIT */
+inicio();
+</script>
+
+</body>
+</html>

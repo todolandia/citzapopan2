@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrador | Plataforma Educativa</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f9;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+    height: 60px;
+    background: linear-gradient(90deg, #243b55, #141e30);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.topbar h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.topbar button {
+    background: crimson;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 220px;
+    background: #1f1f1f;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #333;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sidebar button:hover {
+    background: #444;
+}
+
+/* ===== MAIN ===== */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* ===== DASHBOARD ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,.1);
+    font-size: 18px;
+}
+
+/* ===== USERS ===== */
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+.form-box button {
+    background: #243b55;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-item {
+    background: #eaeaea;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <h1>Plataforma Educativa | Administrador</h1>
+    <button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h3>Menú</h3>
+        <button onclick="dashboard()">📊 Dashboard</button>
+        <button onclick="usuarios()">👥 Usuarios</button>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main" id="contenido"></div>
+
+</div>
+
+<script>
+/* ===== DATA ===== */
+let users = JSON.parse(localStorage.getItem("users")) || [
+    {user:"admin", pass:"admin", role:"admin"},
+    {user:"profesor", pass:"profesor", role:"profesor"},
+    {user:"alumno", pass:"alumno", role:"alumno"}
+];
+
+localStorage.setItem("users", JSON.stringify(users));
+
+/* ===== DASHBOARD ===== */
+function dashboard(){
+    const a = users.filter(u=>u.role==="admin").length;
+    const p = users.filter(u=>u.role==="profesor").length;
+    const al = users.filter(u=>u.role==="alumno").length;
+
+    contenido.innerHTML = `
+        <h2>Dashboard</h2>
+        <div class="cards">
+            <div class="card">Admins<br><strong>${a}</strong></div>
+            <div class="card">Profesores<br><strong>${p}</strong></div>
+            <div class="card">Alumnos<br><strong>${al}</strong></div>
+        </div>
+    `;
+}
+
+/* ===== USERS ===== */
+function usuarios(){
+    let html = `
+        <h2>Gestión de Usuarios</h2>
+        <div class="form-box">
+            <input id="u" placeholder="Usuario">
+            <input id="p" placeholder="Contraseña">
+            <select id="r">
+                <option value="admin">Admin</option>
+                <option value="profesor">Profesor</option>
+                <option value="alumno">Alumno</option>
+            </select>
+            <button onclick="agregar()">Agregar usuario</button>
+        </div>
+    `;
+
+    users.forEach((x,i)=>{
+        html += `
+            <div class="user-item">
+                ${x.user} (${x.role})
+                ${x.user!=="admin"?`<button onclick="eliminar(${i})">❌</button>`:""}
+            </div>
+        `;
+    });
+
+    contenido.innerHTML = html;
+}
+
+function agregar(){
+    if(!u.value || !p.value) return alert("Completa todos los campos");
+    users.push({user:u.value, pass:p.value, role:r.value});
+    localStorage.setItem("users", JSON.stringify(users));
+    usuarios();
+}
+
+function eliminar(i){
+    users.splice(i,1);
+    localStorage.setItem("users", JSON.stringify(users));
+    usuarios();
+}
+
+/* ===== LOGOUT ===== */
+function logout(){
+    localStorage.removeItem("loggedUser");
+    window.location.href="index.html";
+}
+
+/* INIT */
+dashboard();
+</script>
+
+</body>
+</html>
