@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Roblox - Sesión #3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Roboto',sans-serif;
+      background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+      color:#333;line-height:1.6;padding:20px;min-height:100vh;
+    }
+    .container{max-width:1000px;margin:0 auto;}
+    header{
+      text-align:center;margin-bottom:30px;padding:20px;
+      background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+      border-radius:15px;color:white;
+      box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    }
+    h1{
+      font-family:'Montserrat',sans-serif;
+      font-size:2.8rem;margin-bottom:10px;
+    }
+    .subtitle{font-size:1.4rem;opacity:0.9;}
+    .instructions,.example,.delivery{
+      background:white;border-radius:15px;
+      padding:25px;box-shadow:0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom:30px;
+    }
+    h2{
+      font-family:'Montserrat',sans-serif;color:#8c52ff;
+      margin-bottom:20px;font-size:1.8rem;
+    }
+    .steps{margin-left:20px;margin-bottom:20px;}
+    .steps li{margin-bottom:10px;}
+    .code{
+      background:#1e1e1e;color:#dcdcdc;
+      padding:15px;border-radius:10px;
+      font-family:monospace;font-size:0.95rem;
+      overflow-x:auto;margin-bottom:15px;
+    }
+    .buttons{text-align:center;margin-top:30px;}
+    .btn{
+      display:inline-block;padding:15px 30px;
+      background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+      color:white;text-decoration:none;border-radius:50px;
+      font-weight:bold;font-size:1.2rem;border:none;cursor:pointer;
+      margin:0 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<div class="logo">ROBLOX</div>
+<h1>Sesión #3: Condiciones con IF</h1>
+<p class="subtitle">Aprendiendo a tomar decisiones en LUA</p>
+</header>
+
+<div class="instructions">
+<h2>¿Qué es IF?</h2>
+<p>
+El comando <strong>if</strong> sirve para que el juego pueda <strong>tomar decisiones</strong>.
+El programa revisa si una condición se cumple. Si es verdadera, ejecuta una acción.
+</p>
+</div>
+
+<div class="example">
+
+<h2>Ejemplo 1: IF en la consola</h2>
+
+<p>Este script revisa si el jugador tiene suficientes puntos.</p>
+
+<div class="code">
+local puntos = 10<br><br>
+
+if puntos &gt;= 5 then<br>
+&nbsp;&nbsp;print("¡Puedes pasar al siguiente nivel!")<br>
+end
+</div>
+
+<p>
+Si la condición se cumple, aparecerá un mensaje en la <strong>Output Console</strong>.
+</p>
+
+</div>
+
+<div class="example">
+
+<h2>Ejemplo 2: Bloque que cambia de color</h2>
+
+<p>Este script hará que un bloque cambie de color cuando el jugador lo toque.</p>
+
+<div class="code">
+script.Parent.Touched:Connect(function(hit)<br>
+
+&nbsp;&nbsp;local humanoid = hit.Parent:FindFirstChild("Humanoid")<br><br>
+
+&nbsp;&nbsp;if humanoid then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;script.Parent.Color = Color3.fromRGB(0,255,0)<br>
+&nbsp;&nbsp;end<br>
+
+end)
+</div>
+
+<p>
+El <code>if</code> revisa si lo que tocó el bloque es un jugador.
+Si lo es, el bloque cambia de color.
+</p>
+
+</div>
+
+<div class="delivery">
+
+<h2>Actividad</h2>
+
+<ul class="steps">
+
+<li>Crea un nuevo <strong>Script</strong> en Roblox Studio.</li>
+
+<li>Crea una variable llamada <code>edad</code>.</li>
+
+<li>Usa un <code>if</code> para que, si la edad es mayor o igual a 10, aparezca el mensaje:
+<code>"Puedes jugar este nivel"</code>.</li>
+
+<li>Crea un <strong>bloque</strong> en el mapa.</li>
+
+<li>Agrega un <strong>Script dentro del bloque</strong>.</li>
+
+<li>Programa el bloque para que cambie de color cuando el jugador lo toque.</li>
+
+</ul>
+
+</div>
+
+<div class="buttons">
+<button class="btn" onclick="window.print()">Imprimir PDF</button>
+</div><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Roblox - Sesión #3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Roboto',sans-serif;
+      background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+      color:#333;line-height:1.6;padding:20px;min-height:100vh;
+    }
+    .container{max-width:1000px;margin:0 auto;}
+    header{
+      text-align:center;margin-bottom:30px;padding:20px;
+      background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+      border-radius:15px;color:white;
+      box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    }
+    h1{
+      font-family:'Montserrat',sans-serif;
+      font-size:2.8rem;margin-bottom:10px;
+    }
+    .subtitle{font-size:1.4rem;opacity:0.9;}
+    .instructions,.example,.delivery{
+      background:white;border-radius:15px;
+      padding:25px;box-shadow:0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom:30px;
+    }
+    h2{
+      font-family:'Montserrat',sans-serif;color:#8c52ff;
+      margin-bottom:20px;font-size:1.8rem;
+    }
+    .steps{margin-left:20px;margin-bottom:20px;}
+    .steps li{margin-bottom:10px;}
+    .code{
+      background:#1e1e1e;color:#dcdcdc;
+      padding:15px;border-radius:10px;
+      font-family:monospace;font-size:0.95rem;
+      overflow-x:auto;margin-bottom:15px;
+    }
+    .buttons{text-align:center;margin-top:30px;}
+    .btn{
+      display:inline-block;padding:15px 30px;
+      background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+      color:white;text-decoration:none;border-radius:50px;
+      font-weight:bold;font-size:1.2rem;border:none;cursor:pointer;
+      margin:0 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<div class="logo">ROBLOX</div>
+<h1>Sesión #5: Condiciones con IF</h1>
+<p class="subtitle">Aprendiendo a tomar decisiones en LUA</p>
+</header>
+
+<div class="instructions">
+<h2>¿Qué es IF?</h2>
+<p>
+El comando <strong>if</strong> sirve para que el juego pueda <strong>tomar decisiones</strong>.
+El programa revisa si una condición se cumple. Si es verdadera, ejecuta una acción.
+</p>
+</div>
+
+<div class="example">
+
+<h2>Ejemplo 1: IF en la consola</h2>
+
+<p>Este script revisa si el jugador tiene suficientes puntos.</p>
+
+<div class="code">
+local puntos = 10<br><br>
+
+if puntos &gt;= 5 then<br>
+&nbsp;&nbsp;print("¡Puedes pasar al siguiente nivel!")<br>
+end
+</div>
+
+<p>
+Si la condición se cumple, aparecerá un mensaje en la <strong>Output Console</strong>.
+</p>
+
+</div>
+
+<div class="example">
+
+<h2>Ejemplo 2: Bloque que cambia de color</h2>
+
+<p>Este script hará que un bloque cambie de color cuando el jugador lo toque.</p>
+
+<div class="code">
+script.Parent.Touched:Connect(function(hit)<br>
+
+&nbsp;&nbsp;local humanoid = hit.Parent:FindFirstChild("Humanoid")<br><br>
+
+&nbsp;&nbsp;if humanoid then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;script.Parent.Color = Color3.fromRGB(0,255,0)<br>
+&nbsp;&nbsp;end<br>
+
+end)
+</div>
+
+<p>
+El <code>if</code> revisa si lo que tocó el bloque es un jugador.
+Si lo es, el bloque cambia de color.
+</p>
+
+</div>
+
+<div class="delivery">
+
+<h2>Actividad</h2>
+
+<ul class="steps">
+
+<li>Crea un nuevo <strong>Script</strong> en Roblox Studio.</li>
+
+<li>Crea una variable llamada <code>edad</code>.</li>
+
+<li>Usa un <code>if</code> para que, si la edad es mayor o igual a 10, aparezca el mensaje:
+<code>"Puedes jugar este nivel"</code>.</li>
+
+<li>Crea un <strong>bloque</strong> en el mapa.</li>
+
+<li>Agrega un <strong>Script dentro del bloque</strong>.</li>
+
+<li>Programa el bloque para que cambie de color cuando el jugador lo toque.</li>
+
+</ul>
+
+</div>
+
+<div class="buttons">
+<button class="btn" onclick="window.print()">Imprimir PDF</button>
+</div>
+
+</div>
+
+</body>
+</html>
+
+</div>
+
+</body>
+</html>
