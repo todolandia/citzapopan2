@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Actividad Roblox - Sesión #6</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Roboto',sans-serif;
+background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+color:#333;
+line-height:1.6;
+padding:20px;
+min-height:100vh;
+}
+
+.container{max-width:1000px;margin:0 auto;}
+
+header{
+text-align:center;
+margin-bottom:30px;
+padding:20px;
+background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+border-radius:15px;
+color:white;
+box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+font-family:'Montserrat',sans-serif;
+font-size:2.8rem;
+margin-bottom:10px;
+}
+
+.subtitle{font-size:1.4rem;opacity:0.9;}
+
+.instructions,.example,.delivery{
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+margin-bottom:30px;
+}
+
+h2{
+font-family:'Montserrat',sans-serif;
+color:#8c52ff;
+margin-bottom:20px;
+font-size:1.8rem;
+}
+
+.steps{margin-left:20px;margin-bottom:20px;}
+
+.steps li{margin-bottom:10px;}
+
+.code{
+background:#1e1e1e;
+color:#dcdcdc;
+padding:15px;
+border-radius:10px;
+font-family:monospace;
+font-size:0.95rem;
+overflow-x:auto;
+margin-bottom:15px;
+}
+
+.buttons{text-align:center;margin-top:30px;}
+
+.btn{
+display:inline-block;
+padding:15px 30px;
+background:linear-gradient(135deg,#8c52ff 0%,#5ce1e6 100%);
+color:white;
+text-decoration:none;
+border-radius:50px;
+font-weight:bold;
+font-size:1.2rem;
+border:none;
+cursor:pointer;
+margin:0 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<div class="logo">ROBLOX</div>
+<h1>Sesión #6: Crear Tiendas</h1>
+<p class="subtitle">Tres formas de obtener objetos en Roblox</p>
+</header>
+
+
+<div class="instructions">
+
+<h2>¿Qué es una tienda en Roblox?</h2>
+
+<p>
+Una tienda permite que el jugador pueda <strong>obtener objetos dentro del juego</strong>.
+Puede funcionar de diferentes maneras: tocando un objeto, haciendo clic o usando monedas.
+</p>
+
+</div>
+
+
+
+<div class="example">
+
+<h2>Tienda 1: Tienda con Clic</h2>
+
+<p>El jugador obtiene una espada cuando hace clic en la tienda.</p>
+
+<div class="code">
+
+local espada = game.ReplicatedStorage:WaitForChild("Espada")<br><br>
+
+script.Parent.ClickDetector.MouseClick:Connect(function(player)<br>
+
+&nbsp;&nbsp;local nuevaEspada = espada:Clone()<br>
+&nbsp;&nbsp;nuevaEspada.Parent = player.Backpack<br>
+
+end)
+
+</div>
+
+</div>
+
+
+
+<div class="example">
+
+<h2>Tienda 2: Tienda con Touch</h2>
+
+<p>El jugador recibe una espada cuando toca la tienda.</p>
+
+<div class="code">
+
+local espada = game.ReplicatedStorage:WaitForChild("Espada")<br><br>
+
+script.Parent.Touched:Connect(function(hit)<br>
+
+&nbsp;&nbsp;local player = game.Players:GetPlayerFromCharacter(hit.Parent)<br><br>
+
+&nbsp;&nbsp;if player then<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;local nuevaEspada = espada:Clone()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nuevaEspada.Parent = player.Backpack<br>
+
+&nbsp;&nbsp;end<br>
+
+end)
+
+</div>
+
+</div>
+
+
+
+<div class="example">
+
+<h2>Tienda 3: Tienda con Monedas</h2>
+
+<p>El jugador solo obtiene la espada si tiene suficientes monedas.</p>
+
+<div class="code">
+
+local precio = 50<br>
+local espada = game.ReplicatedStorage:WaitForChild("Espada")<br><br>
+
+script.Parent.Touched:Connect(function(hit)<br>
+
+&nbsp;&nbsp;local player = game.Players:GetPlayerFromCharacter(hit.Parent)<br><br>
+
+&nbsp;&nbsp;if player then<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;local monedas = player.leaderstats.Monedas<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;if monedas.Value &gt;= precio then<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;monedas.Value = monedas.Value - precio<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;local nuevaEspada = espada:Clone()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nuevaEspada.Parent = player.Backpack<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;end<br>
+
+&nbsp;&nbsp;end<br>
+
+end)
+
+</div>
+
+</div>
+
+
+
+<div class="delivery">
+
+<h2>Actividad</h2>
+
+<ul class="steps">
+
+<li>Crea una <strong>espada</strong> en ReplicatedStorage.</li>
+
+<li>Crea tres bloques diferentes que funcionen como tiendas.</li>
+
+<li>Programa una tienda que funcione con <strong>clic</strong>.</li>
+
+<li>Programa una tienda que funcione cuando el jugador <strong>toque el bloque</strong>.</li>
+
+<li>Programa una tienda que solo funcione si el jugador tiene <strong>monedas</strong>.</li>
+
+<li>Prueba tu juego y verifica que las tres tiendas funcionen.</li>
+
+</ul>
+
+</div>
+
+
+<div class="buttons">
+<button class="btn" onclick="window.print()">Imprimir PDF</button>
+</div>
+
+</div>
+
+</body>
+</html>
