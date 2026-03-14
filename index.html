@@ -13,7 +13,85 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* Slider Styles */
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen Mejorado - CORREGIDO */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a192f, #1c3a5f, #FF6B35);
+            background-size: 400% 400%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: gradientFlow 8s ease infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo-loading {
+            width: 200px;
+            max-width: 80%;
+            margin: 0 auto 20px;
+            display: block;
+            animation: heartbeat 1.5s infinite, float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.7));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            75% { transform: scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .loading-text {
+            color: white;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            animation: fadeInOut 2s infinite;
+            text-align: center;
+            width: 100%;
+        }
+
+        .loading-subtext {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-top: 15px;
+            animation: fadeInOut 2s infinite 0.5s;
+            text-align: center;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Slider Styles Mejorados */
         .hero-slider {
             position: relative;
             width: 100%;
@@ -45,6 +123,12 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            transform: scale(1);
+            transition: transform 8s ease;
+        }
+
+        .slide.active img {
+            transform: scale(1.1);
         }
 
         .slide-content {
@@ -52,11 +136,19 @@
             bottom: 15%;
             left: 10%;
             max-width: 500px;
-            background: rgba(10, 25, 47, 0.8);
+            background: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(5px);
             padding: 2rem;
             border-radius: 10px;
             color: white;
-            animation: fadeInUp 1s ease;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .slide.active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .slide-label {
@@ -69,6 +161,12 @@
             border-radius: 50px;
             font-weight: bold;
             font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .slider-controls {
@@ -99,6 +197,7 @@
 
         .control:hover {
             background: #FF6B35;
+            transform: scale(1.1);
         }
 
         .dots-container {
@@ -120,8 +219,654 @@
             transform: scale(1.2);
         }
 
-        /* Animaciones */
+        /* HEADER Mejorado */
+        header {
+            background-color: #0a192f;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-header {
+            height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-header:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .logo-text {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .logo-text:hover h1 {
+            color: #FF6B35;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        /* Navegación Mejorada */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: #FF6B35;
+            transition: height 0.3s;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        nav ul li a:hover::before {
+            height: 100%;
+        }
+
+        nav ul li a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Botón destacado para "Campus Virtual" */
+        nav ul li:last-child a {
+            background: #FF6B35;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 107, 53, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.8); }
+        }
+
+        /* Botones generales */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #FF6B35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e05a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* SECCIÓN CURSOS Mejorada */
+        .cursos-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: #0a192f;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: #FF6B35;
+            transition: width 0.5s ease;
+        }
+
+        .section-title:hover h2::after {
+            width: 100px;
+        }
+
+        .section-title p {
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .curso-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .curso-card:nth-child(1) { animation-delay: 0.2s; }
+        .curso-card:nth-child(2) { animation-delay: 0.4s; }
+        .curso-card:nth-child(3) { animation-delay: 0.6s; }
+        .curso-card:nth-child(4) { animation-delay: 0.8s; }
+
         @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .curso-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .curso-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .curso-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+
+        .curso-card:hover .curso-img::before {
+            left: 100%;
+        }
+
+        .curso-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .curso-card:hover .curso-img img {
+            transform: scale(1.1);
+        }
+
+        .curso-info {
+            padding: 1.5rem;
+        }
+
+        .curso-info h3 {
+            margin-bottom: 0.5rem;
+            color: #0a192f;
+        }
+
+        .curso-info p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .btn-curso {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #0a192f;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-curso:hover {
+            background: #FF6B35;
+            transform: translateX(5px);
+        }
+
+        /* SECCIÓN ALIADOS Mejorada */
+        .aliados {
+            background: #f9f9f9;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aliados::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,107,53,0.1), transparent);
+            animation: shine 10s linear infinite;
+        }
+
+        @keyframes shine {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .aliados-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .aliados-logos img {
+            height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        .aliados-logos img:nth-child(1) { animation-delay: 0s; }
+        .aliados-logos img:nth-child(2) { animation-delay: 0.5s; }
+        .aliados-logos img:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .aliados-logos img:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Testimonios Mejorado */
+        .testimonials-container {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #0a192f, #1c3a5f);
+            color: white;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(100%) scale(0.8);
+            transition: all 0.5s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .testimonial-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid #FF6B35;
+            animation: rotate 20s linear infinite;
+            display: block;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #FF6B35;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-btn {
+            background: rgba(255, 107, 53, 0.3);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .testimonial-btn:hover {
+            background: #FF6B35;
+            transform: scale(1.1);
+        }
+
+        /* FOOTER Mejorado */
+        footer {
+            background: #0a192f;
+            color: white;
+            padding: 3rem 0 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+            animation: slide 3s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .footer-column.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #FF6B35;
+            transition: width 0.3s;
+        }
+
+        .footer-column:hover h3::after {
+            width: 100%;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #FF6B35;
+            transform: translateY(-5px) scale(1.2);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* MENÚ INFERIOR RESPONSIVO Mejorado */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #0a192f, #111);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.4rem 0.2rem;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .bottom-nav.visible {
+            transform: translateY(0);
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-align: center;
+            flex-grow: 1;
+            padding: 0.4rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bottom-nav a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .bottom-nav a:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .bottom-nav i {
+            font-size: 1.3rem;
+            margin-bottom: 0.1rem;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bottom-nav a:hover i {
+            color: #FF6B35;
+            transform: scale(1.3) rotate(360deg);
+        }
+
+        .bottom-nav span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Botón flotante Mejorado */
+        #chat-toggle {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        #chat-toggle:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Chatbot Mejorado */
+        #chatbot {
+            position: fixed;
+            bottom: 150px;
+            right: 20px;
+            width: 340px;
+            max-width: 90vw;
+            height: 460px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -130,6 +875,82 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        #chatbot > div:first-child {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        #chat-close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #chat-close:hover {
+            transform: rotate(90deg);
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            font-size: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-messages div {
+            animation: messageIn 0.3s ease;
+        }
+
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        #chat-form {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        #chat-input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        #chat-form button {
+            background: #25D366;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #chat-form button:hover {
+            background: #128C7E;
         }
 
         /* Responsive */
@@ -144,733 +965,299 @@
             .hero-slider {
                 height: 60vh;
             }
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-            animation: gradientBG 8s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
+            nav ul {
+                display: none;
             }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .logo-loading {
-            width: 20vw;
-            max-width: 200px;
-            min-width: 100px;
-            animation: heartbeat 1.5s infinite, float 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
-            display: block;
-            margin: 0 auto;
-        }
-
-        @keyframes heartbeat {
-            0% {
-                transform: scale(1);
-            }
-            25% {
-                transform: scale(1.1);
-            }
-            50% {
-                transform: scale(1);
-            }
-            75% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .loading-text {
-            color: white;
-            margin-top: 20px;
-            font-family: 'Arial', sans-serif;
-            font-size: 1.2rem;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
-        }
-
-        /* Añade esto al final del CSS para ocultar el contenido inicialmente */
-        body:not(.loaded) .main-content {
-            opacity: 0;
-        }
-        body.loaded .main-content {
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        /* General styles */
-        body {
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        /* HEADER */
-        header {
-            background-color: #0a192f;
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo-header {
-            height: 60px;
-            transition: transform 0.3s;
-        }
-        .logo-header:hover {
-            transform: scale(1.05);
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            position: relative;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        nav ul li a:hover {
-            color: #FF6B35;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        /* Subrayado animado al hacer hover */
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: #FF6B35;
-            transition: width 0.3s;
-        }
-        nav ul li a:hover::after {
-            width: 60%;
-        }
-        /* Botón destacado para "Campus Virtual" */
-        nav ul li:last-child a {
-            background: #FF6B35;
-            color: white;
-            padding: 0.5rem 1.5rem;
-        }
-        nav ul li:last-child a:hover {
-            background: #e05a2b;
-            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-            padding: 4rem 0;
-        }
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-        .hero-text {
-            flex: 1;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #0a192f;
-        }
-        .hero h1 span {
-            color: #FF6B35;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .btn-primary {
-            background: #FF6B35;
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #e05a2b;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-        .btn-secondary {
-            border: 2px solid #0a192f;
-            color: #0a192f;
-        }
-        .btn-secondary:hover {
-            background: #0a192f;
-            color: white;
-        }
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* SECCIÓN CURSOS */
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .section-title h2 {
-            font-size: 2rem;
-            color: #0a192f;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: #FF6B35;
-        }
-        .cursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .curso-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-        .curso-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        .curso-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        .curso-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .curso-card:hover .curso-img img {
-            transform: scale(1.1);
-        }
-        .curso-info {
-            padding: 1.5rem;
-        }
-        .curso-info h3 {
-            margin-bottom: 0.5rem;
-            color: #0a192f;
-        }
-        .curso-info p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
-        .btn-curso {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #0a192f;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
-        .btn-curso:hover {
-            background: #FF6B35;
-        }
-
-        /* Testimonios */
-        .testimonial-slide {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-        .testimonial-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid #ccc;
-        }
-        .testimonial-text {
-            font-style: italic;
-            font-size: 1.1em;
-            color: #333;
-            max-width: 400px;
-        }
-        .testimonial-author {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #555;
-        }
-
-        /* SECCIÓN ALIADOS */
-        .aliados {
-            background: #f9f9f9;
-            padding: 4rem 0;
-        }
-        .aliados-logos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-        }
-        .aliados-logos img {
-            height: 60px;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s;
-        }
-        .aliados-logos img:hover {
-            filter: grayscale(0);
-            opacity: 1;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #0a192f;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: #FF6B35;
-        }
-        .footer-column ul {
-            list-style: none;
-        }
-        .footer-column ul li {
-            margin-bottom: 0.8rem;
-        }
-        .footer-column ul li a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer-column ul li a:hover {
-            color: #FF6B35;
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-        .social-links a:hover {
-            color: #FF6B35;
-        }
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            .hero-text {
-                order: 2;
+            .header-container {
+                justify-content: center;
                 text-align: center;
             }
-            .hero-buttons {
-                justify-content: center;
-            }
-            nav ul {
-                display: none; /* Menú hamburguesa (implementar con JS) */
+            .logo-text {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
             }
         }
 
-        /* MENÚ INFERIOR RESPONSIVO */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, #0a192f, #111);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0.4rem 0.2rem;
-            z-index: 999;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .bottom-nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.7rem;
-            text-align: center;
-            flex-grow: 1;
-            padding: 0.4rem 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.3s;
-            border-radius: 12px;
-        }
-        .bottom-nav a:hover {
-            background: rgba(255, 107, 53, 0.15);
-            color: #FF6B35;
-            transform: scale(1.08);
-        }
-        .bottom-nav i {
-            font-size: 1.3rem;
-            margin-bottom: 0.1rem;
-            transition: transform 0.3s, color 0.3s;
-        }
-        .bottom-nav a:hover i {
-            color: #FF6B35;
-            transform: scale(1.3);
-        }
-
-        /* Mostrar solo en pantallas mayores o iguales a 992px */
         @media (min-width: 992px) {
             .bottom-nav {
                 display: none;
             }
         }
+
+        /* Clase para elementos visibles */
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Ocultar contenido inicialmente */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body.loaded .main-content {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
+    <!-- Loading Screen Mejorado - CORREGIDO -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="logo-container">
+        <div class="loading-container">
             <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="CITZapopan" class="logo-loading">
-            <p class="loading-text">Centro de innovación tecnológica de Zapopan</p>
+            <p class="loading-text">Centro de Innovación Tecnológica de Zapopan</p>
+            <p class="loading-subtext">Cargando experiencia interactiva...</p>
         </div>
     </div>
 
-    <!-- HEADER -->
-    <header>
-        <div class="container header-container">
-            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="CITZAPOPAN" class="logo-header">
-            <div class="logo-text">
-                <h1>CITZAPOPAN</h1>
-                <p>Centro de innovación tecnológica de Zapopan</p>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#cursos">Cursos</a></li>
-                    <li><a href="#aliados">Aliados</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="https://todolandia.github.io/citzapopan2/campus.html">Campus Virtual</a></li>
-                    <!-- Nueva sección -->
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <!-- Hero Section con Slider -->
-    <section class="hero-slider">
-        <div class="slider-container">
-            <!-- Slide 1 - Niños -->
-            <div class="slide active">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/arduino.jpg" alt="Niños aprendiendo robótica">
-                <div class="slide-content">
-                    <h2>Kit de Arduino</h2>
-                    <p>Explora el mundo de la electrónica con Arduino</p>
-                    <p>Kits completos con sensores, cables y tutoriales para aprender haciendo.</p>
-                    <a href="#cursos-ninos" class="btn btn-primary">Ver Kits Arduino</a>
+    <div class="main-content">
+        <!-- HEADER Mejorado -->
+        <header id="header">
+            <div class="container header-container">
+                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png" alt="CITZAPOPAN" class="logo-header">
+                <div class="logo-text">
+                    <h1>CITZAPOPAN</h1>
+                    <p>Centro de innovación tecnológica de Zapopan</p>
                 </div>
-                <div class="slide-label">Ver kits de Arduino</div>
-            </div>
-
-            <!-- Slide 2 - Jóvenes/Adultos -->
-            <div class="slide">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/roboticaLego.jpg" alt="Jóvenes en taller de programación">
-                <div class="slide-content">
-                    <h2>Robotica Lego Educativo</h2>
-                    <p>Robótica divertida y educativa para niño</p>
-                    <p> Lego WeDo, máquinas simples y mecanismos para aprender jugando.</p>
-                    <a href="#cursos-adultos" class="btn btn-primary">Ver Robots Lego</a>
-                </div>
-                <div class="slide-label">Ver Robots Lego</div>
-            </div>
-
-            <!-- Slide 3 - Escuelas -->
-            <div class="slide">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/pluma3D.png" alt="Capacitación para docentes">
-                <div class="slide-content">
-                    <h2>Dibuja en el aire, crea en 3D</h2>
-                    <p>Incluye libro, acetatos y filamento. Ideal para fomentar la creatividad.</p>
-                    <a href="#paquetes-escuelas" class="btn btn-primary">Explorar Plumas 3D</a>
-                </div>
-                <div class="slide-label">Explorar Plumas 3D</div>
-            </div>
-        </div>
-
-        <!-- Controles del Slider -->
-        <div class="slider-controls">
-            <button class="control prev">❮</button>
-            <div class="dots-container">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-            <button class="control next">❯</button>
-        </div>
-    </section>
-
-    <!-- SECCIÓN CURSOS -->
-    <section class="cursos-section" id="cursos">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nuestros Cursos</h2>
-            </div>
-            <div class="cursos-grid">
-                <!-- Nuevo Curso de Verano -->
-                <div class="curso-card">
-                    <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/online.png" alt="Cursos de Verano">
-                        <!-- Reemplaza con tu imagen real -->
-                    </div>
-                    <div class="curso-info">
-                        <h3>Cursos Online</h3>
-                        <p>"Programas intensivos de tecnología impartidos en modalidad 100% en línea, diseñados para aprender desde casa."</p>
-                        <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20verano" class="btn-curso" target="_blank"> Más información </a>
-                        <!-- Reemplaza # con tu enlace real -->
-                    </div>
-                </div>
-
-                <!-- Curso 1 -->
-                <div class="curso-card">
-                    <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/masinfoNi%C3%B1os.jpg" alt="Programación para niños">
-                    </div>
-                    <div class="curso-info">
-                        <h3>Programación para Niños</h3>
-                        <p>"Desarrolla el pensamiento lógico de tu hijo con robótica, programación y diversión educativa."</p>
-                        <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de%20programaci%C3%B3n%20para%20ni%C3%B1os" class="btn-curso" target="_blank"> Más información </a>
-                    </div>
-                </div>
-
-                <!-- Curso 2 -->
-                <div class="curso-card">
-                    <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/curso-robotica.jpg" alt="Jóvenes/Adultos">
-                    </div>
-                    <div class="curso-info">
-                        <h3>Jóvenes/adultos</h3>
-                        <p>"Capacítate en C++, Java, Python, diseño, web y más, con acceso desde cualquier lugar."</p>
-                        <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de%20programaci%C3%B3n%20para%20j%C3%B3venes%20y%20adultos" class="btn-curso" target="_blank"> Más información </a>
-                    </div>
-                </div>
-
-                <!-- Curso 3 -->
-                <div class="curso-card">
-                    <div class="curso-img">
-                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/paraadutlos.jpg" alt="Diseño 3D">
-                    </div>
-                    <div class="curso-info">
-                        <h3>Para escuelas</h3>
-                        <p>"Materiales listos para clase, capacitación docente y plataforma online todo en uno."</p>
-                        <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20cursos%20para%20escuelas" class="btn-curso" target="_blank"> Más información </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN ALIADOS -->
-    <section class="aliados" id="aliados">
-        <div class="container">
-            <div class="section-title">
-                <h2>Aliados Estratégicos</h2>
-            </div>
-            <div class="aliados-logos">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/dif.png" alt="DIF Zapopan">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/lin.png" alt="Laboratorio de Innovación">
-                <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/taleny.png" alt="Colegio Taleny">
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Testimonios -->
-    <div class="testimonial-slider">
-        <div class="testimonial-slide">
-            <img src="foto1.jpg" alt="Foto de Juan Pérez" class="testimonial-photo" onerror="this.onerror=null;this.src='icono-perfil.png';">
-            <p class="testimonial-text">"Este curso me ayudó mucho a aprender robótica y programación."</p>
-            <p class="testimonial-author">Juan Pérez</p>
-        </div>
-        <div class="testimonial-slide">
-            <img src="foto2.jpg" alt="Foto de María López" class="testimonial-photo" onerror="this.onerror=null;this.src='icono-perfil.png';">
-            <p class="testimonial-text">"La experiencia fue increíble, aprendí y me divertí."</p>
-            <p class="testimonial-author">María López</p>
-        </div>
-        <div class="testimonial-slide">
-            <img src="" alt="Foto genérica" class="testimonial-photo" onerror="this.onerror=null;this.src='icono-perfil.png';">
-            <p class="testimonial-text">"Los instructores son muy amables y enseñan muy bien."</p>
-            <p class="testimonial-author">Pedro García</p>
-        </div>
-    </div>
-
-    <!-- Botones de navegación -->
-    <button class="prev">❮</button>
-    <button class="next">❯</button>
-    </div>
-
-    <!-- Botones de navegación -->
-    <button class="prev">❮</button>
-    <button class="next">❯</button>
-    </div>
-
-    <!-- FOOTER -->
-    <footer id="contacto">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>CITZapopan</h3>
-                    <p>Centro de Innovación Tecnológica de Zapopan. Formando creadores del futuro.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
+                <nav>
                     <ul>
-                        <li>Tel: 33 1234 5678</li>
-                        <li>Email: info@citzapopan.edu.mx</li>
-                        <li>Dirección: Av. Tecnológico 123, Zapopan</li>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#cursos">Cursos</a></li>
+                        <li><a href="#aliados">Aliados</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="https://todolandia.github.io/citzapopan2/campus.html">Campus Virtual</a></li>
                     </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section con Slider Mejorado -->
+        <section class="hero-slider" id="inicio">
+            <div class="slider-container">
+                <!-- Slide 1 - Niños -->
+                <div class="slide active">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/arduino.jpg" alt="Niños aprendiendo robótica">
+                    <div class="slide-content">
+                        <h2>Kit de Arduino</h2>
+                        <p>Explora el mundo de la electrónica con Arduino</p>
+                        <p>Kits completos con sensores, cables y tutoriales para aprender haciendo.</p>
+                        <a href="#" class="btn btn-primary">Ver Kits Arduino</a>
+                    </div>
+                    <div class="slide-label">✨ Nuevo</div>
                 </div>
-                <div class="footer-column">
-                    <h3>Redes Sociales</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+
+                <!-- Slide 2 - Jóvenes/Adultos -->
+                <div class="slide">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/roboticaLego.jpg" alt="Jóvenes en taller de programación">
+                    <div class="slide-content">
+                        <h2>Robotica Lego Educativo</h2>
+                        <p>Robótica divertida y educativa para niños</p>
+                        <p>Lego WeDo, máquinas simples y mecanismos para aprender jugando.</p>
+                        <a href="#" class="btn btn-primary">Ver Robots Lego</a>
+                    </div>
+                    <div class="slide-label">🎯 Popular</div>
+                </div>
+
+                <!-- Slide 3 - Escuelas -->
+                <div class="slide">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/pluma3D.png" alt="Capacitación para docentes">
+                    <div class="slide-content">
+                        <h2>Dibuja en el aire, crea en 3D</h2>
+                        <p>Incluye libro, acetatos y filamento. Ideal para fomentar la creatividad.</p>
+                        <a href="#" class="btn btn-primary">Explorar Plumas 3D</a>
+                    </div>
+                    <div class="slide-label">🚀 Innovación</div>
+                </div>
+            </div>
+
+            <!-- Controles del Slider Mejorados -->
+            <div class="slider-controls">
+                <button class="control prev">❮</button>
+                <div class="dots-container">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="control next">❯</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CURSOS Mejorada -->
+        <section class="cursos-section" id="cursos">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Nuestros Cursos</h2>
+                    <p>Descubre nuestra oferta educativa</p>
+                </div>
+                <div class="cursos-grid">
+                    <!-- Curso Online -->
+                    <div class="curso-card">
+                        <div class="curso-img">
+                            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/online.png" alt="Cursos Online">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Cursos Online</h3>
+                            <p>"Programas intensivos de tecnología 100% en línea para aprender desde casa."</p>
+                            <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20cursos%20online" class="btn-curso" target="_blank">Más información →</a>
+                        </div>
+                    </div>
+
+                    <!-- Curso 1 -->
+                    <div class="curso-card">
+                        <div class="curso-img">
+                            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/masinfoNi%C3%B1os.jpg" alt="Programación para niños">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Programación para Niños</h3>
+                            <p>"Desarrolla el pensamiento lógico con robótica y programación divertida."</p>
+                            <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de%20programaci%C3%B3n%20para%20ni%C3%B1os" class="btn-curso" target="_blank">Más información →</a>
+                        </div>
+                    </div>
+
+                    <!-- Curso 2 -->
+                    <div class="curso-card">
+                        <div class="curso-img">
+                            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/curso-robotica.jpg" alt="Jóvenes/Adultos">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Jóvenes/Adultos</h3>
+                            <p>"Capacítate en C++, Java, Python, diseño web y más, desde cualquier lugar."</p>
+                            <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de%20programaci%C3%B3n%20para%20j%C3%B3venes%20y%20adultos" class="btn-curso" target="_blank">Más información →</a>
+                        </div>
+                    </div>
+
+                    <!-- Curso 3 -->
+                    <div class="curso-card">
+                        <div class="curso-img">
+                            <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/paraadutlos.jpg" alt="Para escuelas">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Para escuelas</h3>
+                            <p>"Materiales listos para clase, capacitación docente y plataforma online."</p>
+                            <a href="https://wa.me/523317243665?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20cursos%20para%20escuelas" class="btn-curso" target="_blank">Más información →</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 CITZapopan. Todos los derechos reservados.</p>
+        </section>
+
+        <!-- SECCIÓN ALIADOS Mejorada -->
+        <section class="aliados" id="aliados">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Aliados Estratégicos</h2>
+                    <p>Instituciones que confían en nosotros</p>
+                </div>
+                <div class="aliados-logos">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/dif.png" alt="DIF Zapopan">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/lin.png" alt="Laboratorio de Innovación">
+                    <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/taleny.png" alt="Colegio Taleny">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Testimonios Mejorada -->
+        <div class="testimonials-container">
+            <div class="container">
+                <div class="section-title" style="color: white;">
+                    <h2 style="color: white;">Lo que dicen nuestros alumnos</h2>
+                </div>
+                <div class="testimonial-slider">
+                    <div class="testimonial-slide active">
+                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/icono-perfil.png" alt="Foto de Juan Pérez" class="testimonial-photo">
+                        <p class="testimonial-text">"Este curso me ayudó mucho a aprender robótica y programación. Los instructores son excelentes."</p>
+                        <p class="testimonial-author">- Juan Pérez</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/icono-perfil.png" alt="Foto de María López" class="testimonial-photo">
+                        <p class="testimonial-text">"La experiencia fue increíble, aprendí y me divertí al mismo tiempo. Muy recomendado."</p>
+                        <p class="testimonial-author">- María López</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/icono-perfil.png" alt="Foto de Pedro García" class="testimonial-photo">
+                        <p class="testimonial-text">"Los instructores son muy amables y enseñan muy bien. El material didáctico es de primera."</p>
+                        <p class="testimonial-author">- Pedro García</p>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn testimonial-prev">❮</button>
+                    <button class="testimonial-btn testimonial-next">❯</button>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <!-- Font Awesome para iconos (opcional) -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <!-- FOOTER Mejorado -->
+        <footer id="contacto">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>CITZapopan</h3>
+                        <p>Centro de Innovación Tecnológica de Zapopan. Formando creadores del futuro desde 2018.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contacto</h3>
+                        <ul>
+                            <li>📞 Tel: 33 1724 3665</li>
+                            <li>✉️ Email: info@citzapopan.edu.mx</li>
+                            <li>📍 Dirección: Av. Vallarta 6500, Zapopan</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Redes Sociales</h3>
+                        <div class="social-links">
+                            <a href="#">f</a>
+                            <a href="#">ig</a>
+                            <a href="#">yt</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 CITZapopan. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- MENÚ INFERIOR RESPONSIVO -->
+        <nav class="bottom-nav" id="bottomNav">
+            <a href="#inicio"><span>🏠</span><span>Inicio</span></a>
+            <a href="#cursos"><span>💻</span><span>Cursos</span></a>
+            <a href="#aliados"><span>🤝</span><span>Aliados</span></a>
+            <a href="#contacto"><span>📧</span><span>Contacto</span></a>
+            <a href="https://todolandia.github.io/citzapopan2/campus.html"><span>🎓</span><span>Campus</span></a>
+        </nav>
+
+        <!-- Botón flotante -->
+        <button id="chat-toggle" aria-label="Abrir chat">💬</button>
+
+        <!-- Chatbot -->
+        <div id="chatbot">
+            <div>
+                👋 Asistente Virtual
+                <button id="chat-close">×</button>
+            </div>
+            <div id="chat-messages"></div>
+            <form id="chat-form">
+                <input id="chat-input" type="text" placeholder="Escribe aquí..." autocomplete="off" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // Espera a que todo cargue (imágenes incluidas)
+        // Loading Screen - CORREGIDO
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('loadingScreen').style.opacity = '0';
                 document.body.classList.add('loaded');
-                // Elimina el loading del DOM después de la animación
                 setTimeout(function() {
-                    document.getElementById('loadingScreen').remove();
+                    document.getElementById('loadingScreen').style.display = 'none';
                 }, 500);
-            }, 3000); // 3 segundos de loading (ajústalo)
+            }, 2500); // 2.5 segundos
         });
-    </script>
 
-    <script>
+        // Slider functionality
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
             const dots = document.querySelectorAll('.dot');
@@ -878,7 +1265,6 @@
             const nextBtn = document.querySelector('.next');
             let currentIndex = 0;
 
-            // Mostrar slide actual
             function showSlide(index) {
                 slides.forEach(slide => slide.classList.remove('active'));
                 dots.forEach(dot => dot.classList.remove('active'));
@@ -887,239 +1273,216 @@
                 currentIndex = index;
             }
 
-            // Navegación
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                showSlide(currentIndex);
+            if (prevBtn && nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    showSlide(currentIndex);
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    showSlide(currentIndex);
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => showSlide(index));
+                });
+
+                // Autoplay
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    showSlide(currentIndex);
+                }, 5000);
+            }
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             });
 
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                showSlide(currentIndex);
+            // Section title reveal
+            const sectionTitles = document.querySelectorAll('.section-title');
+            const footerColumns = document.querySelectorAll('.footer-column');
+            
+            function checkVisibility() {
+                sectionTitles.forEach(title => {
+                    const rect = title.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        title.classList.add('visible');
+                    }
+                });
+                
+                footerColumns.forEach(column => {
+                    const rect = column.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        column.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility();
+
+            // Testimonials slider
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialPrev = document.querySelector('.testimonial-prev');
+            const testimonialNext = document.querySelector('.testimonial-next');
+            let testimonialIndex = 0;
+
+            if (testimonialPrev && testimonialNext) {
+                function showTestimonial(index) {
+                    testimonialSlides.forEach(slide => slide.classList.remove('active'));
+                    testimonialSlides[index].classList.add('active');
+                }
+
+                testimonialNext.addEventListener('click', () => {
+                    testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+                    showTestimonial(testimonialIndex);
+                });
+
+                testimonialPrev.addEventListener('click', () => {
+                    testimonialIndex = (testimonialIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+                    showTestimonial(testimonialIndex);
+                });
+
+                setInterval(() => {
+                    testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+                    showTestimonial(testimonialIndex);
+                }, 4000);
+            }
+
+            // Bottom nav visibility
+            const bottomNav = document.getElementById('bottomNav');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.scrollY;
+                if (currentScroll > lastScroll && currentScroll > 100) {
+                    bottomNav.classList.remove('visible');
+                } else {
+                    bottomNav.classList.add('visible');
+                }
+                lastScroll = currentScroll;
             });
 
-            // Click en dots
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => showSlide(index));
-            });
+            // Chatbot functionality
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatBot = document.getElementById('chatbot');
+            const chatClose = document.getElementById('chat-close');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            let step = 0;
 
-            // Autoplay (opcional)
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                showSlide(currentIndex);
-            }, 5000);
-        });
-    </script>
-
-    <!-- MENÚ INFERIOR RESPONSIVO -->
-    <nav class="bottom-nav">
-        <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
-        <a href="#cursos"><i class="fas fa-laptop-code"></i><span>Cursos</span></a>
-        <a href="#aliados"><i class="fas fa-handshake"></i><span>Aliados</span></a>
-        <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
-        <a href="https://todolandia.github.io/citzapopan2/campus.html"><i class="fas fa-user-graduate"></i><span>Campus</span></a>
-    </nav>
-
-    <!-- Botón flotante -->
-    <button id="chat-toggle" aria-label="Abrir chat" style="position: fixed; bottom: 80px; right: 20px; background-color: #25D366; border: none; border-radius: 50%; width: 60px; height: 60px; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999;">💬</button>
-
-    <!-- Chatbot -->
-    <div id="chatbot" style="position: fixed; bottom: 150px; right: 20px; width: 340px; max-width: 90vw; height: 460px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: none; flex-direction: column; z-index: 10000; font-family: Arial, sans-serif; overflow: hidden;">
-        <div style="background:#25D366; color:white; padding: 12px; font-weight: bold; font-size: 18px; text-align:center; position: relative;">
-            👋 Asistente Virtual
-            <button id="chat-close" style="position: absolute; right: 10px; top: 5px; background:transparent; border:none; color:white; font-size: 20px; cursor:pointer;">×</button>
-        </div>
-        <div id="chat-messages" style="flex:1; padding: 12px; overflow-y: auto; font-size: 15px; display: flex; flex-direction: column;"></div>
-        <form id="chat-form" style="display:flex; border-top:1px solid #ccc;">
-            <input id="chat-input" type="text" placeholder="Escribe aquí..." autocomplete="off" style="flex:1; border:none; padding: 12px; font-size: 15px;" required>
-            <button type="submit" style="background:#25D366; border:none; color:white; padding: 12px 16px; cursor:pointer;">Enviar</button>
-        </form>
-    </div>
-
-    <script>
-        const chatToggle = document.getElementById('chat-toggle');
-        const chatBot = document.getElementById('chatbot');
-        const chatClose = document.getElementById('chat-close');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        let step = 0;
-        let mainOption = '';
-
-        function addBotMessage(text, isOptions = false) {
-            const msg = document.createElement('div');
-            msg.style.background = '#f0f0f0';
-            msg.style.color = '#333';
-            msg.style.padding = '10px 14px';
-            msg.style.margin = '8px 0';
-            msg.style.borderRadius = '12px';
-            msg.style.maxWidth = '85%';
-            msg.style.alignSelf = 'flex-start';
-            msg.style.whiteSpace = 'pre-wrap';
-
-            if (isOptions) {
-                msg.innerHTML = text
-                    .split('\n')
-                    .map(line => {
-                        if (line.match(/^\d/)) {
-                            const number = line.charAt(0);
-                            const content = line.slice(1).trim();
-                            return `<div style="margin: 5px 0;"><span style="background:#2196F3; color:white; border-radius:50%; width:24px; height:24px; display:inline-block; text-align:center; font-weight:bold; margin-right:8px;">${number}</span>${content}</div>`;
-                        } else {
-                            return `<div>${line}</div>`;
-                        }
-                    }).join('');
-            } else {
+            function addBotMessage(text, isOptions = false) {
+                const msg = document.createElement('div');
+                msg.style.background = '#f0f0f0';
+                msg.style.color = '#333';
+                msg.style.padding = '10px 14px';
+                msg.style.margin = '8px 0';
+                msg.style.borderRadius = '12px';
+                msg.style.maxWidth = '85%';
+                msg.style.alignSelf = 'flex-start';
+                msg.style.whiteSpace = 'pre-wrap';
                 msg.textContent = text;
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-            chatMessages.appendChild(msg);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
 
-        function addUserMessage(text) {
-            const msg = document.createElement('div');
-            msg.style.background = '#25D366';
-            msg.style.color = 'white';
-            msg.style.padding = '10px 14px';
-            msg.style.margin = '8px 0';
-            msg.style.borderRadius = '12px';
-            msg.style.maxWidth = '85%';
-            msg.style.alignSelf = 'flex-end';
-            msg.style.whiteSpace = 'pre-wrap';
-            msg.textContent = text;
-            chatMessages.appendChild(msg);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            function addUserMessage(text) {
+                const msg = document.createElement('div');
+                msg.style.background = '#25D366';
+                msg.style.color = 'white';
+                msg.style.padding = '10px 14px';
+                msg.style.margin = '8px 0';
+                msg.style.borderRadius = '12px';
+                msg.style.maxWidth = '85%';
+                msg.style.alignSelf = 'flex-end';
+                msg.style.whiteSpace = 'pre-wrap';
+                msg.textContent = text;
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
 
-            // Reiniciar chatbot después de 15 segundos
-            setTimeout(() => {
-                chatMessages.innerHTML = '';
+            chatToggle.addEventListener('click', () => {
+                chatBot.style.display = 'flex';
+                chatToggle.style.display = 'none';
+                if (step === 0) {
+                    addBotMessage("¡Hola! Soy tu asistente virtual. ¿Qué estás buscando hoy?\n\n1. Cursos presenciales\n2. Cursos en línea\n3. Servicios a escuelas\n\n(Escribe el número de opción)");
+                    step = 1;
+                }
+            });
+
+            chatClose.addEventListener('click', () => {
                 chatBot.style.display = 'none';
-                chatToggle.style.display = 'block';
+                chatToggle.style.display = 'flex';
+                chatMessages.innerHTML = '';
                 step = 0;
-                mainOption = '';
-            }, 15000);
-        }
+            });
 
-        chatToggle.addEventListener('click', () => {
-            chatBot.style.display = 'flex';
-            chatToggle.style.display = 'none';
-            if (step === 0) {
-                addBotMessage("¡Hola! Soy tu asistente virtual. ¿Qué estás buscando hoy?\n1 Cursos presenciales\n2 Cursos en línea\n3 Servicios a escuelas\n\n(Escribe el número de opción)", true);
-                step = 1;
-            }
-        });
+            chatForm.addEventListener('submit', e => {
+                e.preventDefault();
+                const input = chatInput.value.trim();
+                if (!input) return;
 
-        chatClose.addEventListener('click', () => {
-            chatBot.style.display = 'none';
-            chatToggle.style.display = 'block';
-            chatMessages.innerHTML = '';
-            step = 0;
-            mainOption = '';
-        });
+                addUserMessage(input);
+                chatInput.value = '';
 
-        chatForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const input = chatInput.value.trim();
-            if (!input) return;
-
-            addUserMessage(input);
-            chatInput.value = '';
-
-            // Etapa 1 - opción principal
-            if (step === 1) {
-                if (input === "1") {
-                    mainOption = "Cursos presenciales";
-                    addBotMessage("¿Para quién estás buscando?\n1 Para niños\n2 Para jóvenes/adultos", true);
-                    step = 2;
-                } else if (input === "2") {
-                    mainOption = "Cursos en línea";
-                    addBotMessage("¿Para quién estás buscando?\n1 Para niños\n2 Para jóvenes/adultos", true);
-                    step = 3;
-                } else if (input === "3") {
-                    mainOption = "Servicios a escuelas";
-                    sendWhatsapp("Hola, estoy interesado en los servicios a escuelas de Citzapopan.");
-                    step = 99;
-                } else {
-                    addBotMessage("Por favor, responde con 1, 2 o 3.", false);
+                if (step === 1) {
+                    if (input === "1") {
+                        addBotMessage("¿Para quién estás buscando?\n\n1. Para niños\n2. Para jóvenes/adultos");
+                        step = 2;
+                    } else if (input === "2") {
+                        addBotMessage("¿Para quién estás buscando?\n\n1. Para niños\n2. Para jóvenes/adultos");
+                        step = 3;
+                    } else if (input === "3") {
+                        window.open('https://wa.me/5213317243665?text=Hola,%20estoy%20interesado%20en%20los%20servicios%20a%20escuelas%20de%20Citzapopan.', '_blank');
+                        step = 0;
+                    } else {
+                        addBotMessage("Por favor, responde con 1, 2 o 3.");
+                    }
+                } else if (step === 2) {
+                    if (input === "1") {
+                        window.open('https://wa.me/5213317243665?text=Hola,%20estoy%20interesado%20en%20cursos%20presenciales%20para%20niños.', '_blank');
+                        step = 0;
+                    } else if (input === "2") {
+                        window.open('https://wa.me/5213317243665?text=Hola,%20estoy%20interesado%20en%20cursos%20presenciales%20para%20jóvenes%20o%20adultos.', '_blank');
+                        step = 0;
+                    } else {
+                        addBotMessage("Responde con 1 o 2.");
+                    }
+                } else if (step === 3) {
+                    if (input === "1") {
+                        window.open('https://wa.me/5213317243665?text=Hola,%20estoy%20interesado%20en%20cursos%20online%20para%20niños.', '_blank');
+                        step = 0;
+                    } else if (input === "2") {
+                        window.open('https://wa.me/5213317243665?text=Hola,%20estoy%20interesado%20en%20cursos%20online%20para%20jóvenes%20o%20adultos.', '_blank');
+                        step = 0;
+                    } else {
+                        addBotMessage("Responde con 1 o 2.");
+                    }
                 }
-            }
-            // Etapa 2 - cursos presenciales
-            else if (step === 2) {
-                if (input === "1") {
-                    sendWhatsapp("Hola, estoy interesado en cursos presenciales para niños.");
-                    step = 99;
-                } else if (input === "2") {
-                    sendWhatsapp("Hola, estoy interesado en cursos presenciales para jóvenes o adultos.");
-                    step = 99;
-                } else {
-                    addBotMessage("Responde con 1 o 2.", false);
-                }
-            }
-            // Etapa 3 - cursos online
-            else if (step === 3) {
-                if (input === "1") {
-                    sendWhatsapp("Hola, estoy interesado en cursos online para niños.");
-                    step = 99;
-                } else if (input === "2") {
-                    sendWhatsapp("Hola, estoy interesado en cursos online para jóvenes o adultos.");
-                    step = 99;
-                } else {
-                    addBotMessage("Responde con 1 o 2.", false);
-                }
-            }
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
         });
-
-        function sendWhatsapp(texto) {
-            const url = `https://wa.me/5213317243665?text=${encodeURIComponent(texto)}`;
-            addBotMessage("🔗 ¡Gracias por tu interés! Da clic en el siguiente enlace para continuar por WhatsApp:");
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank';
-            link.textContent = "👉 Continuar en WhatsApp";
-            link.style.display = "block";
-            link.style.marginTop = "10px";
-            link.style.color = "#25D366";
-            link.style.fontWeight = "bold";
-            chatMessages.appendChild(link);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    </script>
-
-    <script>
-        // Botones de navegación
-        document.querySelector(".prev").addEventListener("click", () => {
-            indice = (indice - 1 + testimonios.length) % testimonios.length;
-            mostrarTestimonio(indice);
-        });
-
-        document.querySelector(".next").addEventListener("click", () => {
-            indice = (indice + 1) % testimonios.length;
-            mostrarTestimonio(indice);
-        });
-
-        // Cambio automático cada 4 segundos
-        setInterval(() => {
-            indice = (indice + 1) % testimonios.length;
-            mostrarTestimonio(indice);
-        }, 4000);
-    </script>
-
-    <script>
-        // Carrusel automático
-        let slideIndex = 0;
-        const slides = document.querySelectorAll(".testimonial-slide");
-
-        function showSlides() {
-            slides.forEach(slide => slide.style.display = "none");
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            slides[slideIndex - 1].style.display = "flex";
-            setTimeout(showSlides, 3000); // Cambia cada 3 segundos
-        }
-        showSlides();
     </script>
 </body>
 </html>
-
