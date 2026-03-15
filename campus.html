@@ -1,183 +1,288 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Campus Virtual CITZapopan</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: white;
-    }
-    header {
-      background-color: #6a1b9a;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh - 100px);
-    }
-    .login-container {
-      background: #f4f4f9;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-    .login-container h2 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      display: block;
-      margin: 15px 0 5px;
-      color: #333;
-    }
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 10px;
-      background-color: #6a1b9a;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #4a148c;
-    }
-    .error {
-      color: red;
-      text-align: center;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Campus Virtual CITZapopan</h1>
-  </header>
 
-  <main>
-    <div class="login-container">
-      <h2>Iniciar Sesión</h2>
-      <label for="usuario">Usuario:</label>
-      <input type="text" id="usuario" autocomplete="username" />
-      <label for="contrasena">Contraseña:</label>
-      <input type="password" id="contrasena" autocomplete="current-password" />
-      <button onclick="iniciarSesion()">Ingresar</button>
-      <p class="error" id="errorMensaje"></p>
-    </div>
-  </main>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Campus Virtual CITZapopan</title>
+
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#6a1b9a">
+<link rel="apple-touch-icon" href="/icono-192.png">
+
+<style>
+
+body{
+font-family:'Segoe UI',sans-serif;
+margin:0;
+background:white;
+}
+
+header{
+background-color:#6a1b9a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+main{
+display:flex;
+justify-content:center;
+align-items:center;
+height:calc(100vh - 100px);
+}
+
+.login-container{
+background:#f4f4f9;
+padding:30px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+max-width:400px;
+width:100%;
+}
+
+.login-container h2{
+text-align:center;
+color:#333;
+}
+
+label{
+display:block;
+margin:15px 0 5px;
+color:#333;
+}
+
+input[type="text"],
+input[type="password"]{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+margin-top:20px;
+width:100%;
+padding:10px;
+background-color:#6a1b9a;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background-color:#4a148c;
+}
+
+.error{
+color:red;
+text-align:center;
+margin-top:10px;
+}
+
+.install-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#6a1b9a;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:50px;
+font-size:14px;
+cursor:pointer;
+display:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Campus Virtual CITZapopan</h1>
+</header>
+
+<main>
+
+<div class="login-container">
+
+<h2>Iniciar Sesión</h2>
+
+<label for="usuario">Usuario:</label>
+<input type="text" id="usuario" autocomplete="username">
+
+<label for="contrasena">Contraseña:</label>
+<input type="password" id="contrasena" autocomplete="current-password">
+
+<button onclick="iniciarSesion()">Ingresar</button>
+
+<p class="error" id="errorMensaje"></p>
+
+</div>
+
+</main>
+
+<button id="installBtn" class="install-btn">📲 Instalar App</button>
 
 <script>
-  function iniciarSesion() {
-    const usuario = document.getElementById("usuario").value.trim();
-    const contrasena = document.getElementById("contrasena").value.trim();
-    const errorMensaje = document.getElementById("errorMensaje");
 
-    if (usuario === "dgomez" && contrasena === "Daniel2025") {
-      localStorage.setItem("usuarioAutenticado", "dgomez");
-      window.location.href = "usuario1.html";
-    } else if (usuario === "apeña" && contrasena === "Alejandro2025") {
-      localStorage.setItem("usuarioAutenticado", "apeña");
-      window.location.href = "usuario2.html";
-    } else if (usuario === "lcastillejos" && contrasena === "Luis2026") {
-      localStorage.setItem("usuarioAutenticado", "lcastillejos");
-      window.location.href = "lcastillejos.html";
-    } else if (usuario === "acastillejos" && contrasena === "Aaron2026") {
-      localStorage.setItem("usuarioAutenticado", "acastillejos");
-      window.location.href = "acastillejos.html";
-    } else if (usuario === "fperez" && contrasena === "Fernando2025") {
-      localStorage.setItem("usuarioAutenticado", "fperez");
-      window.location.href = "fperez.html";
-    } else if (usuario === "ralcala" && contrasena === "Rodrigo2025") {
-      localStorage.setItem("usuarioAutenticado", "ralcala");
-      window.location.href = "ralcala.html";
-    } else if (usuario === "Amartinez" && contrasena === "Angel2025") {
-      localStorage.setItem("usuarioAutenticado", "Amartinez");
-      window.location.href = "amartinez.html";
-    } else if (usuario === "sgarcia" && contrasena === "Santi2025") {
-      localStorage.setItem("usuarioAutenticado", "sgarcia");
-      window.location.href = "sgarcia.html";
-    }  else if (usuario === "araya" && contrasena === "Allison2025") {
-      localStorage.setItem("usuarioAutenticado", "araya");
-      window.location.href = "araya.html";
-    }  else if (usuario === "mlangarica" && contrasena === "Mateo2025") {
-      localStorage.setItem("usuarioAutenticado", "mlangarica");
-      window.location.href = "mlangarica.html";
-    } else if (usuario === "ejurado" && contrasena === "Elias2025") {
-      localStorage.setItem("usuarioAutenticado", "ejurado");
-      window.location.href = "ejurado.html";
-    } else if (usuario === "dgarcia" && contrasena === "Dante2025") {
-      localStorage.setItem("usuarioAutenticado", "dgarcia");
-      window.location.href = "dgarcia.html";
-    } else if (usuario === "mdejesus" && contrasena === "Manuel2025") {
-      localStorage.setItem("usuarioAutenticado", "mdejesus");
-      window.location.href = "mdejesus.html";
-    } else if (usuario === "ecervantes" && contrasena === "Emilio2025") {
-      localStorage.setItem("usuarioAutenticado", "ecervantes");
-      window.location.href = "ecervantes.html";
-    } else if (usuario === "mmichel" && contrasena === "Maria2025") {
-      localStorage.setItem("usuarioAutenticado", "mmichel");
-      window.location.href = "mmichel.html";
-    } else if (usuario === "atorres" && contrasena === "Abisai2025") {
-      localStorage.setItem("usuarioAutenticado", "atorres");
-      window.location.href = "atorres.html";
-    } else if (usuario === "msanchez" && contrasena === "Mateo2025") {
-      localStorage.setItem("usuarioAutenticado", "msanchez");
-      window.location.href = "msanchez.html";
-    } else if (usuario === "dgutierrez" && contrasena === "Diego2026") {
-      localStorage.setItem("usuarioAutenticado", "dgutierrez");
-      window.location.href = "dgutierrez.html";
-    }  else if (usuario === "iamilcar" && contrasena === "Ian2025") {
-      localStorage.setItem("usuarioAutenticado", "iamilcar");
-      window.location.href = "iamilcar.html";
-    } 
+function iniciarSesion(){
 
-    else if (usuario === "glicea" && contrasena === "German2025") {
-      localStorage.setItem("usuarioAutenticado", "glicea");
-      window.location.href = "glicea.html";
-    } 
+const usuario=document.getElementById("usuario").value.trim();
+const contrasena=document.getElementById("contrasena").value.trim();
+const errorMensaje=document.getElementById("errorMensaje");
 
-         else if (usuario === "cescobar" && contrasena === "Carlos2025") {
-      localStorage.setItem("usuarioAutenticado", "cescobar");
-      window.location.href = "cescobar.html";
-    } 
-    else {
-      errorMensaje.textContent = "Usuario o contraseña incorrectos.";
-    }
-  }
+if(usuario==="dgomez" && contrasena==="Daniel2025"){
+localStorage.setItem("usuarioAutenticado","dgomez");
+window.location.href="usuario1.html";
+}
+
+else if(usuario==="apeña" && contrasena==="Alejandro2025"){
+localStorage.setItem("usuarioAutenticado","apeña");
+window.location.href="usuario2.html";
+}
+
+else if(usuario==="lcastillejos" && contrasena==="Luis2026"){
+localStorage.setItem("usuarioAutenticado","lcastillejos");
+window.location.href="lcastillejos.html";
+}
+
+else if(usuario==="acastillejos" && contrasena==="Aaron2026"){
+localStorage.setItem("usuarioAutenticado","acastillejos");
+window.location.href="acastillejos.html";
+}
+
+else if(usuario==="fperez" && contrasena==="Fernando2025"){
+localStorage.setItem("usuarioAutenticado","fperez");
+window.location.href="fperez.html";
+}
+
+else if(usuario==="ralcala" && contrasena==="Rodrigo2025"){
+localStorage.setItem("usuarioAutenticado","ralcala");
+window.location.href="ralcala.html";
+}
+
+else if(usuario==="Amartinez" && contrasena==="Angel2025"){
+localStorage.setItem("usuarioAutenticado","Amartinez");
+window.location.href="amartinez.html";
+}
+
+else if(usuario==="sgarcia" && contrasena==="Santi2025"){
+localStorage.setItem("usuarioAutenticado","sgarcia");
+window.location.href="sgarcia.html";
+}
+
+else if(usuario==="araya" && contrasena==="Allison2025"){
+localStorage.setItem("usuarioAutenticado","araya");
+window.location.href="araya.html";
+}
+
+else if(usuario==="mlangarica" && contrasena==="Mateo2025"){
+localStorage.setItem("usuarioAutenticado","mlangarica");
+window.location.href="mlangarica.html";
+}
+
+else if(usuario==="ejurado" && contrasena==="Elias2025"){
+localStorage.setItem("usuarioAutenticado","ejurado");
+window.location.href="ejurado.html";
+}
+
+else if(usuario==="dgarcia" && contrasena==="Dante2025"){
+localStorage.setItem("usuarioAutenticado","dgarcia");
+window.location.href="dgarcia.html";
+}
+
+else if(usuario==="mdejesus" && contrasena==="Manuel2025"){
+localStorage.setItem("usuarioAutenticado","mdejesus");
+window.location.href="mdejesus.html";
+}
+
+else if(usuario==="ecervantes" && contrasena==="Emilio2025"){
+localStorage.setItem("usuarioAutenticado","ecervantes");
+window.location.href="ecervantes.html";
+}
+
+else if(usuario==="mmichel" && contrasena==="Maria2025"){
+localStorage.setItem("usuarioAutenticado","mmichel");
+window.location.href="mmichel.html";
+}
+
+else if(usuario==="atorres" && contrasena==="Abisai2025"){
+localStorage.setItem("usuarioAutenticado","atorres");
+window.location.href="atorres.html";
+}
+
+else if(usuario==="msanchez" && contrasena==="Mateo2025"){
+localStorage.setItem("usuarioAutenticado","msanchez");
+window.location.href="msanchez.html";
+}
+
+else if(usuario==="dgutierrez" && contrasena==="Diego2026"){
+localStorage.setItem("usuarioAutenticado","dgutierrez");
+window.location.href="dgutierrez.html";
+}
+
+else if(usuario==="iamilcar" && contrasena==="Ian2025"){
+localStorage.setItem("usuarioAutenticado","iamilcar");
+window.location.href="iamilcar.html";
+}
+
+else if(usuario==="glicea" && contrasena==="German2025"){
+localStorage.setItem("usuarioAutenticado","glicea");
+window.location.href="glicea.html";
+}
+
+else if(usuario==="cescobar" && contrasena==="Carlos2025"){
+localStorage.setItem("usuarioAutenticado","cescobar");
+window.location.href="cescobar.html";
+}
+
+else{
+errorMensaje.textContent="Usuario o contraseña incorrectos.";
+}
+
+}
+
+if("serviceWorker" in navigator){
+navigator.serviceWorker.register("/service-worker.js")
+}
+
+let deferredPrompt;
+const installBtn=document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt",(e)=>{
+
+e.preventDefault();
+deferredPrompt=e;
+installBtn.style.display="block";
+
+});
+
+installBtn.addEventListener("click",async()=>{
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+const choice=await deferredPrompt.userChoice;
+
+if(choice.outcome==="accepted"){
+console.log("App instalada");
+}
+
+deferredPrompt=null;
+installBtn.style.display="none";
+
+}
+
+});
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
