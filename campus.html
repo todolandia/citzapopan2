@@ -324,6 +324,11 @@ localStorage.setItem("usuarioAutenticado","acastillejos");
 window.location.href="acastillejos.html";
 }
 
+else if(usuario==="admin" && contrasena==="admin"){
+localStorage.setItem("usuarioAutenticado","admin");
+window.location.href="admin.html";
+}
+
 else{
 errorMensaje.textContent="Usuario o contraseña incorrectos.";
 }
