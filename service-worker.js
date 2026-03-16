@@ -1,4 +1,4 @@
-const CACHE_NAME = "citzapopan-campus-v1";
+const CACHE_NAME = "citzapopan-campus-v3";
 
 const urlsToCache = [
 "/campus.html"
