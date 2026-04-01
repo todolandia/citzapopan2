@@ -1,709 +1,23 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bienvenido Noctis Aarón Castillejos Ocampo</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .slider {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
-    }
-
-    .slides img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100vw); }
-      66% { transform: translateX(-200vw); }
-      100% { transform: translateX(0); }
-    }
-
-    .lua-code {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.6);
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-family: 'Courier New', monospace;
-      font-size: 1em;
-      white-space: pre-line;
-      color: #00ffcc;
-      max-width: 400px;
-      z-index: 10;
-    }
-
-    .music-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .music-btn {
-      background: #6a0dad;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-
-    .music-btn:hover { background: #5a019c; }
-
-    .tooltip {
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 0.9em;
-      margin-top: 8px;
-      max-width: 180px;
-      text-align: center;
-    }
-
-    img.logo {
-      height: 80px;
-      margin: 40px auto 20px;
-      display: block;
-      position: relative;
-      z-index: 10;
-    }
-
-    .container {
-      background: rgba(255,255,255,0.95);
-      padding: 50px 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 600px;
-      width: 90%;
-      margin: 20px auto 40px;
-      color: #000;
-      position: relative;
-      z-index: 10;
-    }
-
-    h1 {
-      font-size: 2.2em;
-      background: linear-gradient(to right, #6a0dad, #a64ac9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-weight: 500;
-      color: #333;
-      margin-bottom: 24px;
-    }
-
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 26px;
-    }
-
-    .menu a {
-      text-decoration: none;
-      background-color: #6a0dad;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-size: 1.05em;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu a:hover {
-      background-color: #5a019c;
-    }
-
-    .logout-btn {
-      background-color: #ff4d4f;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-
-    footer {
-      margin-top: 18px;
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="slider">
-  <div class="slides">
-    <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg">
-    <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large">
-    <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp">
-  </div>
-
-  <div class="lua-code" id="code"></div>
-
-  <div class="music-container">
-    <button class="music-btn" onclick="toggleMusic()" id="musicButton">
-      🔊 Música
-    </button>
-    <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
-  </div>
-</div>
-
-<img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png">
-
-<div class="container">
-
-<h1>Bienvenido Noctis Aarón Castillejos Ocampo</h1>
-<h2>Curso: Scripting Lua - Roblox Studio</h2>
-
-<nav class="menu">
-<a href="actividadesRoblox2.html"><i class="fas fa-book-open"></i> Actividades</a>
-<a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
-<a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
-</nav>
-
-<button class="logout-btn" onclick="cerrarSesion()">
-<i class="fas fa-sign-out-alt"></i> Cerrar sesión
-</button>
-
-<footer>
-© 2025 Plataforma Educativa CITZapopan
-</footer>
-
-</div>
-
-<audio id="bgMusic" loop>
-<source src="audio.ogg" type="audio/ogg">
-<source src="audio.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-window.addEventListener('load', () => {
-
-const usuario = localStorage.getItem("usuarioAutenticado");
-
-if (usuario !== "acastillejos") {
-alert("Acceso no autorizado");
-window.location.href = "index.html";
-}
-
-const nombreUsuario = localStorage.getItem("nombreUsuario") || "Noctis Aarón Castillejos Ocampo";
-
-document.querySelector("h1").textContent = "Bienvenido " + nombreUsuario;
-
-document.title = "Bienvenido " + nombreUsuario + " - Curso Scripting Lua";
-
-typeCode();
-
-});
-
-function cerrarSesion(){
-alert("Sesión cerrada");
-window.location.href="index.html";
-}
-
-const codeElement = document.getElementById("code");
-
-const luaCode =
-local part = Instance.new("Part")
-part.Anchored = true
-part.BrickColor = BrickColor.new("Bright red")
-part.Position = Vector3.new(0, 5, 0)
-part.Parent = workspace;
-
-let i = 0;
-
-function typeCode(){
-
-if(i < luaCode.length){
-
-codeElement.textContent += luaCode.charAt(i);
-
-i++;
-
-setTimeout(typeCode,50);
-
-}
-
-}
-
-const music = document.getElementById("bgMusic");
-
-function toggleMusic(){
-
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-
-}
-
-</script>
-
-</body>
-</html>
-
-Página Web Con Botón Scratch Y Arduino
-· html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bienvenido Noctis Aarón Castillejos Ocampo</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .slider {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
-    }
-Listo. Ya agregué el botón “Curso Scratch y Arduino” dentro del menú sin modificar nada más de tu página.
-
-Si quieres, en el siguiente paso puedo:
-
-Crear la página scratch_arduino.html
-
-O conectar ese botón a WhatsApp / formulario de inscripción 🚀
-
-
-ahora de este:
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bienvenido Luis Fernando Castillejos Ocampo</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .slider {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
-    }
-
-    .slides img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100vw); }
-      66% { transform: translateX(-200vw); }
-      100% { transform: translateX(0); }
-    }
-
-    .lua-code {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.6);
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-family: 'Courier New', monospace;
-      font-size: 1em;
-      white-space: pre-line;
-      color: #00ffcc;
-      max-width: 400px;
-      z-index: 10;
-    }
-
-    .music-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .music-btn {
-      background: #6a0dad;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-
-    .music-btn:hover { background: #5a019c; }
-
-    .tooltip {
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 0.9em;
-      margin-top: 8px;
-      max-width: 180px;
-      text-align: center;
-    }
-
-    img.logo {
-      height: 80px;
-      margin: 40px auto 20px;
-      display: block;
-      position: relative;
-      z-index: 10;
-    }
-
-    .container {
-      background: rgba(255,255,255,0.95);
-      padding: 50px 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 600px;
-      width: 90%;
-      margin: 20px auto 40px;
-      color: #000;
-      position: relative;
-      z-index: 10;
-    }
-
-    h1 {
-      font-size: 2.2em;
-      background: linear-gradient(to right, #6a0dad, #a64ac9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-weight: 500;
-      color: #333;
-      margin-bottom: 24px;
-    }
-
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 26px;
-    }
-
-    .menu a {
-      text-decoration: none;
-      background-color: #6a0dad;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-size: 1.05em;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu a:hover {
-      background-color: #5a019c;
-    }
-
-    .logout-btn {
-      background-color: #ff4d4f;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-
-    footer {
-      margin-top: 18px;
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="slider">
-  <div class="slides">
-    <img src="https://digitalfamily.mx/innovandojuntos/wp-content/uploads/2022/11/roblox.jpg">
-    <img src="https://pbs.twimg.com/media/Et5PyL7VoAI-IFs?format=jpg&name=large">
-    <img src="https://create.roblox.com/21dc8de7a20d68e3db11804f9a7add83cf29f08d/assets/landing/studio.webp">
-  </div>
-
-  <div class="lua-code" id="code"></div>
-
-  <div class="music-container">
-    <button class="music-btn" onclick="toggleMusic()" id="musicButton">
-      🔊 Música
-    </button>
-    <div class="tooltip" id="musicTooltip">Da clic para reproducir el audio</div>
-  </div>
-</div>
-
-<img class="logo" src="https://raw.githubusercontent.com/todolandia/citzapopan2/refs/heads/main/logo.png">
-
-<div class="container">
-
-<h1>Bienvenido Luis Fernando Castillejos Ocampo</h1>
-<h2>Curso: Scripting Lua - Roblox Studio</h2>
-
-<nav class="menu">
-<a href="actividadesRoblox2.html"><i class="fas fa-book-open"></i> Actividades</a>
-<a href="subir_archivos.html"><i class="fas fa-upload"></i> Subir archivos</a>
-<a href="avance.html"><i class="fas fa-chart-line"></i> Avance</a>
-</nav>
-
-<button class="logout-btn" onclick="cerrarSesion()">
-<i class="fas fa-sign-out-alt"></i> Cerrar sesión
-</button>
-
-<footer>
-© 2025 Plataforma Educativa CITZapopan
-</footer>
-
-</div>
-
-<audio id="bgMusic" loop>
-<source src="audio.ogg" type="audio/ogg">
-<source src="audio.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-window.addEventListener('load', () => {
-
-const usuario = localStorage.getItem("usuarioAutenticado");
-
-if (usuario !== "lcastillejos") {
-alert("Acceso no autorizado");
-window.location.href = "index.html";
-}
-
-const nombreUsuario = localStorage.getItem("nombreUsuario") || "Luis Fernando Castillejos Ocampo";
-
-document.querySelector("h1").textContent = "Bienvenido " + nombreUsuario;
-
-document.title = "Bienvenido " + nombreUsuario + " - Curso Scripting Lua";
-
-typeCode();
-
-});
-
-function cerrarSesion(){
-alert("Sesión cerrada");
-window.location.href="index.html";
-}
-
-const codeElement = document.getElementById("code");
-
-const luaCode =
-local part = Instance.new("Part")
-part.Anchored = true
-part.BrickColor = BrickColor.new("Bright red")
-part.Position = Vector3.new(0, 5, 0)
-part.Parent = workspace;
-
-let i = 0;
-
-function typeCode(){
-
-if(i < luaCode.length){
-
-codeElement.textContent += luaCode.charAt(i);
-
-i++;
-
-setTimeout(typeCode,50);
-
-}
-
-}
-
-const music = document.getElementById("bgMusic");
-
-function toggleMusic(){
-
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-
-}
-
-</script>
-
-</body>
-</html>
-
-Página Luis Con Botón Scratch Y Arduino
-· html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bienvenido Luis Fernando Castillejos Ocampo</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .slider {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
-    }
-Listo también 👍
-
-Ya tiene el botón “Curso Scratch y Arduino” agregado exactamente igual que el anterior, sin mover nada más.
-
-Si quieres, siguiente paso lógico:
-
-Hacer una página única y solo cambiar el usuario dinámicamente (te ahorra duplicar código)
-
-O crear la página scratch_arduino.html con contenido real del curso
-
-Dime y lo armamos 🚀
-
-
-ahora una pagina como esta pero para el curso de scratch y arduino. 
-deja todas las actividades en proximamente y no les pongas nombre, solo actividad 1.. etc_
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividades Roblox</title>
+    <title>Actividades Scratch y Arduino</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            /* 🔧 Controla aquí el tamaño de las miniaturas */
+            --thumb-size: 70px;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
-            line-height: 1.6;
             padding: 20px;
-            min-height: 100vh;
         }
         
         .container {
@@ -719,81 +33,97 @@ deja todas las actividades en proximamente y no les pongas nombre, solo activida
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            background: linear-gradient(135deg, #ff7a18 0%, #32d2aa 100%);
             border-radius: 15px;
             color: white;
         }
-        
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+
+        .banner {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        h1 {
+            font-family: 'Montserrat';
+            font-size: 2.5rem;
         }
         
         .catalogo {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
         }
         
         .actividad {
-            background-color: white;
-            border-radius: 10px;
             padding: 20px;
+            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: 0.3s;
         }
         
         .actividad:hover {
             transform: translateY(-5px);
         }
+
+        /* 🔵 Círculo de miniaturas */
+        .thumb {
+            width: var(--thumb-size);
+            height: var(--thumb-size);
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px auto;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        
+
+        .thumb img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        /* ✨ Interacción */
+        .thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .thumb:hover img {
+            transform: scale(1.2) rotate(5deg);
+        }
         
         .actividad h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: #8c52ff;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            color: #ff7a18;
+            margin-bottom: 10px;
         }
         
         .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: none;
-            cursor: pointer;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        }
-        
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px auto 0 auto;
+    border-radius: 30px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff7a18, #32d2aa);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
         .btn-bloqueada {
-            background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
-            cursor: not-allowed;
-        }
-        
-        .btn-bloqueada:hover {
-            transform: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: gray;
+            pointer-events: none;
         }
         
         footer {
@@ -806,138 +136,74 @@ deja todas las actividades en proximamente y no les pongas nombre, solo activida
 <body>
     <div class="container">
         <header>
-            <h1>Actividades de Roblox</h1>
-            <p class="subtitle">Sesiones de aprendizaje para estudiantes</p>
-        </header>
-        
-        <div class="catalogo">
-            <div class="actividad">
-                <h3>Sesión #1: Creación de Bloques</h3>
-                <p>Crea 5 bloques con diferentes características en Roblox Studio.</p>
-                <a href="actividad1.html" class="btn">Acceder a la Actividad</a> 
-            </div>
-            
-            <div class="actividad">
-                <h3>Sesión #2: Actividad </h3>
-                <p>Sesión #2: Mi primer Script</p>
-                <a href="actividadRoblox2.html" class="btn">Acceder a la Actividad</a> 
-            </div>
-            
-            <div class="actividad">
-                <h3>Sesión #3: Generar terrenos</h3>
-                <p>Aprende a crear entornos y escenarios inmersivos.</p>
-                <a href="actividadRoblox3.html" class="btn">Acceder a la Actividad</a>
-            </div>
-            
-            <div class="actividad">
-                <h3>Sesión #4: Sonidos</h3>
-                <p>Agrega sonidos de fondo a tus juegos.</p>
-                <a href="actividadRoblox4.html" class="btn">Acceder a la Actividad</a>
-            </div>
-            
-           <div class="actividad">
-                <h3>Sesión #5: Condicionales</h3>
-                <p>¿Cómo usar el If/then/end?</p>
-                <a href="actividadRoblox5.html" class="btn">Acceder a la Actividad</a>
-            </div>
-            
-           <div class="actividad">
-                <h3>Sesión #6: Tipos de tiendas</h3>
-                <p>Crea tus tipos de tiendas</p>
-                <a href="actividadRoblox6.html" class="btn">Acceder a la Actividad</a>
-            </div>
-
-             <div class="actividad">
-                <h3>Sesión #7:Sistema de monedas</h3>
-                <p>Crea tus sistema de monedas</p>
-                <a href="actividadRoblox7.html" class="btn">Acceder a la Actividad</a>
-            </div>
-        
-        <footer>
-            <p>© 2023 Curso de Roblox - Todos los derechos reservados</p>
-        </footer>
-    </div>
-</body>
-</html>
-
-
-Actividades Scratch Y Arduino (plantilla)
-· html
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: none;
-            cursor: pointer;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .btn-bloqueada {
-            background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
-            cursor: not-allowed;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
+            <img class="banner" src="https://github.com/todolandia/citzapopan2/blob/main/banerscratcharduino.png?raw=true">
             <h1>Actividades Scratch y Arduino</h1>
-            <p class="subtitle">Próximamente disponibles</p>
+            <p>Próximamente disponibles</p>
         </header>
         
         <div class="catalogo">
 
+            <!-- SCRATCH 1-5 -->
             <div class="actividad">
-                <h3>Actividad 1</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <div class="thumb"><img src="https://1000marcas.net/wp-content/uploads/2021/02/Scratch-Logo-500x281.png"></div>
+                <h3>El plano cartesiano</h3>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
             <div class="actividad">
-                <h3>Actividad 2</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <div class="thumb"><img src="https://1000marcas.net/wp-content/uploads/2021/02/Scratch-Logo-500x281.png"></div>
+                <h3>Lanzar proyectil</h3>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
             <div class="actividad">
+                <div class="thumb"><img src="https://1000marcas.net/wp-content/uploads/2021/02/Scratch-Logo-500x281.png"></div>
                 <h3>Actividad 3</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
             <div class="actividad">
+                <div class="thumb"><img src="https://1000marcas.net/wp-content/uploads/2021/02/Scratch-Logo-500x281.png"></div>
                 <h3>Actividad 4</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
             <div class="actividad">
+                <div class="thumb"><img src="https://1000marcas.net/wp-content/uploads/2021/02/Scratch-Logo-500x281.png"></div>
                 <h3>Actividad 5</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
+            <!-- ARDUINO 6-10 -->
             <div class="actividad">
+                <div class="thumb"><img src="https://blogs.upm.es/observatoriogate/wp-content/uploads/sites/13/2017/02/Arduino_Logo.svg_.png"></div>
                 <h3>Actividad 6</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
             <div class="actividad">
+                <div class="thumb"><img src="https://blogs.upm.es/observatoriogate/wp-content/uploads/sites/13/2017/02/Arduino_Logo.svg_.png"></div>
                 <h3>Actividad 7</h3>
-                <p>Próximamente</p>
-                <button class="btn btn-bloqueada">Próximamente</button>
+                <a href="#" class="btn">Próximamente</a>
             </div>
 
+            <div class="actividad">
+                <div class="thumb"><img src="https://blogs.upm.es/observatoriogate/wp-content/uploads/sites/13/2017/02/Arduino_Logo.svg_.png"></div>
+                <h3>Actividad 8</h3>
+                <a href="#" class="btn">Próximamente</a>
+            </div>
+
+            <div class="actividad">
+                <div class="thumb"><img src="https://blogs.upm.es/observatoriogate/wp-content/uploads/sites/13/2017/02/Arduino_Logo.svg_.png"></div>
+                <h3>Actividad 9</h3>
+                <a href="#" class="btn">Próximamente</a>
+            </div>
+
+            <div class="actividad">
+                <div class="thumb"><img src="https://blogs.upm.es/observatoriogate/wp-content/uploads/sites/13/2017/02/Arduino_Logo.svg_.png"></div>
+                <h3>Actividad 10</h3>
+                <a href="#" class="btn">Próximamente</a>
+            </div>
         </div>
         
         <footer>
@@ -945,8 +211,4 @@ Actividades Scratch Y Arduino (plantilla)
         </footer>
     </div>
 </body>
-
-
-
-
-
+</html>
