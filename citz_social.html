@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CITZ Social</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Fira+Code&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e, #0d0d0d);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* CONTENEDOR */
+.container {
+  display: flex;
+  width: 900px;
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+}
+
+/* LADO IZQUIERDO (ROBOT) */
+.left {
+  flex: 1;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+}
+
+/* LADO DERECHO */
+.right {
+  flex: 1;
+  padding: 40px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: white;
+}
+
+/* BOTÓN */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #8B5CF6;
+}
+
+/* SOCIAL */
+.social button {
+  background: #222;
+  margin-top: 10px;
+}
+
+.toggle {
+  margin-top: 15px;
+  cursor: pointer;
+  color: #8B5CF6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="left">
+    🤖
+  </div>
+
+  <div class="right">
+    <h2 id="title">Iniciar Sesión</h2>
+
+    <input type="email" id="email" placeholder="Correo">
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <button onclick="login()">Entrar</button>
+
+    <div class="social">
+      <button onclick="googleLogin()">Entrar con Google</button>
+    </div>
+
+    <div class="toggle" onclick="toggleMode()">
+      ¿No tienes cuenta? Regístrate
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+
+// 🔥 CONFIGURA TU FIREBASE AQUÍ
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { 
+  getAuth, 
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_DOMINIO",
+  projectId: "TU_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let isLogin = true;
+
+// LOGIN / REGISTRO
+window.login = async () => {
+  const email = emailInput.value;
+  const pass = passwordInput.value;
+
+  if (isLogin) {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } else {
+    await createUserWithEmailAndPassword(auth, email, pass);
+  }
+
+  alert("Bienvenido a CITZ Social 🚀");
+};
+
+// GOOGLE
+window.googleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(auth, provider);
+};
+
+// TOGGLE
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+window.toggleMode = () => {
+  isLogin = !isLogin;
+  document.getElementById("title").innerText = isLogin ? "Iniciar Sesión" : "Registro";
+};
+
+</script>
+
+</body>
+</html>
