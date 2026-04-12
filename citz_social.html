@@ -103,7 +103,7 @@ button:hover {
 
 <script type="module">
 
-// 🔥 FIREBASE IMPORTS (CORRECTO PARA HTML)
+// 🔥 FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
@@ -154,14 +154,27 @@ window.emailAuth = async () => {
 };
 
 
-// 🌐 GOOGLE LOGIN (REACTIVADO)
+// 🌐 GOOGLE LOGIN (YA CON PERFIL PERSONALIZADO)
 window.googleLogin = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
 
-    console.log("Usuario:", result.user);
-    alert("Bienvenido " + result.user.displayName);
+    const user = result.user;
+    const uid = user.uid;
+
+    console.log("Usuario logueado:", user);
+
+    // 🔥 guardar usuario local
+    localStorage.setItem("user", JSON.stringify({
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL
+    }));
+
+    // 🚀 REDIRECCIÓN A PERFIL PERSONALIZADO
+    window.location.href = `perfil.html?uid=${uid}`;
 
   } catch (error) {
     console.error(error.code, error.message);
