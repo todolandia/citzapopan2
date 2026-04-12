@@ -36,6 +36,7 @@ textarea {
   padding: 10px;
 }
 
+/* BOTONES */
 button {
   margin-top: 10px;
   padding: 10px;
@@ -53,7 +54,11 @@ button {
 <div class="editor">
   <h2>Editar perfil</h2>
 
-  <textarea id="htmlEditor"></textarea>
+  <textarea id="htmlEditor">
+<h1>CITZapopan</h1>
+<p>Bienvenido a mi perfil 🚀</p>
+<img src="https://via.placeholder.com/200">
+  </textarea>
 
   <button onclick="preview()">Vista previa</button>
   <button onclick="guardar()">Guardar</button>
@@ -89,7 +94,7 @@ window.preview = () => {
   document.getElementById("preview").innerHTML = html;
 };
 
-// Guardar en Firestore
+// Guardar
 window.guardar = async () => {
   const html = document.getElementById("htmlEditor").value;
 
@@ -100,18 +105,20 @@ window.guardar = async () => {
   alert("Guardado 🚀");
 };
 
-// Volver al perfil
+// Volver
 window.volver = () => {
   window.location.href = `perfil.html?uid=${uid}`;
 };
 
-// Cargar contenido existente
+// Cargar
 async function cargar() {
   const ref = doc(db, "users", uid);
   const snap = await getDoc(ref);
 
   if (snap.exists() && snap.data().html) {
     document.getElementById("htmlEditor").value = snap.data().html;
+    preview();
+  } else {
     preview();
   }
 }
