@@ -12,22 +12,40 @@ body {
   color: white;
 }
 
-#contenido {
-  padding: 20px;
+/* 🔥 MENÚ SUPERIOR */
+#menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px;
+  text-align: right;
+  z-index: 9999;
 }
 
-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999; /* 🔥 esto lo pone encima de todo */
+/* BOTÓN EDITAR */
+#menu button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #8B5CF6;
+  color: white;
+  cursor: pointer;
+}
+
+/* CONTENIDO */
+#contenido {
+  margin-top: 60px;
+  padding: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<button onclick="editar()">Editar perfil</button>
+<div id="menu">
+  <button onclick="editar()">✏️ Editar perfil</button>
+</div>
 
 <div id="contenido"></div>
 
@@ -48,7 +66,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// UID desde URL
+// UID
 const params = new URLSearchParams(window.location.search);
 const uid = params.get("uid");
 
@@ -64,7 +82,7 @@ async function cargarPerfil() {
   }
 }
 
-// Ir a editor
+// Ir a editar
 window.editar = () => {
   window.location.href = `editor.html?uid=${uid}`;
 };
