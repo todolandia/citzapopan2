@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>CITZ Social</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Fira+Code&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -18,7 +18,6 @@ body {
   height: 100vh;
 }
 
-/* CONTENEDOR */
 .container {
   display: flex;
   width: 900px;
@@ -28,7 +27,6 @@ body {
   box-shadow: 0 0 30px rgba(139,92,246,0.3);
 }
 
-/* LADO IZQUIERDO (ROBOT) */
 .left {
   flex: 1;
   background: linear-gradient(135deg, #3B82F6, #8B5CF6);
@@ -38,17 +36,11 @@ body {
   font-size: 120px;
 }
 
-/* LADO DERECHO */
 .right {
   flex: 1;
   padding: 40px;
 }
 
-h2 {
-  margin-bottom: 20px;
-}
-
-/* INPUTS */
 input {
   width: 100%;
   padding: 12px;
@@ -59,7 +51,6 @@ input {
   color: white;
 }
 
-/* BOTÓN */
 button {
   width: 100%;
   padding: 12px;
@@ -74,12 +65,6 @@ button {
 
 button:hover {
   box-shadow: 0 0 15px #8B5CF6;
-}
-
-/* SOCIAL */
-.social button {
-  background: #222;
-  margin-top: 10px;
 }
 
 .toggle {
@@ -104,11 +89,9 @@ button:hover {
     <input type="email" id="email" placeholder="Correo">
     <input type="password" id="password" placeholder="Contraseña">
 
-    <button onclick="login()">Entrar</button>
+    <button onclick="loginEmail()">Entrar</button>
 
-    <div class="social">
-      <button onclick="googleLogin()">Entrar con Google</button>
-    </div>
+    <button onclick="googleLogin()">Entrar con Google</button>
 
     <div class="toggle" onclick="toggleMode()">
       ¿No tienes cuenta? Regístrate
@@ -119,10 +102,9 @@ button:hover {
 
 <script type="module">
 
-// 🔥 CONFIGURA TU FIREBASE AQUÍ
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getAuth, 
+import {
+  getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -131,8 +113,8 @@ import {
 
 const firebaseConfig = {
   apiKey: "TU_API_KEY",
-  authDomain: "TU_DOMINIO",
-  projectId: "TU_ID"
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "TU_PROJECT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -140,33 +122,51 @@ const auth = getAuth(app);
 
 let isLogin = true;
 
-// LOGIN / REGISTRO
-window.login = async () => {
-  const email = emailInput.value;
-  const pass = passwordInput.value;
-
-  if (isLogin) {
-    await signInWithEmailAndPassword(auth, email, pass);
-  } else {
-    await createUserWithEmailAndPassword(auth, email, pass);
-  }
-
-  alert("Bienvenido a CITZ Social 🚀");
-};
-
-// GOOGLE
-window.googleLogin = async () => {
-  const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
-};
-
-// TOGGLE
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
+
+// 🔐 EMAIL LOGIN / REGISTER
+window.loginEmail = async () => {
+  const email = emailInput.value;
+  const pass = passwordInput.value;
+
+  try {
+    if (isLogin) {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } else {
+      await createUserWithEmailAndPassword(auth, email, pass);
+    }
+
+    alert("Bienvenido a CITZ Social 🚀");
+  } catch (error) {
+    console.error("Error email login:", error.code, error.message);
+    alert(error.message);
+  }
+};
+
+
+// 🌐 GOOGLE LOGIN (CORREGIDO)
+window.googleLogin = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+
+    console.log("Usuario:", result.user);
+    alert("Bienvenido " + result.user.displayName);
+
+  } catch (error) {
+    console.error("ERROR GOOGLE LOGIN:", error.code, error.message);
+    alert("Error Google: " + error.message);
+  }
+};
+
+
+// 🔁 TOGGLE LOGIN / REGISTER
 window.toggleMode = () => {
   isLogin = !isLogin;
-  document.getElementById("title").innerText = isLogin ? "Iniciar Sesión" : "Registro";
+  document.getElementById("title").innerText =
+    isLogin ? "Iniciar Sesión" : "Registro";
 };
 
 </script>
