@@ -14,7 +14,7 @@ body {
   height: 100vh;
 }
 
-/* PANEL IZQUIERDO (EDITOR) */
+/* EDITOR */
 .editor {
   width: 40%;
   padding: 20px;
@@ -34,7 +34,7 @@ textarea {
   font-family: monospace;
 }
 
-/* BOTÓN */
+/* BOTONES */
 button {
   margin-top: 10px;
   padding: 10px;
@@ -46,7 +46,11 @@ button {
   cursor: pointer;
 }
 
-/* PANEL DERECHO (PREVIEW) */
+button:hover {
+  background: #6d28d9;
+}
+
+/* PREVIEW */
 .preview {
   width: 60%;
   padding: 20px;
@@ -65,28 +69,82 @@ button {
 
   <textarea id="htmlEditor">
 <h1>Mi Perfil</h1>
-<p>Escribe tu bio aquí...</p>
-<img src="https://via.placeholder.com/150">
+<p>Edita tu perfil aquí 🚀</p>
   </textarea>
 
   <button onclick="renderPreview()">Vista previa</button>
+  <button onclick="guardarPerfil()">Guardar</button>
 </div>
 
 <!-- PREVIEW -->
-<div class="preview" id="preview">
-  <!-- aquí se renderiza el HTML -->
-</div>
+<div class="preview" id="preview"></div>
 
-<script>
+<script type="module">
 
-// 🚀 FUNCION VISTA PREVIA
-function renderPreview() {
+// 🔥 FIREBASE IMPORTS
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// 🔥 CONFIG (MISMA QUE YA USAS)
+const firebaseConfig = {
+  apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
+  authDomain: "daniel-web-9d96f.firebaseapp.com",
+  projectId: "daniel-web-9d96f",
+  storageBucket: "daniel-web-9d96f.firebasestorage.app",
+  messagingSenderId: "97835808356",
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171",
+  measurementId: "G-R83EYY563R"
+};
+
+// INIT
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 🔥 OBTENER UID DE LA URL
+const params = new URLSearchParams(window.location.search);
+const uid = params.get("uid");
+
+// 🚀 VISTA PREVIA
+window.renderPreview = () => {
   const html = document.getElementById("htmlEditor").value;
   document.getElementById("preview").innerHTML = html;
+};
+
+// 💾 GUARDAR PERFIL
+window.guardarPerfil = async () => {
+  const html = document.getElementById("htmlEditor").value;
+
+  try {
+    await setDoc(doc(db, "users", uid), {
+      html: html
+    }, { merge: true });
+
+    alert("Perfil guardado 🚀");
+
+  } catch (error) {
+    console.error(error);
+    alert("Error al guardar");
+  }
+};
+
+// 📥 CARGAR PERFIL
+async function cargarPerfil() {
+  if (!uid) return;
+
+  const ref = doc(db, "users", uid);
+  const snap = await getDoc(ref);
+
+  if (snap.exists() && snap.data().html) {
+    const html = snap.data().html;
+
+    document.getElementById("htmlEditor").value = html;
+    document.getElementById("preview").innerHTML = html;
+  } else {
+    renderPreview(); // si no hay nada guardado
+  }
 }
 
-// 🔥 CARGA INICIAL
-renderPreview();
+cargarPerfil();
 
 </script>
 
