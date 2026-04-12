@@ -10,139 +10,69 @@ body {
   font-family: Arial;
   background: #0d0d0d;
   color: white;
-  display: flex;
-  height: 100vh;
 }
 
-/* EDITOR */
-.editor {
-  width: 40%;
+#contenido {
   padding: 20px;
-  background: #111;
-  display: flex;
-  flex-direction: column;
 }
 
-textarea {
-  width: 100%;
-  height: 70vh;
-  background: #1a1a1a;
-  color: white;
-  border: 1px solid #333;
-  padding: 10px;
-  border-radius: 10px;
-  font-family: monospace;
-}
-
-/* BOTONES */
 button {
-  margin-top: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
   padding: 10px;
   border: none;
   border-radius: 10px;
   background: #8B5CF6;
   color: white;
-  font-weight: bold;
   cursor: pointer;
-}
-
-button:hover {
-  background: #6d28d9;
-}
-
-/* PREVIEW */
-.preview {
-  width: 60%;
-  padding: 20px;
-  background: #0d0d0d;
-  overflow: auto;
-  border-left: 1px solid #222;
 }
 </style>
 </head>
 
 <body>
 
-<!-- EDITOR -->
-<div class="editor">
-  <h2>Editor de perfil</h2>
+<button onclick="editar()">Editar perfil</button>
 
-  <textarea id="htmlEditor">
-<h1>Mi Perfil</h1>
-<p>Edita tu perfil aquí 🚀</p>
-  </textarea>
-
-  <button onclick="renderPreview()">Vista previa</button>
-  <button onclick="guardarPerfil()">Guardar</button>
-</div>
-
-<!-- PREVIEW -->
-<div class="preview" id="preview"></div>
+<div id="contenido"></div>
 
 <script type="module">
 
-// 🔥 FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 🔥 CONFIG (MISMA QUE YA USAS)
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
   authDomain: "daniel-web-9d96f.firebaseapp.com",
   projectId: "daniel-web-9d96f",
   storageBucket: "daniel-web-9d96f.firebasestorage.app",
   messagingSenderId: "97835808356",
-  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171",
-  measurementId: "G-R83EYY563R"
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
 };
 
-// INIT
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔥 OBTENER UID DE LA URL
+// UID desde URL
 const params = new URLSearchParams(window.location.search);
 const uid = params.get("uid");
 
-// 🚀 VISTA PREVIA
-window.renderPreview = () => {
-  const html = document.getElementById("htmlEditor").value;
-  document.getElementById("preview").innerHTML = html;
-};
-
-// 💾 GUARDAR PERFIL
-window.guardarPerfil = async () => {
-  const html = document.getElementById("htmlEditor").value;
-
-  try {
-    await setDoc(doc(db, "users", uid), {
-      html: html
-    }, { merge: true });
-
-    alert("Perfil guardado 🚀");
-
-  } catch (error) {
-    console.error(error);
-    alert("Error al guardar");
-  }
-};
-
-// 📥 CARGAR PERFIL
+// Cargar perfil
 async function cargarPerfil() {
-  if (!uid) return;
-
   const ref = doc(db, "users", uid);
   const snap = await getDoc(ref);
 
   if (snap.exists() && snap.data().html) {
-    const html = snap.data().html;
-
-    document.getElementById("htmlEditor").value = html;
-    document.getElementById("preview").innerHTML = html;
+    document.getElementById("contenido").innerHTML = snap.data().html;
   } else {
-    renderPreview(); // si no hay nada guardado
+    document.getElementById("contenido").innerHTML = "<h2>Perfil vacío</h2>";
   }
 }
+
+// Ir a editor
+window.editar = () => {
+  window.location.href = `editor.html?uid=${uid}`;
+};
 
 cargarPerfil();
 
