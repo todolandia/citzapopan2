@@ -10,21 +10,26 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  width: 1536px;
-  height: 1024px;
-  background: url('https://raw.githubusercontent.com/todolandia/CITZ_SOCIAL/refs/heads/main/1.png') no-repeat;
-  background-size: 1536px 1024px;
-  background-position: top left;
+  height: 100vh;
+
+  /* 🔥 RESPONSIVE */
+  background: url('https://raw.githubusercontent.com/todolandia/CITZ_SOCIAL/refs/heads/main/1.png') no-repeat center center;
+  background-size: cover;
+
   color: white;
   position: relative;
 }
 
-/* CONTENEDOR */
+/* 🔥 CONTENEDOR FLEX */
 .login-box {
   position: absolute;
-  left: 890px;
-  top: 200px;
-  width: 420px;
+
+  /* 👉 posición relativa a pantalla */
+  right: 8%;
+  top: 20%;
+
+  width: 400px;
+  max-width: 90%;
 }
 
 /* TITULO */
@@ -62,7 +67,7 @@ input:focus {
   cursor: pointer;
 }
 
-/* BOTÓN GENERAL */
+/* BOTÓN */
 button {
   width: 100%;
   padding: 14px;
@@ -109,15 +114,26 @@ button:hover {
   background: white;
   color: black;
   border-radius: 50px;
-  font-weight: 500;
 }
 
 .google-btn img {
   width: 20px;
 }
 
-.google-btn:hover {
-  box-shadow: 0 0 15px rgba(255,255,255,0.5);
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .login-box {
+    position: static;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 </style>
 </head>
@@ -173,7 +189,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// LOGIN EMAIL
 window.emailAuth = async () => {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
@@ -186,23 +201,11 @@ window.emailAuth = async () => {
   }
 };
 
-// GOOGLE LOGIN
 window.googleLogin = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
-
-    const user = result.user;
-
-    localStorage.setItem("user", JSON.stringify({
-      uid: user.uid,
-      name: user.displayName,
-      email: user.email,
-      photo: user.photoURL
-    }));
-
-    window.location.href = `perfil.html?uid=${user.uid}`;
-
+    window.location.href = `perfil.html?uid=${result.user.uid}`;
   } catch (error) {
     alert(error.message);
   }
