@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Editor CITZ</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0d0d0d;
+  color: white;
+  display: flex;
+  height: 100vh;
+}
+
+.editor {
+  width: 40%;
+  padding: 20px;
+  background: #111;
+}
+
+.preview {
+  width: 60%;
+  padding: 20px;
+  border-left: 1px solid #222;
+  overflow: auto;
+}
+
+textarea {
+  width: 100%;
+  height: 60vh;
+  background: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  padding: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #8B5CF6;
+  color: white;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="editor">
+  <h2>Editar perfil</h2>
+
+  <textarea id="htmlEditor"></textarea>
+
+  <button onclick="preview()">Vista previa</button>
+  <button onclick="guardar()">Guardar</button>
+  <button onclick="volver()">Volver al perfil</button>
+</div>
+
+<div class="preview" id="preview"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
+  authDomain: "daniel-web-9d96f.firebaseapp.com",
+  projectId: "daniel-web-9d96f",
+  storageBucket: "daniel-web-9d96f.firebasestorage.app",
+  messagingSenderId: "97835808356",
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// UID
+const params = new URLSearchParams(window.location.search);
+const uid = params.get("uid");
+
+// Vista previa
+window.preview = () => {
+  const html = document.getElementById("htmlEditor").value;
+  document.getElementById("preview").innerHTML = html;
+};
+
+// Guardar en Firestore
+window.guardar = async () => {
+  const html = document.getElementById("htmlEditor").value;
+
+  await setDoc(doc(db, "users", uid), {
+    html: html
+  }, { merge: true });
+
+  alert("Guardado 🚀");
+};
+
+// Volver al perfil
+window.volver = () => {
+  window.location.href = `perfil.html?uid=${uid}`;
+};
+
+// Cargar contenido existente
+async function cargar() {
+  const ref = doc(db, "users", uid);
+  const snap = await getDoc(ref);
+
+  if (snap.exists() && snap.data().html) {
+    document.getElementById("htmlEditor").value = snap.data().html;
+    preview();
+  }
+}
+
+cargar();
+
+</script>
+
+</body>
+</html>
