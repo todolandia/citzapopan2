@@ -90,7 +90,9 @@ button:hover {
     <input type="email" id="email" placeholder="Correo">
     <input type="password" id="password" placeholder="Contraseña">
 
-    <button onclick="loginEmail()">Entrar</button>
+    <button onclick="emailAuth()">Entrar</button>
+
+    <button onclick="googleLogin()">Entrar con Google</button>
 
     <div class="toggle" onclick="toggleMode()">
       ¿No tienes cuenta? Regístrate
@@ -101,19 +103,28 @@ button:hover {
 
 <script type="module">
 
+// 🔥 FIREBASE IMPORTS (CORRECTO PARA HTML)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+// 🔥 TU CONFIG FIREBASE
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID"
+  apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
+  authDomain: "daniel-web-9d96f.firebaseapp.com",
+  projectId: "daniel-web-9d96f",
+  storageBucket: "daniel-web-9d96f.firebasestorage.app",
+  messagingSenderId: "97835808356",
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171",
+  measurementId: "G-R83EYY563R"
 };
 
+// INIT
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -123,8 +134,8 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
 
-// 🔐 LOGIN / REGISTRO
-window.loginEmail = async () => {
+// 🔐 EMAIL LOGIN / REGISTER
+window.emailAuth = async () => {
   const email = emailInput.value;
   const pass = passwordInput.value;
 
@@ -139,6 +150,22 @@ window.loginEmail = async () => {
   } catch (error) {
     console.error(error.code, error.message);
     alert(error.message);
+  }
+};
+
+
+// 🌐 GOOGLE LOGIN (REACTIVADO)
+window.googleLogin = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+
+    console.log("Usuario:", result.user);
+    alert("Bienvenido " + result.user.displayName);
+
+  } catch (error) {
+    console.error(error.code, error.message);
+    alert("Error Google: " + error.message);
   }
 };
 
