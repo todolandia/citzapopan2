@@ -10,162 +10,190 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, #1a1a2e, #0d0d0d);
+  width: 1536px;
+  height: 1024px;
+  background: url('https://raw.githubusercontent.com/todolandia/CITZ_SOCIAL/refs/heads/main/1.png') no-repeat;
+  background-size: 1536px 1024px;
+  background-position: top left;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
 }
 
-.container {
-  display: flex;
-  width: 900px;
-  background: #111;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+/* CONTENEDOR */
+.login-box {
+  position: absolute;
+  left: 890px;
+  top: 200px;
+  width: 420px;
 }
 
-.left {
-  flex: 1;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 120px;
+/* TITULO */
+h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
 }
 
-.right {
-  flex: 1;
-  padding: 40px;
+/* INPUTS */
+.input-group {
+  margin-bottom: 15px;
 }
 
 input {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #333;
-  background: #1a1a1a;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.4);
   color: white;
 }
 
+input:focus {
+  border: 1px solid #8B5CF6;
+  box-shadow: 0 0 10px #8B5CF6;
+}
+
+/* LINK */
+.forgot {
+  text-align: right;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  color: #c084fc;
+  cursor: pointer;
+}
+
+/* BOTÓN GENERAL */
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6, #ec4899);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 button:hover {
-  box-shadow: 0 0 15px #8B5CF6;
+  box-shadow: 0 0 20px #8B5CF6;
 }
 
-.toggle {
-  margin-top: 15px;
-  cursor: pointer;
-  color: #8B5CF6;
-  text-align: center;
+/* DIVISOR */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+}
+
+.divider span {
+  margin: 0 10px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* GOOGLE */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: white;
+  color: black;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.google-btn img {
+  width: 20px;
+}
+
+.google-btn:hover {
+  box-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="login-box">
 
-  <div class="left">
-    🤖
+  <h2>Iniciar Sesión</h2>
+
+  <div class="input-group">
+    <input type="email" id="email" placeholder="Correo electrónico">
   </div>
 
-  <div class="right">
-    <h2 id="title">Iniciar Sesión</h2>
-
-    <input type="email" id="email" placeholder="Correo">
+  <div class="input-group">
     <input type="password" id="password" placeholder="Contraseña">
-
-    <button onclick="emailAuth()">Entrar</button>
-
-    <button onclick="googleLogin()">Entrar con Google</button>
-
-    <div class="toggle" onclick="toggleMode()">
-      ¿No tienes cuenta? Regístrate
-    </div>
   </div>
+
+  <div class="forgot">¿Olvidaste tu contraseña?</div>
+
+  <button onclick="emailAuth()">Iniciar Sesión</button>
+
+  <div class="divider">
+    <span>O continúa con</span>
+  </div>
+
+  <button class="google-btn" onclick="googleLogin()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+    Entrar con Google
+  </button>
 
 </div>
 
 <script type="module">
 
-// 🔥 FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔥 TU CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
   authDomain: "daniel-web-9d96f.firebaseapp.com",
   projectId: "daniel-web-9d96f",
   storageBucket: "daniel-web-9d96f.firebasestorage.app",
   messagingSenderId: "97835808356",
-  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171",
-  measurementId: "G-R83EYY563R"
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
 };
 
-// INIT
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-let isLogin = true;
-
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-
-
-// 🔐 EMAIL LOGIN / REGISTER
+// LOGIN EMAIL
 window.emailAuth = async () => {
-  const email = emailInput.value;
-  const pass = passwordInput.value;
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
 
   try {
-    if (isLogin) {
-      await signInWithEmailAndPassword(auth, email, pass);
-      alert("Bienvenido a CITZ Social 🚀");
-    } else {
-      await createUserWithEmailAndPassword(auth, email, pass);
-      alert("Cuenta creada correctamente 🚀");
-    }
+    await signInWithEmailAndPassword(auth, email, pass);
+    alert("Bienvenido 🚀");
   } catch (error) {
-    console.error(error.code, error.message);
     alert(error.message);
   }
 };
 
-
-// 🌐 GOOGLE LOGIN (YA CON PERFIL PERSONALIZADO)
+// GOOGLE LOGIN
 window.googleLogin = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
 
     const user = result.user;
-    const uid = user.uid;
 
-    console.log("Usuario logueado:", user);
-
-    // 🔥 guardar usuario local
     localStorage.setItem("user", JSON.stringify({
       uid: user.uid,
       name: user.displayName,
@@ -173,21 +201,11 @@ window.googleLogin = async () => {
       photo: user.photoURL
     }));
 
-    // 🚀 REDIRECCIÓN A PERFIL PERSONALIZADO
-    window.location.href = `perfil.html?uid=${uid}`;
+    window.location.href = `perfil.html?uid=${user.uid}`;
 
   } catch (error) {
-    console.error(error.code, error.message);
-    alert("Error Google: " + error.message);
+    alert(error.message);
   }
-};
-
-
-// 🔁 TOGGLE LOGIN / REGISTER
-window.toggleMode = () => {
-  isLogin = !isLogin;
-  document.getElementById("title").innerText =
-    isLogin ? "Iniciar Sesión" : "Registro";
 };
 
 </script>
