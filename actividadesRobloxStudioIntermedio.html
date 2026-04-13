@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades Roblox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .actividad {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .actividad:hover {
+            transform: translateY(-5px);
+        }
+        
+        .actividad h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #8c52ff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #8c52ff 0%, #5ce1e6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-bloqueada {
+            background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+            cursor: not-allowed;
+        }
+        
+        .btn-bloqueada:hover {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Actividades de Roblox</h1>
+            <p class="subtitle">Sesiones de aprendizaje para estudiantes</p>
+        </header>
+        
+        <div class="catalogo">
+
+            <div class="actividad">
+                <h3>Sesión #1: Creación de Bloques</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+            
+            <div class="actividad">
+                <h3>Sesión #2: Mi primer Script</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+            
+            <div class="actividad">
+                <h3>Sesión #3: Generar terrenos</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+            
+            <div class="actividad">
+                <h3>Sesión #4: Sonidos</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+            
+            <div class="actividad">
+                <h3>Sesión #5: Condicionales</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+            
+            <div class="actividad">
+                <h3>Sesión #6: Tipos de tiendas</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+
+            <div class="actividad">
+                <h3>Sesión #7: Sistema de monedas</h3>
+                <p>Próximamente</p>
+                <button class="btn btn-bloqueada">Próximamente</button>
+            </div>
+
+        </div>
+        
+        <footer>
+            <p>© 2023 Curso de Roblox - Todos los derechos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>
