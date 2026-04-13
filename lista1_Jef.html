@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Asistencia</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 10px;
+    }
+
+    h2 {
+        text-align: center;
+        background: #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .card {
+        background: white;
+        margin: 8px 0;
+        padding: 12px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        font-size: 14px;
+    }
+
+    /* SWITCH */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: red;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: green;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+
+</style>
+</head>
+
+<body>
+
+<h2>Kinder</h2>
+
+<div class="card">Schultz Martinez Bosco
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="card">Olmedo Delgado Diego Alberto
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="card">Saraz Humberto
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="card">Parada Casas Saul Alejandro
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+
+
+<h2>Primaria menor</h2>
+
+<div class="card">Uriel Serrano Ruvalcaba
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Guzman Ambriz Natalia Gisselle
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Reyes Marquez José Rodrigo
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Licea Magaña Germán Isaac
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Gómez Hernández Alan Bernardo
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Gómez Hernández Julian Alejandro
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Martinez Diaz Romina Rosaura
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Ceja Becerra Aleera Montserrat
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Ceja Becerra Velkan Antonio
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Isaac Avila Fernando Farid
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Sánchez León Macias Mikel
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="card">Gonzalez López Victor Leonardo
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+
+</body>
+</html>
