@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos | Especialista en Colorimetría</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f5f5;
+    color:#222;
+    overflow-x:hidden;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:60px;
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+    position:relative;
+}
+
+.hero-content{
+    max-width:900px;
+    animation:fadeUp 1s ease;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    padding:10px 20px;
+    border-radius:50px;
+    margin-bottom:20px;
+    backdrop-filter:blur(10px);
+    font-weight:600;
+}
+
+.hero h1{
+    font-size:5rem;
+    line-height:1;
+    margin-bottom:20px;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#ff9966;
+}
+
+.hero p{
+    font-size:1.3rem;
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:18px 35px;
+    border:none;
+    border-radius:15px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:700;
+}
+
+.btn-primary{
+    background:#ff7b54;
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:translateY(-5px);
+    background:#ff5f2e;
+}
+
+.btn-secondary{
+    background:white;
+    color:#222;
+}
+
+.btn-secondary:hover{
+    transform:translateY(-5px);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    padding:80px 10%;
+    background:white;
+}
+
+.stat-box{
+    background:linear-gradient(135deg,#ff9966,#ff5e62);
+    color:white;
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.stat-box:hover{
+    transform:translateY(-10px);
+}
+
+.stat-box h2{
+    font-size:3rem;
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    padding:100px 10%;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    border-radius:30px;
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+.about-text h2{
+    font-size:3rem;
+    margin-bottom:25px;
+}
+
+.about-text p{
+    font-size:1.1rem;
+    line-height:1.8;
+    margin-bottom:25px;
+    color:#555;
+}
+
+.services{
+    display:grid;
+    gap:20px;
+}
+
+.service{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.service:hover{
+    transform:translateX(10px);
+}
+
+/* GALLERY */
+
+.gallery{
+    padding:100px 10%;
+    background:#111;
+    color:white;
+}
+
+.gallery-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.gallery-title h2{
+    font-size:3.5rem;
+    margin-bottom:15px;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#1d1d1d;
+    border-radius:25px;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card-content h3{
+    margin-bottom:15px;
+    font-size:1.7rem;
+}
+
+/* CTA */
+
+.cta{
+    padding:120px 10%;
+    text-align:center;
+    background:linear-gradient(135deg,#ff9966,#ff5e62);
+    color:white;
+}
+
+.cta h2{
+    font-size:4rem;
+    margin-bottom:20px;
+}
+
+.cta p{
+    font-size:1.3rem;
+    max-width:800px;
+    margin:auto;
+    margin-bottom:40px;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    background:#000;
+    color:#aaa;
+    text-align:center;
+    padding:40px;
+}
+
+footer h3{
+    color:white;
+    margin-bottom:10px;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .cta h2{
+        font-size:2.5rem;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            Especialista en Colorimetría e Igualación Profesional
+        </div>
+
+        <h1>
+            Carlos <br>
+            <span>Experto en Color</span>
+        </h1>
+
+        <p>
+            Transforma cualquier espacio con igualación precisa,
+            asesoría profesional y colores que realmente impresionan.
+        </p>
+
+        <div class="buttons">
+
+            <a 
+            href="https://wa.me/525623730814?text=Hola%20Carlos,%20me%20interesa%20recibir%20información%20sobre%20igualación%20de%20color"
+            target="_blank">
+            
+                <button class="btn btn-primary">
+                    Solicitar Asesoría
+                </button>
+
+            </a>
+
+            <button class="btn btn-secondary">
+                Ver Proyectos
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat-box">
+        <h2>+500</h2>
+        <p>Colores Igualados</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>98%</h2>
+        <p>Precisión Visual</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>100%</h2>
+        <p>Clientes Satisfechos</p>
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about">
+
+    <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop">
+
+    <div class="about-text">
+
+        <h2>
+            El color correcto cambia todo.
+        </h2>
+
+        <p>
+            Carlos combina experiencia visual, teoría del color y
+            técnicas avanzadas de igualación para lograr acabados
+            modernos, elegantes y totalmente personalizados.
+        </p>
+
+        <div class="services">
+
+            <div class="service">
+                🎨 Igualación profesional de color
+            </div>
+
+            <div class="service">
+                🏠 Simulación visual de espacios
+            </div>
+
+            <div class="service">
+                💡 Asesoría en tendencias y combinaciones
+            </div>
+
+            <div class="service">
+                ✨ Recomendación de acabados premium
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="gallery">
+
+    <div class="gallery-title">
+
+        <h2>Resultados que impresionan</h2>
+
+        <p>
+            Espacios modernos con colores perfectamente equilibrados.
+        </p>
+
+    </div>
+
+    <div class="gallery-grid">
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
+
+            <div class="card-content">
+                <h3>Habitaciones Elegantes</h3>
+                <p>
+                    Tonos cálidos y modernos para crear ambientes premium.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200&auto=format&fit=crop">
+
+            <div class="card-content">
+                <h3>Cocinas Modernas</h3>
+                <p>
+                    Combinaciones sofisticadas para hogares contemporáneos.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop">
+
+            <div class="card-content">
+                <h3>Espacios Premium</h3>
+                <p>
+                    Acabados visualmente impactantes y profesionales.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>
+        Tu proyecto merece el color perfecto.
+    </h2>
+
+    <p>
+        Lleva tus espacios al siguiente nivel con asesoría profesional,
+        igualación experta y atención personalizada.
+    </p>
+
+    <a 
+    href="https://wa.me/525623730814?text=Hola%20Carlos,%20me%20interesa%20más%20información%20sobre%20colorimetría"
+    target="_blank">
+
+        <button class="btn btn-secondary">
+            Contactar a Carlos
+        </button>
+
+    </a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        Carlos · Especialista en Colorimetría
+    </h3>
+
+    <p>
+        Precisión, experiencia y pasión por el color.
+    </p>
+
+</footer>
+
+<script>
+
+/* Animación simple al hacer scroll */
+
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', () => {
+
+    cards.forEach(card => {
+
+        const top = card.getBoundingClientRect().top;
+
+        if(top < window.innerHeight - 100){
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        }
+
+    });
+
+});
+
+cards.forEach(card => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(50px)";
+    card.style.transition = "all 0.8s ease";
+});
+
+</script>
+
+</body>
+</html>
+```
