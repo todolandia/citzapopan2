@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehículo Autómata | CITZapopan</title>
+
+<style>
+
+body{
+font-family:Segoe UI, sans-serif;
+background:#f4f6f9;
+margin:0;
+padding:30px;
+color:#222;
+}
+
+.header{
+background:linear-gradient(135deg,#1d3557,#457b9d);
+color:white;
+padding:25px;
+border-radius:18px;
+margin-bottom:25px;
+}
+
+h1{
+margin:0;
+}
+
+.section{
+background:white;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+h2{
+color:#1d3557;
+margin-top:0;
+}
+
+img{
+max-width:100%;
+border-radius:12px;
+margin-top:10px;
+border:1px solid #ddd;
+}
+
+code, pre{
+background:#0f172a;
+color:#00ff9d;
+padding:15px;
+display:block;
+border-radius:12px;
+overflow-x:auto;
+font-size:13px;
+}
+
+ul{
+line-height:1.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Proyecto: Vehículo Autómata con Arduino</h1>
+<p>CITZapopan · Instrucciones del proyecto</p>
+</div>
+
+<div class="section">
+
+<h2>🎯 Objetivo</h2>
+<p>
+El alumno realizará un vehículo autómata elaborado con Arduino, capaz de detectar obstáculos y tomar decisiones de movimiento automáticamente.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>🧰 Materiales</h2>
+<ul>
+<li>1 Arduino Uno</li>
+<li>2 mini protoboards</li>
+<li>1 sensor de distancia ultrasónico</li>
+<li>2 motores DC (llantas amarillas)</li>
+<li>1 tarjeta L293D</li>
+<li>1 portapilas</li>
+<li>4 pilas AA</li>
+<li>25 cables Dupont macho-macho</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>🔌 Circuito</h2>
+<p>Diagrama de conexión del vehículo autómata:</p>
+
+<img src="https://raw.githubusercontent.com/todolandia/citzapopan2/main/circuitoVehiculo.png" alt="Circuito Vehículo Arduino">
+
+</div>
+
+<div class="section">
+
+<h2>🧠 Código por bloques</h2>
+<p>Representación visual del código en bloques:</p>
+
+<img src="https://raw.githubusercontent.com/todolandia/citzapopan2/main/codigoVehiculo.png" alt="Código por bloques">
+
+</div>
+
+<div class="section">
+
+<h2>💻 Código en texto (Arduino)</h2>
+
+<pre>
+int DISTANCIA = 0;
+
+long readUltrasonicDistance(int triggerPin, int echoPin)
+{
+  pinMode(triggerPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+
+  pinMode(echoPin, INPUT);
+  return pulseIn(echoPin, HIGH);
+}
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(5, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+}
+
+void loop()
+{
+  DISTANCIA = 0.01723 * readUltrasonicDistance(10, 11);
+  Serial.println(DISTANCIA);
+
+  if (DISTANCIA < 20) {
+    digitalWrite(5, HIGH);
+    digitalWrite(2, LOW);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, LOW);
+  } 
+  else {
+    digitalWrite(5, LOW);
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+
+    delay(1000);
+
+    digitalWrite(5, HIGH);
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, HIGH);
+
+    delay(400);
+  }
+}
+</pre>
+
+</div>
+
+</body>
+</html>
