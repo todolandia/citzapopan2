@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -282,17 +282,17 @@
 
     function enviarAsistencia(){
 
-      let mensaje = "📋 *Asistencia CITZapopan*\n\n";
+      let mensaje = "ASISTENCIA CITZAPOPAN\n\n";
 
       const fecha = new Date().toLocaleDateString();
 
-      mensaje += "📅 Fecha: " + fecha + "\n\n";
+      mensaje += "Fecha: " + fecha + "\n\n";
 
       // =========================
       // KINDER
       // =========================
 
-      mensaje += "👶 *Kinder*\n";
+      mensaje += "KINDER\n";
 
       kinder.forEach((alumno,index)=>{
 
@@ -300,8 +300,8 @@
         document.getElementById("k"+index).checked;
 
         mensaje += asistencia
-        ? "✅ " + alumno + "\n"
-        : "❌ " + alumno + "\n";
+        ? alumno + " - ASISTIO\n"
+        : alumno + " - FALTA\n";
 
       });
 
@@ -311,7 +311,7 @@
       // PMENOR
       // =========================
 
-      mensaje += "🧒 *PMenor*\n";
+      mensaje += "PMENOR\n";
 
       pmenor.forEach((alumno,index)=>{
 
@@ -319,8 +319,8 @@
         document.getElementById("p"+index).checked;
 
         mensaje += asistencia
-        ? "✅ " + alumno + "\n"
-        : "❌ " + alumno + "\n";
+        ? alumno + " - ASISTIO\n"
+        : alumno + " - FALTA\n";
 
       });
 
@@ -338,7 +338,7 @@
       // =========================
 
       document.getElementById("summary").innerHTML = `
-        <h2>✅ Asistencia guardada correctamente</h2>
+        <h2>Asistencia guardada correctamente</h2>
         <br>
         <p>La asistencia fue almacenada localmente.</p>
       `;
@@ -347,7 +347,7 @@
       // WHATSAPP
       // =========================
 
-      const numero = "5213317243665";
+      const numero = "5213312345678";
 
       const mensajeCodificado =
       encodeURIComponent(mensaje);
@@ -363,4 +363,4 @@
 
 </body>
 </html>
-```
+
