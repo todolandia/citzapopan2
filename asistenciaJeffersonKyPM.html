@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -119,6 +119,8 @@
       transform:translateX(30px);
     }
 
+    /* BOTON */
+
     .button-container{
       margin-top:35px;
       text-align:center;
@@ -141,6 +143,8 @@
       transform:translateY(-2px);
     }
 
+    /* RESUMEN */
+
     .summary{
       margin-top:20px;
       background:white;
@@ -162,7 +166,7 @@
 
 <body>
 
-  <!-- ENCABEZADO -->
+  <!-- HEADER -->
 
   <div class="header">
     <h1>Jefferson - Kinder y PMenor</h1>
@@ -202,9 +206,11 @@
   <!-- BOTON -->
 
   <div class="button-container">
+
     <button class="send-btn" onclick="enviarAsistencia()">
       Enviar asistencia
     </button>
+
   </div>
 
   <!-- RESUMEN -->
@@ -276,39 +282,45 @@
 
     function enviarAsistencia(){
 
-      let mensaje = "📋 *Asistencia CITZapopan*%0A%0A";
+      let mensaje = "📋 *Asistencia CITZapopan*\n\n";
 
       const fecha = new Date().toLocaleDateString();
 
-      mensaje += "📅 Fecha: " + fecha + "%0A%0A";
+      mensaje += "📅 Fecha: " + fecha + "\n\n";
 
+      // =========================
       // KINDER
+      // =========================
 
-      mensaje += "👶 *Kinder*%0A";
+      mensaje += "👶 *Kinder*\n";
 
       kinder.forEach((alumno,index)=>{
 
-        const asistencia = document.getElementById("k"+index).checked;
+        const asistencia =
+        document.getElementById("k"+index).checked;
 
         mensaje += asistencia
-        ? "✅ " + alumno + "%0A"
-        : "❌ " + alumno + "%0A";
+        ? "✅ " + alumno + "\n"
+        : "❌ " + alumno + "\n";
 
       });
 
-      mensaje += "%0A";
+      mensaje += "\n";
 
+      // =========================
       // PMENOR
+      // =========================
 
-      mensaje += "🧒 *PMenor*%0A";
+      mensaje += "🧒 *PMenor*\n";
 
       pmenor.forEach((alumno,index)=>{
 
-        const asistencia = document.getElementById("p"+index).checked;
+        const asistencia =
+        document.getElementById("p"+index).checked;
 
         mensaje += asistencia
-        ? "✅ " + alumno + "%0A"
-        : "❌ " + alumno + "%0A";
+        ? "✅ " + alumno + "\n"
+        : "❌ " + alumno + "\n";
 
       });
 
@@ -326,7 +338,7 @@
       // =========================
 
       document.getElementById("summary").innerHTML = `
-        <h2>Asistencia guardada correctamente</h2>
+        <h2>✅ Asistencia guardada correctamente</h2>
         <br>
         <p>La asistencia fue almacenada localmente.</p>
       `;
@@ -337,8 +349,11 @@
 
       const numero = "5213317243665";
 
+      const mensajeCodificado =
+      encodeURIComponent(mensaje);
+
       window.open(
-        `https://wa.me/${numero}?text=${mensaje}`,
+        `https://wa.me/${numero}?text=${mensajeCodificado}`,
         "_blank"
       );
 
@@ -348,4 +363,4 @@
 
 </body>
 </html>
-
+```
