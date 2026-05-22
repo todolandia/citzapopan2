@@ -20,7 +20,13 @@
             overflow-x: hidden;
             background: #0A1628;
             color: #ffffff;
-            cursor: none;
+        }
+
+        /* Solo ocultamos cursor en PC, en móvil se muestra normal */
+        @media (min-width: 993px) {
+            body {
+                cursor: none;
+            }
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -44,7 +50,7 @@
             --shadow-accent: 0 0 40px rgba(232, 122, 62, 0.4);
         }
 
-        /* Cursor Personalizado */
+        /* Cursor Personalizado - MÁS FLUIDO */
         .cursor {
             width: 30px;
             height: 30px;
@@ -53,8 +59,9 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.15s ease;
+            transition: transform 0.08s linear, width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
             backdrop-filter: blur(2px);
+            will-change: left, top;
         }
 
         .cursor-dot {
@@ -65,7 +72,8 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.1s ease;
+            transition: transform 0.04s linear;
+            will-change: left, top;
         }
 
         .cursor.active {
@@ -359,6 +367,9 @@
         }
 
         .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
@@ -402,12 +413,31 @@
             font-weight: 700;
             border: 1px solid var(--border-glow);
             transition: all 0.3s;
-            margin-left: 1rem;
         }
 
         .btn-primary:hover, .btn-secondary:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-accent);
+        }
+
+        /* Responsive para botones en móvil */
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                text-align: center;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
 
         /* Cursos */
@@ -849,20 +879,8 @@
                 display: none;
             }
             
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
             .bottom-nav {
                 display: flex;
-            }
-            
-            body {
-                cursor: auto;
-            }
-            
-            .cursor, .cursor-dot {
-                display: none;
             }
             
             .chat-toggle {
@@ -904,7 +922,7 @@
         </div>
     </div>
 
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor (solo visible en PC) -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
@@ -1093,7 +1111,7 @@
         <a href="https://todolandia.github.io/citzapopan2/campus.html"><span>🎓</span><span>Campus</span></a>
     </nav>
 
-    <!-- Chatbot - ESQUINA SUPERIOR DERECHA -->
+    <!-- Chatbot -->
     <button class="chat-toggle" id="chatToggle">💬</button>
     <div class="chatbot" id="chatbot">
         <div class="chat-header">
@@ -1119,27 +1137,49 @@
             }, 2500);
         });
 
-        // Custom Cursor
+        // Custom Cursor - MÁS FLUIDO usando requestAnimationFrame
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
         
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let dotX = 0, dotY = 0;
+        
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 15 + 'px';
-            cursor.style.top = e.clientY - 15 + 'px';
-            cursorDot.style.left = e.clientX - 3 + 'px';
-            cursorDot.style.top = e.clientY - 3 + 'px';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
         
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('a, button, .curso-card')) {
+        // Animación fluida con requestAnimationFrame
+        function animateCursor() {
+            // Suavizado para el círculo exterior (más lento, efecto elástico)
+            cursorX += (mouseX - cursorX) * 0.25;
+            cursorY += (mouseY - cursorY) * 0.25;
+            
+            // Suavizado para el punto interior (más rápido, sigue más de cerca)
+            dotX += (mouseX - dotX) * 0.4;
+            dotY += (mouseY - dotY) * 0.4;
+            
+            cursor.style.left = (cursorX - 15) + 'px';
+            cursor.style.top = (cursorY - 15) + 'px';
+            cursorDot.style.left = (dotX - 3) + 'px';
+            cursorDot.style.top = (dotY - 3) + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        
+        animateCursor();
+        
+        // Efecto hover en elementos interactivos
+        const interactiveElements = document.querySelectorAll('a, button, .curso-card, .btn-primary, .btn-secondary, .btn-curso');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
                 cursor.classList.add('active');
-            }
-        });
-        
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('a, button, .curso-card')) {
+            });
+            el.addEventListener('mouseleave', () => {
                 cursor.classList.remove('active');
-            }
+            });
         });
 
         // Partículas en Canvas
