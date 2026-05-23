@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CITZAPOPAN ARCADE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Orbitron',sans-serif;
+background:#050816;
+overflow-x:hidden;
+color:white;
+}
+
+body::before{
+content:'';
+position:fixed;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(0,255,255,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,255,.05) 1px, transparent 1px);
+background-size:40px 40px;
+animation:gridMove 10s linear infinite;
+z-index:-2;
+}
+
+@keyframes gridMove{
+from{
+transform:translateY(0px);
+}
+to{
+transform:translateY(40px);
+}
+}
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-3;
+overflow:hidden;
+}
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+from{
+opacity:0.2;
+}
+to{
+opacity:1;
+}
+}
+
+header{
+padding:30px;
+text-align:center;
+position:sticky;
+top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:999;
+}
+
+.logo{
+font-size:3rem;
+font-weight:900;
+background:linear-gradient(90deg,#00ffff,#ff00ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.sub{
+margin-top:10px;
+color:#9ca3af;
+}
+
+.search{
+margin-top:20px;
+width:320px;
+max-width:90%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#111827;
+color:white;
+font-size:1rem;
+outline:none;
+box-shadow:
+0 0 10px #00ffff55,
+0 0 20px #ff00ff33;
+}
+
+.games-grid{
+width:95%;
+margin:auto;
+margin-top:40px;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+padding-bottom:100px;
+}
+
+.game-card{
+background:#111827;
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+
+transition:0.35s;
+
+border:1px solid rgba(255,255,255,0.1);
+
+box-shadow:
+0 0 10px rgba(0,255,255,.2),
+0 0 25px rgba(255,0,255,.1);
+}
+
+.game-card:hover{
+transform:translateY(-10px) scale(1.04);
+
+box-shadow:
+0 0 20px #00ffff,
+0 0 40px #ff00ff;
+}
+
+.game-thumb{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.game-info{
+padding:15px;
+}
+
+.game-title{
+font-size:1rem;
+font-weight:bold;
+}
+
+.game-category{
+margin-top:8px;
+font-size:.8rem;
+color:#9ca3af;
+}
+
+.play-button{
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+
+background:linear-gradient(90deg,#00ffff,#ff00ff);
+
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+.logo{
+font-size:2rem;
+}
+
+.games-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<header>
+
+<div class="logo">
+🎮 CITZAPOPAN ARCADE
+</div>
+
+<div class="sub">
+Scratch + TurboWarp Games
+</div>
+
+<input type="text" class="search" id="searchInput" placeholder="Buscar juegos...">
+
+</header>
+
+<section class="games-grid" id="gamesGrid">
+
+<div class="game-card" onclick="openGame('games/space-lab.html')">
+
+<img src="thumbs/space-lab.png" class="game-thumb">
+
+<div class="game-info">
+
+<div class="game-title">
+🚀 SPACE LAB ADVENTURE
+</div>
+
+<div class="game-category">
+Sci-Fi • Plataforma
+</div>
+
+<button class="play-button">
+JUGAR
+</button>
+
+</div>
+</div>
+
+<div class="game-card" onclick="openGame('games/robot-runner.html')">
+
+<img src="thumbs/robot-runner.png" class="game-thumb">
+
+<div class="game-info">
+
+<div class="game-title">
+🤖 ROBOT RUNNER
+</div>
+
+<div class="game-category">
+Arcade • Acción
+</div>
+
+<button class="play-button">
+JUGAR
+</button>
+
+</div>
+</div>
+
+</section>
+
+<script>
+
+const starsContainer =
+document.getElementById('stars');
+
+for(let i=0;i<120;i++){
+
+const star =
+document.createElement('div');
+
+star.classList.add('star');
+
+star.style.left =
+Math.random()*100 + '%';
+
+star.style.top =
+Math.random()*100 + '%';
+
+star.style.animationDuration =
+(Math.random()*3+2) + 's';
+
+starsContainer.appendChild(star);
+
+}
+
+function openGame(url){
+
+window.location.href = url;
+
+}
+
+const searchInput =
+document.getElementById('searchInput');
+
+searchInput.addEventListener('keyup', ()=>{
+
+const value =
+searchInput.value.toLowerCase();
+
+const cards =
+document.querySelectorAll('.game-card');
+
+cards.forEach(card=>{
+
+const title =
+card.innerText.toLowerCase();
+
+if(title.includes(value)){
+card.style.display='block';
+}else{
+card.style.display='none';
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
+
