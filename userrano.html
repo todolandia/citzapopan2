@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uriel Serrano Ruvalcaba | CITZapopan</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+color:#222;
+padding:30px;
+}
+
+/* HEADER */
+
+.header{
+background:linear-gradient(135deg,#5b189b,#7b2cbf);
+color:white;
+padding:30px;
+border-radius:22px;
+margin-bottom:30px;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+position:relative;
+}
+
+.header h1{
+font-size:2.2rem;
+margin-bottom:10px;
+}
+
+.header p{
+opacity:0.9;
+font-size:1rem;
+}
+
+/* BOTON LOGOUT */
+
+.logout-btn{
+position:absolute;
+top:25px;
+right:25px;
+background:white;
+color:#5b189b;
+border:none;
+padding:12px 20px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+}
+
+.logout-btn:hover{
+background:#f3e8ff;
+}
+
+/* SECCIONES */
+
+.section{
+margin-top:35px;
+}
+
+.section-title{
+font-size:1.5rem;
+margin-bottom:20px;
+color:#5b189b;
+}
+
+/* BOTONES */
+
+.button-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.dashboard-btn{
+background:white;
+border:none;
+padding:25px;
+border-radius:20px;
+font-size:1rem;
+cursor:pointer;
+text-align:left;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+text-decoration:none;
+color:#222;
+display:block;
+}
+
+.dashboard-btn:hover{
+transform:translateY(-5px);
+background:#f3e8ff;
+}
+
+.dashboard-btn h3{
+color:#5b189b;
+margin-bottom:10px;
+}
+
+.dashboard-btn p{
+opacity:0.8;
+font-size:0.95rem;
+line-height:1.5;
+}
+
+/* PREVIEW GIF */
+
+.preview{
+width:100%;
+border-radius:15px;
+margin-bottom:15px;
+box-shadow:0 5px 12px rgba(0,0,0,0.08);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- AUTENTICACION -->
+
+<script>
+
+const usuario = localStorage.getItem("usuarioAutenticado");
+
+if(usuario !== "userrano"){
+
+alert("Debes iniciar sesión");
+
+window.location.href = "index.html";
+
+}
+
+/* CERRAR SESION */
+
+function cerrarSesion(){
+
+localStorage.removeItem("usuarioAutenticado");
+
+window.location.href="index.html";
+
+}
+
+</script>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<button onclick="cerrarSesion()" class="logout-btn">
+Cerrar sesión
+</button>
+
+<h1>Uriel Serrano Ruvalcaba</h1>
+
+<p>
+Proyecto especial · Peluches Animatrónicos · CITZapopan
+</p>
+
+</div>
+
+<!-- PROYECTO -->
+
+<div class="section">
+
+<div class="section-title">
+Proyecto Disponible
+</div>
+
+<div class="button-grid">
+
+<div class="dashboard-btn">
+
+<h3>Peluches Animatrónicos</h3>
+
+<p>
+Bienvenido al proyecto de animación de peluches animatrónicos.
+
+Aquí podrás descargar los gifs necesarios para tus animaciones y proyectos en Scratch.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RECURSOS -->
+
+<div class="section">
+
+<div class="section-title">
+Recursos
+</div>
+
+<div class="button-grid">
+
+<!-- CONEJO -->
+
+<a href="https://github.com/todolandia/citzapopan2/blob/main/conejo.gif?raw=true"
+class="dashboard-btn"
+target="_blank">
+
+<img src="https://github.com/todolandia/citzapopan2/blob/main/conejo.gif?raw=true"
+class="preview">
+
+<h3>Gif de Conejo</h3>
+
+<p>
+Descargar animación del conejo.<br><br>
+
+Tiempo de espera recomendado:
+<b>0.1 segundos</b>
+</p>
+
+</a>
+
+<!-- OSO -->
+
+<a href="https://github.com/todolandia/citzapopan2/blob/main/oso.gif?raw=true"
+class="dashboard-btn"
+target="_blank">
+
+<img src="https://github.com/todolandia/citzapopan2/blob/main/oso.gif?raw=true"
+class="preview">
+
+<h3>Gif de Oso</h3>
+
+<p>
+Descargar animación del oso.<br><br>
+
+Tiempo de espera recomendado:
+<b>0.1 segundos</b>
+</p>
+
+</a>
+
+<!-- PERRO -->
+
+<a href="https://github.com/todolandia/citzapopan2/blob/main/perro.gif?raw=true"
+class="dashboard-btn"
+target="_blank">
+
+<img src="https://github.com/todolandia/citzapopan2/blob/main/perro.gif?raw=true"
+class="preview">
+
+<h3>Gif de Perro</h3>
+
+<p>
+Descargar animación del perro.<br><br>
+
+Tiempo de espera recomendado:
+<b>0.1 segundos</b>
+</p>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
