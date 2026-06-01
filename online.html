@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CITZapopan</title>
+<title>CITZapopan - Cursos Online</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
-/* =======================
-   BASE
-======================= */
+/* =========================
+BASE
+========================= */
 html { scroll-behavior: smooth; }
 
 body {
@@ -19,34 +19,35 @@ body {
     margin: 0;
     background: #0A1628;
     color: white;
-    overflow-x: hidden;
 }
 
+/* =========================
+VARIABLES
+========================= */
 :root {
-    --accent-orange:#E87A3E;
-    --primary:#1E4D7B;
-    --bg-card: rgba(21,42,68,0.85);
+    --accent:#E87A3E;
+    --blue:#1E4D7B;
+    --card: rgba(21,42,68,0.85);
 }
 
-/* =======================
-   HEADER
-======================= */
+/* =========================
+HEADER
+========================= */
 header {
     position: fixed;
-    top: 0;
     width: 100%;
+    top: 0;
     background: rgba(10,22,40,0.9);
     backdrop-filter: blur(10px);
-    padding: 15px 40px;
-    z-index: 1000;
+    padding: 15px 30px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    z-index:1000;
 }
 
 header h1 {
+    color: var(--accent);
     font-size: 18px;
-    color: var(--accent-orange);
 }
 
 nav a {
@@ -55,11 +56,11 @@ nav a {
     text-decoration:none;
 }
 
-/* =======================
-   HERO
-======================= */
+/* =========================
+HERO
+========================= */
 .hero {
-    height: 100vh;
+    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -71,52 +72,51 @@ nav a {
     font-size:50px;
 }
 
-.hero span {
-    color: var(--accent-orange);
-}
+.hero span { color: var(--accent); }
 
-/* =======================
-   CURSOS
-======================= */
+/* =========================
+SECCIONES
+========================= */
 .section {
     padding:80px 10%;
 }
 
-.grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+h2 {
+    font-size:32px;
 }
 
+/* =========================
+CARDS
+========================= */
 .card {
-    background: var(--bg-card);
-    padding:20px;
+    background: var(--card);
+    padding:25px;
     border-radius:15px;
+    margin-bottom:25px;
 }
 
-/* VIDEO + IMG SPACE */
-.media-box {
+.media {
     width:100%;
-    height:180px;
+    height:200px;
     background:#0F2C47;
     border-radius:10px;
-    margin-bottom:10px;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#888;
+    margin-bottom:10px;
+    color:#aaa;
 }
 
-/* =======================
-   FORM
-======================= */
-.form-box {
+/* =========================
+FORM
+========================= */
+.form {
     background: rgba(255,255,255,0.05);
-    padding:30px;
-    border-radius:20px;
+    padding:25px;
+    border-radius:15px;
 }
 
-input, select, textarea {
+input, select {
     width:100%;
     padding:12px;
     margin:8px 0;
@@ -125,19 +125,18 @@ input, select, textarea {
 }
 
 button {
-    background: var(--accent-orange);
-    color:white;
+    width:100%;
     padding:12px;
+    background: var(--accent);
     border:none;
     border-radius:10px;
+    color:white;
     cursor:pointer;
-    width:100%;
-    margin-top:10px;
 }
 
-/* =======================
-   FOOTER
-======================= */
+/* =========================
+FOOTER
+========================= */
 footer {
     text-align:center;
     padding:30px;
@@ -162,70 +161,90 @@ footer {
 <section class="hero">
     <div>
         <h2>Innovación <span>Tecnológica</span></h2>
-        <p>Aprende programación, robótica y desarrollo</p>
+        <p>Programación, robótica y videojuegos en línea</p>
     </div>
 </section>
 
-<!-- CURSOS -->
+<!-- =========================
+CURSOS
+========================= -->
 <section id="cursos" class="section">
-    <h2>Cursos</h2>
 
-    <div class="grid">
+<h2>📚 Cursos Online CITZapopan</h2>
+<p>Aprende desde cualquier parte de México con clases en vivo por Google Meet.</p>
 
-        <!-- CURSO 1 -->
-        <div class="card">
-            <div class="media-box">📷 Imagen / Video aquí</div>
-            <h3>Robótica</h3>
-            <p>Aprende Arduino y sensores</p>
-            <div class="media-box">🎥 Video informativo</div>
-        </div>
+<!-- SCRATCH -->
+<div class="card">
+    <h3>🎮 Scratch - Videojuegos</h3>
+    <div class="media">📷 Imagen Scratch</div>
+    <p>Aprende programación visual desde cero.</p>
 
-        <!-- CURSO 2 -->
-        <div class="card">
-            <div class="media-box">📷 Imagen</div>
-            <h3>Scratch</h3>
-            <p>Programación para niños</p>
-            <div class="media-box">🎥 Video informativo</div>
-        </div>
+    <ul>
+        <li>Bloques de programación</li>
+        <li>Variables y ciclos</li>
+        <li>Videojuegos interactivos</li>
+    </ul>
 
-        <!-- CURSO 3 -->
-        <div class="card">
-            <div class="media-box">📷 Imagen</div>
-            <h3>Roblox Studio</h3>
-            <p>Creación de videojuegos</p>
-            <div class="media-box">🎥 Video informativo</div>
-        </div>
+    <div class="media">🎥 Video Scratch</div>
+</div>
 
-    </div>
+<!-- ROBLOX -->
+<div class="card">
+    <h3>🕹️ Roblox Studio</h3>
+    <div class="media">📷 Imagen Roblox</div>
+
+    <ul>
+        <li>Mapas 3D</li>
+        <li>Lua básico</li>
+        <li>Multijugador</li>
+    </ul>
+
+    <div class="media">🎥 Video Roblox</div>
+</div>
+
+<!-- ARDUINO -->
+<div class="card">
+    <h3>⚡ Arduino + Tinkercad</h3>
+    <div class="media">📷 Circuitos</div>
+
+    <ul>
+        <li>Electrónica básica</li>
+        <li>Sensores</li>
+        <li>Programación Arduino</li>
+    </ul>
+
+    <div class="media">🎥 Video Arduino</div>
+</div>
+
 </section>
 
-<!-- FORMULARIO CLASE MUESTRA -->
+<!-- =========================
+CLASE MUESTRA
+========================= -->
 <section id="clase" class="section">
 
-<h2>Agendar Clase Muestra</h2>
+<h2>📅 Agendar Clase Muestra</h2>
 
-<div class="form-box">
+<div class="form">
 
-<form id="formClase">
+<form id="form">
 
-    <input type="text" id="nombre" placeholder="Nombre completo" required>
+<input type="text" id="nombre" placeholder="Nombre completo" required>
+<input type="tel" id="telefono" placeholder="Teléfono" required>
+<input type="email" id="correo" placeholder="Correo (opcional)">
 
-    <input type="tel" id="telefono" placeholder="Teléfono" required>
+<label>Fecha</label>
+<input type="date" id="fecha" required>
 
-    <input type="email" id="correo" placeholder="Correo (opcional)">
+<label>Horario</label>
+<select id="hora">
+    <option>10:00 AM</option>
+    <option>12:00 PM</option>
+    <option>4:00 PM</option>
+    <option>6:00 PM</option>
+</select>
 
-    <label>Fecha</label>
-    <input type="date" id="fecha" required>
-
-    <label>Horario</label>
-    <select id="horario">
-        <option>10:00 AM</option>
-        <option>12:00 PM</option>
-        <option>4:00 PM</option>
-        <option>6:00 PM</option>
-    </select>
-
-    <button type="submit">Agendar</button>
+<button type="submit">Agendar por WhatsApp</button>
 
 </form>
 
@@ -235,38 +254,35 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-    <p>📍 CITZapopan</p>
-    <p>📞 3317243665</p>
+<p>📞 3317243665</p>
+<p>📍 CITZapopan</p>
 </footer>
 
+<!-- =========================
+SCRIPT
+========================= -->
 <script>
 
-document.getElementById("formClase").addEventListener("submit", function(e){
+document.getElementById("form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    let nombre = document.getElementById("nombre").value;
-    let telefono = document.getElementById("telefono").value;
-    let correo = document.getElementById("correo").value;
-    let fecha = document.getElementById("fecha").value;
-    let horario = document.getElementById("horario").value;
+    let nombre = nombre.value;
+    let tel = telefono.value;
+    let correo = correo.value;
+    let fecha = fecha.value;
+    let hora = hora.value;
 
-    // MENSAJE WHATSAPP
     let msg =
-`Hola, quiero agendar clase muestra:
+`Hola quiero clase muestra:
 Nombre: ${nombre}
-Tel: ${telefono}
+Tel: ${tel}
 Correo: ${correo}
 Fecha: ${fecha}
-Horario: ${horario}`;
+Hora: ${hora}`;
 
     let url = "https://wa.me/523317243665?text=" + encodeURIComponent(msg);
 
     window.open(url, "_blank");
-
-    // MAILTO (opcional)
-    window.location.href = `mailto:citzapopan@gmail.com?subject=Clase muestra&body=${encodeURIComponent(msg)}`;
-
-    alert("Solicitud enviada");
 });
 
 </script>
