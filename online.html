@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CITZapopan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =======================
+   BASE
+======================= */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #0A1628;
+    color: white;
+    overflow-x: hidden;
+}
+
+:root {
+    --accent-orange:#E87A3E;
+    --primary:#1E4D7B;
+    --bg-card: rgba(21,42,68,0.85);
+}
+
+/* =======================
+   HEADER
+======================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10,22,40,0.9);
+    backdrop-filter: blur(10px);
+    padding: 15px 40px;
+    z-index: 1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1 {
+    font-size: 18px;
+    color: var(--accent-orange);
+}
+
+nav a {
+    color:white;
+    margin:0 10px;
+    text-decoration:none;
+}
+
+/* =======================
+   HERO
+======================= */
+.hero {
+    height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h2 {
+    font-size:50px;
+}
+
+.hero span {
+    color: var(--accent-orange);
+}
+
+/* =======================
+   CURSOS
+======================= */
+.section {
+    padding:80px 10%;
+}
+
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card {
+    background: var(--bg-card);
+    padding:20px;
+    border-radius:15px;
+}
+
+/* VIDEO + IMG SPACE */
+.media-box {
+    width:100%;
+    height:180px;
+    background:#0F2C47;
+    border-radius:10px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#888;
+}
+
+/* =======================
+   FORM
+======================= */
+.form-box {
+    background: rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:20px;
+}
+
+input, select, textarea {
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    background: var(--accent-orange);
+    color:white;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    width:100%;
+    margin-top:10px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+footer {
+    text-align:center;
+    padding:30px;
+    background:#06101d;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>CITZapopan</h1>
+    <nav>
+        <a href="#cursos">Cursos</a>
+        <a href="#clase">Clase muestra</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h2>Innovación <span>Tecnológica</span></h2>
+        <p>Aprende programación, robótica y desarrollo</p>
+    </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos" class="section">
+    <h2>Cursos</h2>
+
+    <div class="grid">
+
+        <!-- CURSO 1 -->
+        <div class="card">
+            <div class="media-box">📷 Imagen / Video aquí</div>
+            <h3>Robótica</h3>
+            <p>Aprende Arduino y sensores</p>
+            <div class="media-box">🎥 Video informativo</div>
+        </div>
+
+        <!-- CURSO 2 -->
+        <div class="card">
+            <div class="media-box">📷 Imagen</div>
+            <h3>Scratch</h3>
+            <p>Programación para niños</p>
+            <div class="media-box">🎥 Video informativo</div>
+        </div>
+
+        <!-- CURSO 3 -->
+        <div class="card">
+            <div class="media-box">📷 Imagen</div>
+            <h3>Roblox Studio</h3>
+            <p>Creación de videojuegos</p>
+            <div class="media-box">🎥 Video informativo</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FORMULARIO CLASE MUESTRA -->
+<section id="clase" class="section">
+
+<h2>Agendar Clase Muestra</h2>
+
+<div class="form-box">
+
+<form id="formClase">
+
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+
+    <input type="tel" id="telefono" placeholder="Teléfono" required>
+
+    <input type="email" id="correo" placeholder="Correo (opcional)">
+
+    <label>Fecha</label>
+    <input type="date" id="fecha" required>
+
+    <label>Horario</label>
+    <select id="horario">
+        <option>10:00 AM</option>
+        <option>12:00 PM</option>
+        <option>4:00 PM</option>
+        <option>6:00 PM</option>
+    </select>
+
+    <button type="submit">Agendar</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>📍 CITZapopan</p>
+    <p>📞 3317243665</p>
+</footer>
+
+<script>
+
+document.getElementById("formClase").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let nombre = document.getElementById("nombre").value;
+    let telefono = document.getElementById("telefono").value;
+    let correo = document.getElementById("correo").value;
+    let fecha = document.getElementById("fecha").value;
+    let horario = document.getElementById("horario").value;
+
+    // MENSAJE WHATSAPP
+    let msg =
+`Hola, quiero agendar clase muestra:
+Nombre: ${nombre}
+Tel: ${telefono}
+Correo: ${correo}
+Fecha: ${fecha}
+Horario: ${horario}`;
+
+    let url = "https://wa.me/523317243665?text=" + encodeURIComponent(msg);
+
+    window.open(url, "_blank");
+
+    // MAILTO (opcional)
+    window.location.href = `mailto:citzapopan@gmail.com?subject=Clase muestra&body=${encodeURIComponent(msg)}`;
+
+    alert("Solicitud enviada");
+});
+
+</script>
+
+</body>
+</html>
