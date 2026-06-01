@@ -5,152 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CITZapopan - Cursos Online</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 html { scroll-behavior: smooth; }
 
 body {
-    margin:0;
-    font-family:'Inter',sans-serif;
-    background:#0A1628;
-    color:white;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #0A1628;
+    color: white;
+    overflow-x: hidden;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header {
-    position:fixed;
-    top:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 25px;
-    background:rgba(10,22,40,0.9);
-    backdrop-filter:blur(10px);
-    z-index:1000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10,22,40,0.9);
+    backdrop-filter: blur(10px);
+    padding: 10px 0;
+    z-index: 1000;
 }
 
-.logo {
-    font-weight:800;
-    color:#E87A3E;
-    text-decoration:none;
-    font-size:18px;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-nav a {
-    color:white;
-    margin:0 10px;
-    text-decoration:none;
-    font-weight:500;
+.logo a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.back {
-    background:#E87A3E;
-    padding:8px 14px;
-    border-radius:10px;
-}
-
-/* HERO */
+/* ===== HERO ===== */
 .hero {
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
-
-.hero h1 {
-    font-size:48px;
-}
-
-.hero span {
-    color:#E87A3E;
-}
-
-/* SECCIONES */
-.section {
-    padding:90px 10%;
-}
-
-/* CARDS */
-.card {
-    background:rgba(255,255,255,0.05);
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
-.media {
-    height:180px;
-    background:#0F2C47;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:10px;
-    color:#888;
-}
-
-/* FORM */
-.form {
-    background:rgba(255,255,255,0.06);
-    padding:25px;
-    border-radius:15px;
-    max-width:500px;
-}
-
-input, select {
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:none;
-    border-radius:10px;
-}
-
-button {
-    width:100%;
-    padding:12px;
-    background:#E87A3E;
-    border:none;
-    border-radius:10px;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-}
-
-footer {
-    text-align:center;
-    padding:30px;
-    background:#06101d;
-    margin-top:40px;
-}
-
-    .hero {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 100px 5%;
+    padding: 120px 5% 60px;
+    gap: 30px;
 }
 
 .hero-content {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+}
+
+.hero-content span {
+    color: #E87A3E;
 }
 
 .hero-video {
     flex: 1;
-    min-width: 300px;
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 20px;
+    min-width: 280px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(30, 77, 123, 0.5);
-    border: 2px solid rgba(232, 122, 62, 0.3);
+    box-shadow: 0 0 40px rgba(232,122,62,0.4);
 }
 
 .hero-video iframe {
@@ -158,6 +82,55 @@ footer {
     height: 100%;
 }
 
+/* ===== BOTONES ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #E87A3E;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+/* ===== SECCIONES ===== */
+section {
+    padding: 60px 5%;
+}
+
+h2 {
+    color: #E87A3E;
+}
+
+/* ===== CURSOS ===== */
+.curso {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* ===== FORM ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #06101f;
+    margin-top: 40px;
+}
 </style>
 </head>
 
@@ -165,125 +138,110 @@ footer {
 
 <!-- HEADER -->
 <header>
-
-    <!-- LOGO CON LINK -->
-    <a class="logo" href="https://www.citzapopan.com" target="_blank">
-        CITZapopan
-    </a>
-
-    <nav>
-        <a href="#cursos">Cursos</a>
-        <a href="#clase">Clase muestra</a>
-        <a class="back" href="#top">🏠 Menú principal</a>
-    </nav>
-
+    <div class="container">
+        <div class="logo">
+            <a href="https://www.citzapopan.com">CITZapopan</a>
+        </div>
+        <a href="#top" class="btn">Regresar al menú principal</a>
+    </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
+
     <div class="hero-content">
         <h1>Innovación <span>Tecnológica</span></h1>
         <p>Programación, robótica y videojuegos en línea</p>
+        <a href="#formulario" class="btn">Agendar clase muestra</a>
     </div>
 
-    <!-- VIDEO YOUTUBE -->
     <div class="hero-video">
         <iframe 
-            src="https://youtu.be/bF3CLYsoDck?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=1"
-            title="CITZapopan Video"
+            src="https://www.youtube.com/embed/bF3CLYsoDck?autoplay=1&mute=1&loop=1&playlist=bF3CLYsoDck"
             frameborder="0"
-            allow="autoplay; encrypted-media; fullscreen"
+            allow="autoplay; encrypted-media"
             allowfullscreen>
         </iframe>
     </div>
-</section>
 
-   
+</section>
 
 <!-- CURSOS -->
-<section id="cursos" class="section">
+<section>
+    <h2>Cursos Online CITZapopan</h2>
+    <p>
+    Aprende tecnología, programación y robótica desde cualquier lugar de México. Todos nuestros cursos se imparten en vivo mediante Google Meet.
+    </p>
 
-<h2>📚 Cursos Online</h2>
+    <div class="curso">
+        <h3>🎮 Scratch</h3>
+        <p>Creación de videojuegos, lógica, variables, ciclos, IA básica y más.</p>
+    </div>
 
-<div class="card">
-    <h3>🎮 Scratch</h3>
-    <div class="media">Imagen / Video</div>
-    <p>Aprende programación básica creando videojuegos.</p>
-</div>
+    <div class="curso">
+        <h3>🕹 Roblox Studio</h3>
+        <p>Diseño 3D, programación en Lua y creación de mundos interactivos.</p>
+    </div>
 
-<div class="card">
-    <h3>🕹️ Roblox Studio</h3>
-    <div class="media">Imagen / Video</div>
-    <p>Desarrollo de videojuegos 3D con Lua.</p>
-</div>
+    <div class="curso">
+        <h3>⚡ Arduino Simulado</h3>
+        <p>Electrónica, sensores y circuitos virtuales sin hardware físico.</p>
+    </div>
 
-<div class="card">
-    <h3>⚡ Arduino</h3>
-    <div class="media">Imagen / Video</div>
-    <p>Electrónica y simulación en Tinkercad.</p>
-</div>
-
+    <div class="curso">
+        <h3>🌐 HTML Interactivo</h3>
+        <p>Creación de páginas web y red social de aprendizaje.</p>
+    </div>
 </section>
 
-<!-- FORMULARIO -->
-<section id="clase" class="section">
+<!-- FORMULARIO SOLO WHATSAPP -->
+<section id="formulario">
+    <h2>Agendar Clase Muestra</h2>
 
-<h2>📅 Agendar Clase Muestra</h2>
+    <form onsubmit="enviarWhatsApp(event)">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
 
-<div class="form">
+        <select id="curso">
+            <option>Scratch</option>
+            <option>Roblox Studio</option>
+            <option>Arduino</option>
+            <option>HTML</option>
+        </select>
 
-<form id="form">
+        <select id="horario">
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+            <option>6:00 PM</option>
+            <option>7:00 PM</option>
+        </select>
 
-<input type="text" id="nombre" placeholder="Nombre completo" required>
-<input type="tel" id="telefono" placeholder="Teléfono" required>
-
-<label>Fecha</label>
-<input type="date" id="fecha" required>
-
-<label>Horario</label>
-<select id="hora">
-    <option>10:00 AM</option>
-    <option>12:00 PM</option>
-    <option>4:00 PM</option>
-    <option>6:00 PM</option>
-</select>
-
-<button type="submit">Enviar por WhatsApp</button>
-
-</form>
-
-</div>
-
+        <button class="btn" type="submit">Enviar por WhatsApp</button>
+    </form>
 </section>
 
+<!-- FOOTER -->
 <footer>
-<p>📞 3317243665</p>
-<p>CITZapopan</p>
+    <p>© 2026 CITZapopan - Todos los derechos reservados</p>
 </footer>
 
 <script>
-
-document.getElementById("form").addEventListener("submit", function(e){
+function enviarWhatsApp(e){
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value;
-    const telefono = document.getElementById("telefono").value;
-    const fecha = document.getElementById("fecha").value;
-    const hora = document.getElementById("hora").value;
+    let nombre = document.getElementById('nombre').value;
+    let tel = document.getElementById('telefono').value;
+    let curso = document.getElementById('curso').value;
+    let horario = document.getElementById('horario').value;
 
-    const mensaje =
-`📚 Clase muestra CITZapopan
+    let mensaje = `Hola, quiero clase muestra:%0A
+Nombre: ${nombre}%0A
+Teléfono: ${tel}%0A
+Curso: ${curso}%0A
+Horario: ${horario}`;
 
-Nombre: ${nombre}
-Teléfono: ${telefono}
-Fecha: ${fecha}
-Hora: ${hora}`;
-
-    const url = "https://wa.me/523317243665?text=" + encodeURIComponent(mensaje);
-
-    window.open(url, "_blank");
-});
-
+    window.open(`https://wa.me/523317243665?text=${mensaje}`, '_blank');
+}
 </script>
 
 </body>
