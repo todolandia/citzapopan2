@@ -221,6 +221,21 @@ Inicializando Campus Virtual...
 
 <script>
 
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    registrations.forEach(reg => reg.unregister());
+  });
+  }
+
+  /* LIMPIAR CACHE VIEJA */
+if (window.caches) {
+  caches.keys().then(names => {
+    names.forEach(name => {
+      caches.delete(name);
+    });
+  });
+}
+
 /* OCULTAR LOADING */
 
 setTimeout(()=>{
