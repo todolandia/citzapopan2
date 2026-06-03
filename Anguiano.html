@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TobaccoControl Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0d0d0d;
+    color:white;
+    overflow-x:hidden;
+}
+
+:root{
+    --gold:#ffb300;
+    --dark:#111;
+    --light:#f4f4f4;
+}
+
+header{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+header::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,179,0,.25), transparent 30%),
+    radial-gradient(circle at 80% 50%, rgba(255,179,0,.15), transparent 35%),
+    linear-gradient(135deg,#000,#161616,#000);
+}
+
+.hero{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    padding:30px;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,6rem);
+    font-weight:800;
+    line-height:1;
+    text-transform:uppercase;
+}
+
+.hero span{
+    color:var(--gold);
+}
+
+.hero p{
+    margin-top:25px;
+    font-size:1.2rem;
+    color:#d8d8d8;
+    line-height:1.8;
+}
+
+.hero button{
+    margin-top:35px;
+    padding:18px 40px;
+    border:none;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:700;
+    background:var(--gold);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.hero button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(255,179,0,.35);
+}
+
+.glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(255,179,0,.15);
+    filter:blur(120px);
+}
+
+.glow1{
+    top:-150px;
+    left:-150px;
+}
+
+.glow2{
+    bottom:-150px;
+    right:-150px;
+}
+
+section{
+    padding:100px 10%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title h2{
+    font-size:3rem;
+    color:var(--gold);
+}
+
+.section-title p{
+    color:#bbb;
+    margin-top:10px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    padding:35px;
+    border-radius:25px;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:var(--gold);
+    box-shadow:0 20px 50px rgba(255,179,0,.15);
+}
+
+.icon{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:30px;
+}
+
+.stat{
+    text-align:center;
+    background:#161616;
+    padding:40px;
+    border-radius:20px;
+}
+
+.number{
+    font-size:3rem;
+    font-weight:800;
+    color:var(--gold);
+}
+
+.timeline{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.step{
+    background:#151515;
+    padding:30px;
+    border-left:5px solid var(--gold);
+    border-radius:15px;
+}
+
+.cta{
+    text-align:center;
+    background:linear-gradient(135deg,#ffb300,#ff8f00);
+    color:black;
+    border-radius:30px;
+    padding:80px 40px;
+}
+
+.cta h2{
+    font-size:3rem;
+}
+
+.cta p{
+    margin-top:15px;
+    font-size:1.1rem;
+}
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#999;
+    background:#090909;
+}
+
+.fade{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<div class="hero">
+    <h1>Sistema de Ventas <span>Inteligente</span></h1>
+
+    <p>
+        Control total de inventario, trazabilidad de productos,
+        cumplimiento normativo, gestión de sucursales,
+        reportes en tiempo real y análisis de ventas para
+        distribuidores y negocios especializados.
+    </p>
+
+    <button onclick="scrollToSection()">
+        Descubrir Plataforma
+    </button>
+</div>
+
+</header>
+
+<section id="features">
+
+<div class="section-title fade">
+    <h2>Funciones Principales</h2>
+    <p>Tecnología diseñada para operaciones comerciales modernas</p>
+</div>
+
+<div class="features">
+
+<div class="card fade">
+    <div class="icon">📦</div>
+    <h3>Control de Inventario</h3>
+    <p>
+        Monitoreo automático de existencias, entradas,
+        salidas y alertas de reposición.
+    </p>
+</div>
+
+<div class="card fade">
+    <div class="icon">📊</div>
+    <h3>Reportes Ejecutivos</h3>
+    <p>
+        Visualización de ventas diarias, semanales,
+        mensuales y por sucursal.
+    </p>
+</div>
+
+<div class="card fade">
+    <div class="icon">🔒</div>
+    <h3>Cumplimiento</h3>
+    <p>
+        Registro de operaciones y controles para cumplir
+        con requisitos regulatorios.
+    </p>
+</div>
+
+<div class="card fade">
+    <div class="icon">🏪</div>
+    <h3>Múltiples Sucursales</h3>
+    <p>
+        Administra todas tus ubicaciones desde un único panel.
+    </p>
+</div>
+
+<div class="card fade">
+    <div class="icon">💳</div>
+    <h3>Punto de Venta</h3>
+    <p>
+        Cobros rápidos, tickets digitales y sincronización
+        automática con inventario.
+    </p>
+</div>
+
+<div class="card fade">
+    <div class="icon">📱</div>
+    <h3>Acceso Móvil</h3>
+    <p>
+        Consulta métricas y movimientos desde cualquier lugar.
+    </p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="section-title fade">
+    <h2>Indicadores en Tiempo Real</h2>
+</div>
+
+<div class="stats">
+
+<div class="stat fade">
+    <div class="number" data-target="98">0</div>
+    <p>% Precisión Inventario</p>
+</div>
+
+<div class="stat fade">
+    <div class="number" data-target="24">0</div>
+    <p>Horas de Monitoreo</p>
+</div>
+
+<div class="stat fade">
+    <div class="number" data-target="1000">0</div>
+    <p>Productos Gestionados</p>
+</div>
+
+<div class="stat fade">
+    <div class="number" data-target="15">0</div>
+    <p>Sucursales Integradas</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="section-title fade">
+    <h2>Flujo del Sistema</h2>
+</div>
+
+<div class="timeline">
+
+<div class="step fade">
+    <h3>1. Recepción</h3>
+    <p>Registro y validación de mercancía.</p>
+</div>
+
+<div class="step fade">
+    <h3>2. Inventario</h3>
+    <p>Actualización automática de existencias.</p>
+</div>
+
+<div class="step fade">
+    <h3>3. Venta</h3>
+    <p>Operación rápida desde punto de venta.</p>
+</div>
+
+<div class="step fade">
+    <h3>4. Reportes</h3>
+    <p>Análisis y toma de decisiones basada en datos.</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="cta fade">
+    <h2>Transforma tu Operación Comercial</h2>
+    <p>
+        Digitaliza inventarios, ventas y reportes
+        desde una plataforma moderna y segura.
+    </p>
+</div>
+
+</section>
+
+<footer>
+© 2026 TobaccoControl Pro | Plataforma de Gestión Comercial
+</footer>
+
+<script>
+
+function scrollToSection(){
+    document.getElementById("features")
+    .scrollIntoView({behavior:"smooth"});
+}
+
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".fade")
+.forEach(el=>observer.observe(el));
+
+const counters = document.querySelectorAll(".number");
+
+const countObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+
+            let counter = entry.target;
+            let target = +counter.dataset.target;
+            let current = 0;
+
+            let interval = setInterval(()=>{
+
+                current += Math.ceil(target/60);
+
+                if(current >= target){
+                    current = target;
+                    clearInterval(interval);
+                }
+
+                counter.textContent = current;
+
+            },20);
+
+            countObserver.unobserve(counter);
+        }
+    });
+});
+
+counters.forEach(counter=>{
+    countObserver.observe(counter);
+});
+
+</script>
+
+</body>
+</html>
