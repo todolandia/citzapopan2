@@ -247,7 +247,7 @@ input[type=file] { display: none; }
 <div id="contenidoWrap">
 
   <div id="cabecera">
-    <div id="fotoPerfilWrap" onclick="if(esMiPerfil) document.getElementById('fotoInput').click()">
+    <div id="fotoPerfilWrap" onclick="if(window.esMiPerfil) { document.getElementById('fotoInput').click(); } else { console.log('No puedes cambiar la foto de otro perfil. esMiPerfil =', window.esMiPerfil); }">
       <img id="fotoPerfil" src="https://via.placeholder.com/120/1a1a1a/8B5CF6?text=CITZ" alt="Foto de perfil">
     </div>
     <input type="file" id="fotoInput" accept="image/*">
@@ -486,12 +486,23 @@ document.getElementById("fotoInput").addEventListener("change", async (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
-  const refStorage = storageRef(storage, `profile_photos/${miUid}.jpg`);
-  await uploadBytes(refStorage, file);
-  const url = await getDownloadURL(refStorage);
+  if (!miUid) {
+    alert("Debes iniciar sesión para cambiar tu foto.");
+    return;
+  }
 
-  await setDoc(doc(db, "users", miUid), { photoURL: url }, { merge: true });
-  document.getElementById("fotoPerfil").src = url;
+  try {
+    const refStorage = storageRef(storage, `profile_photos/${miUid}.jpg`);
+    await uploadBytes(refStorage, file);
+    const url = await getDownloadURL(refStorage);
+
+    await setDoc(doc(db, "users", miUid), { photoURL: url }, { merge: true });
+    document.getElementById("fotoPerfil").src = url;
+    console.log("Foto subida correctamente:", url);
+  } catch (error) {
+    console.error("Error al subir la foto:", error);
+    alert("No se pudo subir la foto. Error: " + error.message);
+  }
 });
 
 // ---------- COMENTARIOS ----------
@@ -587,8 +598,10 @@ onAuthStateChanged(auth, async (user) => {
 
     if (esMiPerfil) {
       document.getElementById("editarBtn").style.display = "inline-block";
-      document.getElementById("nuevoComentario").style.display = "flex";
     }
+
+    // Cualquier usuario logueado puede comentar (en cualquier perfil, incluido el suyo)
+    document.getElementById("nuevoComentario").style.display = "flex";
 
     cargarNotificaciones();
     actualizarBotonAmistad();
