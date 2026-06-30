@@ -18,22 +18,22 @@ body {
   top: 0;
   width: 100%;
   background: #111;
-  padding: 10px 20px;
+  padding: 14px 28px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   z-index: 9999;
 }
 
 #menu button {
-  padding: 10px 15px;
+  padding: 12px 18px;
   border: none;
   border-radius: 10px;
   background: #8B5CF6;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #menu button:hover { box-shadow: 0 0 10px #8B5CF6; }
@@ -90,21 +90,21 @@ body {
 .notifItem button { padding: 4px 8px; font-size: 12px; margin: 0; }
 
 /* CONTENIDO */
-#contenidoWrap { margin-top: 60px; padding: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+#contenidoWrap { margin-top: 70px; padding: 30px; max-width: 950px; margin-left: auto; margin-right: auto; }
 
 /* CABECERA DE PERFIL */
 #cabecera {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 #fotoPerfilWrap {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: 3px solid #8B5CF6;
+  border: 4px solid #8B5CF6;
   overflow: hidden;
   cursor: pointer;
   position: relative;
@@ -112,6 +112,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
 }
 
 #fotoPerfilWrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -121,54 +122,108 @@ body {
   bottom: 0;
   width: 100%;
   background: rgba(0,0,0,0.6);
-  font-size: 11px;
+  font-size: 14px;
   text-align: center;
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
-#nombrePerfil { margin-top: 10px; font-size: 20px; font-weight: bold; }
+#nombrePerfil { margin-top: 16px; font-size: 30px; font-weight: bold; }
 
-#agregarAmigoBtn { margin-top: 10px; }
+#agregarAmigoBtnTop { margin-top: 14px; font-size: 15px; padding: 12px 20px; }
 
 /* BARRA DE AMIGOS */
 #amigosBar {
-  margin: 15px 0 25px 0;
+  margin: 20px 0 30px 0;
 }
 
-#amigosBar h3 { font-size: 14px; opacity: 0.7; margin-bottom: 8px; }
+#amigosBar h3 { font-size: 17px; opacity: 0.8; margin-bottom: 12px; }
 
 #listaAmigos {
   display: flex;
-  gap: 12px;
+  gap: 18px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .amigoItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60px;
+  width: 80px;
   flex-shrink: 0;
 }
 
 .amigoItem img {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #333;
+  border: 3px solid #333;
 }
 
 .amigoItem span {
-  font-size: 11px;
+  font-size: 13px;
   text-align: center;
-  margin-top: 4px;
+  margin-top: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 60px;
+  width: 80px;
 }
+
+/* MÚSICA */
+#musicaSection {
+  margin-bottom: 30px;
+}
+
+#musicaSection h3 { font-size: 17px; opacity: 0.8; margin-bottom: 12px; }
+
+.cancionItem {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.cancionItem .tituloCancion {
+  font-size: 16px;
+  color: #c084fc;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.cancionItem audio {
+  width: 100%;
+  height: 40px;
+}
+
+.slotEditorMusica {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.slotEditorMusica label {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.slotEditorMusica input[type=text] {
+  width: 100%;
+  padding: 8px;
+  background: #0d0d0d;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.slotEditorMusica input[type=file] { display: inline-block; margin-bottom: 6px; }
 
 /* CONTENIDO LIBRE DEL USUARIO */
 #contenidoLibre {
@@ -179,12 +234,12 @@ body {
 }
 
 /* COMENTARIOS */
-#comentarios h3 { margin-bottom: 10px; }
+#comentarios h3 { font-size: 17px; margin-bottom: 14px; }
 
 #nuevoComentario {
   display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 #nuevoComentario textarea {
@@ -192,41 +247,44 @@ body {
   background: #1a1a1a;
   color: white;
   border: 1px solid #333;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
   resize: vertical;
-  min-height: 40px;
+  min-height: 50px;
 }
 
 .comentarioItem {
   background: #141414;
   border: 1px solid #222;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
-.comentarioItem .autor { font-weight: bold; font-size: 13px; color: #c084fc; }
-.comentarioItem .texto { font-size: 14px; margin-top: 4px; }
-.comentarioItem .fecha { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+.comentarioItem .autor { font-weight: bold; font-size: 15px; color: #c084fc; }
+.comentarioItem .texto { font-size: 16px; margin-top: 6px; line-height: 1.5; }
+.comentarioItem .fecha { font-size: 12px; opacity: 0.5; margin-top: 6px; }
 
 #paginacion {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 20px;
+  font-size: 15px;
 }
 
 #paginacion button:disabled { opacity: 0.3; cursor: default; }
 
 button {
-  padding: 10px;
+  padding: 12px 16px;
   border: none;
   border-radius: 10px;
   background: #8B5CF6;
   color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 button:hover { box-shadow: 0 0 10px #8B5CF6; }
 
@@ -257,6 +315,13 @@ input[type=file] { display: none; }
   <div id="amigosBar">
     <h3>Amigos</h3>
     <div id="listaAmigos"></div>
+  </div>
+
+  <div id="musicaSection">
+    <h3 style="font-size:14px; opacity:0.7; margin-bottom:8px;">🎵 Música</h3>
+    <div id="listaMusica"></div>
+    <button id="editarMusicaBtn" style="display:none; margin-top:10px;" onclick="toggleEditorMusica()">🎚️ Editar canciones</button>
+    <div id="editorMusica" style="display:none; margin-top:10px;"></div>
   </div>
 
   <div id="contenidoLibre"></div>
@@ -333,9 +398,11 @@ async function cargarPerfil() {
       document.getElementById("fotoPerfil").src = data.photoURL;
     }
     document.getElementById("contenidoLibre").innerHTML = data.html || "<p>Este perfil aún no tiene contenido.</p>";
+    renderMusica(data.music);
   } else {
     document.getElementById("nombrePerfil").textContent = "Usuario CITZ";
     document.getElementById("contenidoLibre").innerHTML = "<p>Perfil vacío.</p>";
+    renderMusica([]);
   }
 }
 
@@ -492,7 +559,7 @@ document.getElementById("fotoInput").addEventListener("change", async (e) => {
   }
 
   try {
-    const refStorage = storageRef(storage, `profile_photos/${miUid}.jpg`);
+    const refStorage = storageRef(storage, `profile_photos/${miUid}/foto.jpg`);
     await uploadBytes(refStorage, file);
     const url = await getDownloadURL(refStorage);
 
@@ -575,6 +642,93 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// ---------- MÚSICA ----------
+function renderMusica(musicArr) {
+  const lista = document.getElementById("listaMusica");
+  lista.innerHTML = "";
+
+  const canciones = musicArr || [];
+  const conContenido = canciones.filter(c => c && c.url);
+
+  if (conContenido.length === 0) {
+    lista.innerHTML = "<p style='opacity:0.6; font-size:13px;'>Este perfil aún no tiene canciones.</p>";
+    return;
+  }
+
+  conContenido.forEach((c) => {
+    lista.innerHTML += `
+      <div class="cancionItem">
+        <div class="tituloCancion">${escapeHtml(c.titulo || "Sin título")}</div>
+        <audio controls preload="none" src="${c.url}"></audio>
+      </div>`;
+  });
+}
+
+window.toggleEditorMusica = async () => {
+  const editor = document.getElementById("editorMusica");
+  if (editor.style.display === "block") {
+    editor.style.display = "none";
+    return;
+  }
+
+  const ref = doc(db, "users", uidPerfil);
+  const snap = await getDoc(ref);
+  const musicActual = (snap.exists() && snap.data().music) ? snap.data().music : [{}, {}, {}];
+
+  editor.innerHTML = "";
+  for (let i = 0; i < 3; i++) {
+    const c = musicActual[i] || {};
+    editor.innerHTML += `
+      <div class="slotEditorMusica">
+        <label>Canción ${i + 1} — Título</label>
+        <input type="text" id="musTitulo${i}" placeholder="Nombre de la canción" value="${c.titulo ? c.titulo.replace(/"/g, '&quot;') : ''}">
+        <label>Pegar URL directa de audio (.mp3) — opcional si subes archivo</label>
+        <input type="text" id="musUrl${i}" placeholder="https://..." value="${c.url && !c.subida ? c.url.replace(/"/g, '&quot;') : ''}">
+        <label>O subir archivo de audio</label>
+        <input type="file" id="musArchivo${i}" accept="audio/*">
+      </div>`;
+  }
+  editor.innerHTML += `<button onclick="guardarMusica()">💾 Guardar canciones</button>`;
+  editor.style.display = "block";
+};
+
+window.guardarMusica = async () => {
+  const nuevaMusica = [];
+
+  for (let i = 0; i < 3; i++) {
+    const titulo = document.getElementById(`musTitulo${i}`).value.trim();
+    const urlTexto = document.getElementById(`musUrl${i}`).value.trim();
+    const archivo = document.getElementById(`musArchivo${i}`).files[0];
+
+    let urlFinal = urlTexto;
+    let subida = false;
+
+    if (archivo) {
+      try {
+        const refStorage = storageRef(storage, `music/${miUid}/cancion${i}.mp3`);
+        await uploadBytes(refStorage, archivo);
+        urlFinal = await getDownloadURL(refStorage);
+        subida = true;
+      } catch (error) {
+        console.error("Error al subir canción", i, error);
+        alert(`No se pudo subir la canción ${i + 1}. Error: ${error.message}`);
+        continue;
+      }
+    }
+
+    if (urlFinal) {
+      nuevaMusica.push({ titulo: titulo || `Canción ${i + 1}`, url: urlFinal, subida });
+    } else {
+      nuevaMusica.push({});
+    }
+  }
+
+  await setDoc(doc(db, "users", miUid), { music: nuevaMusica }, { merge: true });
+  alert("Canciones guardadas 🎶");
+  document.getElementById("editorMusica").style.display = "none";
+  renderMusica(nuevaMusica);
+};
+
 // ---------- NAVEGACIÓN ----------
 window.editar = () => {
   window.location.href = `editor.html?uid=${uidPerfil}`;
@@ -598,6 +752,7 @@ onAuthStateChanged(auth, async (user) => {
 
     if (esMiPerfil) {
       document.getElementById("editarBtn").style.display = "inline-block";
+      document.getElementById("editarMusicaBtn").style.display = "inline-block";
     }
 
     // Cualquier usuario logueado puede comentar (en cualquier perfil, incluido el suyo)
