@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Editor CITZ</title>
-
 <style>
 body {
   margin: 0;
@@ -13,29 +12,27 @@ body {
   display: flex;
   height: 100vh;
 }
-
 .editor {
   width: 40%;
   padding: 20px;
   background: #111;
+  overflow-y: auto;
 }
-
 .preview {
   width: 60%;
   padding: 20px;
   border-left: 1px solid #222;
   overflow: auto;
 }
-
 textarea {
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   background: #1a1a1a;
   color: white;
   border: 1px solid #333;
   padding: 10px;
+  box-sizing: border-box;
 }
-
 /* BOTONES */
 button {
   margin-top: 10px;
@@ -48,30 +45,27 @@ button {
 }
 </style>
 </head>
-
 <body>
-
 <div class="editor">
   <h2>Editar perfil</h2>
 
+  <label style="display:block; font-size:13px; opacity:0.8; margin-bottom:6px;">Tu nombre (se muestra en tu perfil, amigos y comentarios)</label>
+  <input type="text" id="nombreEditor" placeholder="Tu nombre" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #333; background:#1a1a1a; color:white; box-sizing:border-box;">
+
+  <label style="display:block; font-size:13px; opacity:0.8; margin-bottom:6px;">Contenido de tu perfil (HTML)</label>
   <textarea id="htmlEditor">
 <h1>CITZapopan</h1>
 <p>Bienvenido a mi perfil 🚀</p>
 <img src="https://via.placeholder.com/200">
   </textarea>
-
   <button onclick="preview()">Vista previa</button>
   <button onclick="guardar()">Guardar</button>
   <button onclick="volver()">Volver al perfil</button>
 </div>
-
 <div class="preview" id="preview"></div>
-
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
   authDomain: "daniel-web-9d96f.firebaseapp.com",
@@ -80,52 +74,47 @@ const firebaseConfig = {
   messagingSenderId: "97835808356",
   appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 // UID
 const params = new URLSearchParams(window.location.search);
 const uid = params.get("uid");
-
 // Vista previa
 window.preview = () => {
   const html = document.getElementById("htmlEditor").value;
   document.getElementById("preview").innerHTML = html;
 };
-
 // Guardar
 window.guardar = async () => {
   const html = document.getElementById("htmlEditor").value;
+  const nombre = document.getElementById("nombreEditor").value.trim();
 
   await setDoc(doc(db, "users", uid), {
-    html: html
+    html: html,
+    displayName: nombre || "Usuario CITZ"
   }, { merge: true });
-
   alert("Guardado 🚀");
 };
-
 // Volver
 window.volver = () => {
   window.location.href = `perfil.html?uid=${uid}`;
 };
-
 // Cargar
 async function cargar() {
   const ref = doc(db, "users", uid);
   const snap = await getDoc(ref);
-
-  if (snap.exists() && snap.data().html) {
-    document.getElementById("htmlEditor").value = snap.data().html;
-    preview();
-  } else {
-    preview();
+  if (snap.exists()) {
+    const data = snap.data();
+    if (data.html) {
+      document.getElementById("htmlEditor").value = data.html;
+    }
+    if (data.displayName) {
+      document.getElementById("nombreEditor").value = data.displayName;
+    }
   }
+  preview();
 }
-
 cargar();
-
 </script>
-
 </body>
 </html>
