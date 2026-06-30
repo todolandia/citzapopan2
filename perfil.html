@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Perfil CITZ</title>
-
 <style>
+* { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: Arial;
@@ -18,12 +18,14 @@ body {
   top: 0;
   width: 100%;
   background: #111;
-  padding: 10px;
-  text-align: right;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
   z-index: 9999;
 }
 
-/* BOTÓN EDITAR */
 #menu button {
   padding: 10px 15px;
   border: none;
@@ -31,28 +33,262 @@ body {
   background: #8B5CF6;
   color: white;
   cursor: pointer;
+  font-size: 14px;
 }
+
+#menu button:hover { box-shadow: 0 0 10px #8B5CF6; }
+
+/* CAMPANA DE NOTIFICACIONES */
+#bellWrap { position: relative; }
+
+#bellBtn {
+  background: #1a1a1a;
+  font-size: 18px;
+  position: relative;
+}
+
+#bellCount {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ec4899;
+  color: white;
+  font-size: 11px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#notifPanel {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  width: 280px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notifItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 13px;
+}
+
+.notifItem img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.notifItem .acciones { margin-left: auto; display: flex; gap: 5px; }
+.notifItem button { padding: 4px 8px; font-size: 12px; margin: 0; }
 
 /* CONTENIDO */
-#contenido {
-  margin-top: 60px;
-  padding: 20px;
+#contenidoWrap { margin-top: 60px; padding: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+/* CABECERA DE PERFIL */
+#cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
+
+#fotoPerfilWrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #8B5CF6;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fotoPerfilWrap img { width: 100%; height: 100%; object-fit: cover; }
+#fotoPerfilWrap:hover::after {
+  content: "📷 Cambiar";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+}
+
+#nombrePerfil { margin-top: 10px; font-size: 20px; font-weight: bold; }
+
+#agregarAmigoBtn { margin-top: 10px; }
+
+/* BARRA DE AMIGOS */
+#amigosBar {
+  margin: 15px 0 25px 0;
+}
+
+#amigosBar h3 { font-size: 14px; opacity: 0.7; margin-bottom: 8px; }
+
+#listaAmigos {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.amigoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.amigoItem img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #333;
+}
+
+.amigoItem span {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 60px;
+}
+
+/* CONTENIDO LIBRE DEL USUARIO */
+#contenidoLibre {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  padding: 20px 0;
+  margin-bottom: 25px;
+}
+
+/* COMENTARIOS */
+#comentarios h3 { margin-bottom: 10px; }
+
+#nuevoComentario {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+#nuevoComentario textarea {
+  flex: 1;
+  background: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px;
+  resize: vertical;
+  min-height: 40px;
+}
+
+.comentarioItem {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comentarioItem .autor { font-weight: bold; font-size: 13px; color: #c084fc; }
+.comentarioItem .texto { font-size: 14px; margin-top: 4px; }
+.comentarioItem .fecha { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+
+#paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+#paginacion button:disabled { opacity: 0.3; cursor: default; }
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #8B5CF6;
+  color: white;
+  cursor: pointer;
+}
+button:hover { box-shadow: 0 0 10px #8B5CF6; }
+
+input[type=file] { display: none; }
 </style>
 </head>
-
 <body>
 
 <div id="menu">
-  <button onclick="editar()">✏️ Editar perfil</button>
+  <div id="bellWrap">
+    <button id="bellBtn" onclick="toggleNotif()">🔔<span id="bellCount" style="display:none;">0</span></button>
+    <div id="notifPanel"></div>
+  </div>
+  <button id="agregarAmigoBtnTop" style="display:none;" onclick="enviarSolicitud()">➕ Agregar amigo</button>
+  <button id="editarBtn" style="display:none;" onclick="editar()">✏️ Editar perfil</button>
 </div>
 
-<div id="contenido"></div>
+<div id="contenidoWrap">
+
+  <div id="cabecera">
+    <div id="fotoPerfilWrap" onclick="if(esMiPerfil) document.getElementById('fotoInput').click()">
+      <img id="fotoPerfil" src="https://via.placeholder.com/120/1a1a1a/8B5CF6?text=CITZ" alt="Foto de perfil">
+    </div>
+    <input type="file" id="fotoInput" accept="image/*">
+    <div id="nombrePerfil">Cargando...</div>
+  </div>
+
+  <div id="amigosBar">
+    <h3>Amigos</h3>
+    <div id="listaAmigos"></div>
+  </div>
+
+  <div id="contenidoLibre"></div>
+
+  <div id="comentarios">
+    <h3>💬 Comentarios</h3>
+    <div id="nuevoComentario" style="display:none;">
+      <textarea id="textoComentario" placeholder="Deja un comentario..."></textarea>
+      <button onclick="enviarComentario()">Enviar</button>
+    </div>
+    <div id="listaComentarios"></div>
+    <div id="paginacion">
+      <button id="btnAnterior" onclick="cambiarPagina(-1)">← Anterior</button>
+      <span id="infoPagina"></span>
+      <button id="btnSiguiente" onclick="cambiarPagina(1)">Siguiente →</button>
+    </div>
+  </div>
+
+</div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc,
+  collection, addDoc, getDocs, query, where, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getAuth, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getStorage, ref as storageRef, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
@@ -65,30 +301,312 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-// UID
+// Perfil que se está viendo (de la URL)
 const params = new URLSearchParams(window.location.search);
-const uid = params.get("uid");
+const uidPerfil = params.get("uid");
 
-// Cargar perfil
+let miUid = null;
+let esMiPerfil = false;
+window.esMiPerfil = false;
+
+let todosComentarios = [];
+let paginaActual = 0;
+const COMENTARIOS_POR_PAGINA = 10;
+
+const SANTITO = {
+  nombre: "Santito",
+  foto: "https://raw.githubusercontent.com/todolandia/CITZ_SOCIAL/refs/heads/main/santito.png"
+};
+
+// ---------- CARGAR PERFIL ----------
 async function cargarPerfil() {
-  const ref = doc(db, "users", uid);
+  const ref = doc(db, "users", uidPerfil);
   const snap = await getDoc(ref);
 
-  if (snap.exists() && snap.data().html) {
-    document.getElementById("contenido").innerHTML = snap.data().html;
+  if (snap.exists()) {
+    const data = snap.data();
+    document.getElementById("nombrePerfil").textContent = data.displayName || "Usuario CITZ";
+    if (data.photoURL) {
+      document.getElementById("fotoPerfil").src = data.photoURL;
+    }
+    document.getElementById("contenidoLibre").innerHTML = data.html || "<p>Este perfil aún no tiene contenido.</p>";
   } else {
-    document.getElementById("contenido").innerHTML = "<h2>Perfil vacío</h2>";
+    document.getElementById("nombrePerfil").textContent = "Usuario CITZ";
+    document.getElementById("contenidoLibre").innerHTML = "<p>Perfil vacío.</p>";
   }
 }
 
-// Ir a editar
-window.editar = () => {
-  window.location.href = `editor.html?uid=${uid}`;
+// ---------- AMIGOS ----------
+async function cargarAmigos() {
+  const lista = document.getElementById("listaAmigos");
+  lista.innerHTML = "";
+
+  // Santito siempre aparece primero
+  lista.innerHTML += `
+    <div class="amigoItem">
+      <img src="${SANTITO.foto}" alt="Santito">
+      <span>${SANTITO.nombre}</span>
+    </div>`;
+
+  const amigosSnap = await getDocs(collection(db, "users", uidPerfil, "friends"));
+  amigosSnap.forEach(d => {
+    const a = d.data();
+    lista.innerHTML += `
+      <div class="amigoItem" style="cursor:pointer" onclick="window.location.href='perfil.html?uid=${d.id}'">
+        <img src="${a.photoURL || 'https://via.placeholder.com/50'}" alt="${a.displayName}">
+        <span>${a.displayName || "Amigo"}</span>
+      </div>`;
+  });
+}
+
+// ---------- ESTADO DE SOLICITUD / BOTÓN AGREGAR AMIGO ----------
+async function actualizarBotonAmistad() {
+  const btn = document.getElementById("agregarAmigoBtnTop");
+  if (!miUid || esMiPerfil) { btn.style.display = "none"; return; }
+
+  // ¿ya somos amigos?
+  const amigoRef = doc(db, "users", miUid, "friends", uidPerfil);
+  const amigoSnap = await getDoc(amigoRef);
+  if (amigoSnap.exists()) {
+    btn.textContent = "✅ Son amigos";
+    btn.disabled = true;
+    btn.style.display = "inline-block";
+    return;
+  }
+
+  // ¿ya hay solicitud pendiente enviada por mí?
+  const q = query(
+    collection(db, "friendRequests"),
+    where("from", "==", miUid),
+    where("to", "==", uidPerfil),
+    where("status", "==", "pending")
+  );
+  const snap = await getDocs(q);
+  if (!snap.empty) {
+    btn.textContent = "⏳ Solicitud enviada";
+    btn.disabled = true;
+  } else {
+    btn.textContent = "➕ Agregar amigo";
+    btn.disabled = false;
+  }
+  btn.style.display = "inline-block";
+}
+
+window.enviarSolicitud = async () => {
+  if (!miUid) { alert("Inicia sesión primero."); return; }
+  const miDoc = await getDoc(doc(db, "users", miUid));
+  const miData = miDoc.exists() ? miDoc.data() : {};
+
+  await addDoc(collection(db, "friendRequests"), {
+    from: miUid,
+    to: uidPerfil,
+    fromName: miData.displayName || "Usuario CITZ",
+    fromPhoto: miData.photoURL || "",
+    status: "pending",
+    timestamp: serverTimestamp()
+  });
+
+  alert("Solicitud enviada 🚀");
+  actualizarBotonAmistad();
 };
 
-cargarPerfil();
+// ---------- NOTIFICACIONES ----------
+window.toggleNotif = () => {
+  const panel = document.getElementById("notifPanel");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+};
 
+async function cargarNotificaciones() {
+  if (!miUid) return;
+
+  const q = query(
+    collection(db, "friendRequests"),
+    where("to", "==", miUid),
+    where("status", "==", "pending")
+  );
+  const snap = await getDocs(q);
+
+  const panel = document.getElementById("notifPanel");
+  const count = document.getElementById("bellCount");
+
+  if (snap.empty) {
+    panel.innerHTML = "<div style='font-size:13px; opacity:0.6; padding:8px;'>Sin notificaciones</div>";
+    count.style.display = "none";
+    return;
+  }
+
+  count.style.display = "flex";
+  count.textContent = snap.size;
+  panel.innerHTML = "";
+
+  snap.forEach(d => {
+    const r = d.data();
+    panel.innerHTML += `
+      <div class="notifItem">
+        <img src="${r.fromPhoto || 'https://via.placeholder.com/32'}">
+        <span>${r.fromName} quiere ser tu amigo</span>
+        <div class="acciones">
+          <button onclick="aceptarSolicitud('${d.id}','${r.from}')">Aceptar</button>
+        </div>
+      </div>`;
+  });
+}
+
+window.aceptarSolicitud = async (reqId, fromUid) => {
+  // marcar solicitud como aceptada
+  await updateDoc(doc(db, "friendRequests", reqId), { status: "accepted" });
+
+  // traer datos de ambos usuarios para guardar espejo en /friends
+  const [miDoc, otroDoc] = await Promise.all([
+    getDoc(doc(db, "users", miUid)),
+    getDoc(doc(db, "users", fromUid))
+  ]);
+  const miData = miDoc.exists() ? miDoc.data() : {};
+  const otroData = otroDoc.exists() ? otroDoc.data() : {};
+
+  await setDoc(doc(db, "users", miUid, "friends", fromUid), {
+    displayName: otroData.displayName || "Usuario CITZ",
+    photoURL: otroData.photoURL || ""
+  });
+  await setDoc(doc(db, "users", fromUid, "friends", miUid), {
+    displayName: miData.displayName || "Usuario CITZ",
+    photoURL: miData.photoURL || ""
+  });
+
+  alert("¡Ahora son amigos! 🎉");
+  cargarNotificaciones();
+  if (uidPerfil === miUid) cargarAmigos();
+};
+
+// ---------- FOTO DE PERFIL ----------
+document.getElementById("fotoInput").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const refStorage = storageRef(storage, `profile_photos/${miUid}.jpg`);
+  await uploadBytes(refStorage, file);
+  const url = await getDownloadURL(refStorage);
+
+  await setDoc(doc(db, "users", miUid), { photoURL: url }, { merge: true });
+  document.getElementById("fotoPerfil").src = url;
+});
+
+// ---------- COMENTARIOS ----------
+async function cargarComentarios() {
+  const q = query(
+    collection(db, "users", uidPerfil, "comments"),
+    orderBy("timestamp", "desc")
+  );
+  const snap = await getDocs(q);
+  todosComentarios = [];
+  snap.forEach(d => todosComentarios.push(d.data()));
+  paginaActual = 0;
+  renderComentarios();
+}
+
+function renderComentarios() {
+  const lista = document.getElementById("listaComentarios");
+  lista.innerHTML = "";
+
+  const inicio = paginaActual * COMENTARIOS_POR_PAGINA;
+  const pagina = todosComentarios.slice(inicio, inicio + COMENTARIOS_POR_PAGINA);
+
+  if (pagina.length === 0) {
+    lista.innerHTML = "<p style='opacity:0.6;'>Aún no hay comentarios.</p>";
+  }
+
+  pagina.forEach(c => {
+    const fecha = c.timestamp && c.timestamp.toDate ? c.timestamp.toDate().toLocaleString() : "";
+    lista.innerHTML += `
+      <div class="comentarioItem">
+        <div class="autor">${c.authorName || "Anónimo"}</div>
+        <div class="texto">${escapeHtml(c.text)}</div>
+        <div class="fecha">${fecha}</div>
+      </div>`;
+  });
+
+  const totalPaginas = Math.max(1, Math.ceil(todosComentarios.length / COMENTARIOS_POR_PAGINA));
+  document.getElementById("infoPagina").textContent = `Página ${paginaActual + 1} de ${totalPaginas}`;
+  document.getElementById("btnAnterior").disabled = paginaActual === 0;
+  document.getElementById("btnSiguiente").disabled = inicio + COMENTARIOS_POR_PAGINA >= todosComentarios.length;
+}
+
+window.cambiarPagina = (delta) => {
+  paginaActual += delta;
+  renderComentarios();
+};
+
+window.enviarComentario = async () => {
+  if (!miUid) { alert("Inicia sesión para comentar."); return; }
+  const texto = document.getElementById("textoComentario").value.trim();
+  if (!texto) return;
+
+  const miDoc = await getDoc(doc(db, "users", miUid));
+  const miData = miDoc.exists() ? miDoc.data() : {};
+
+  await addDoc(collection(db, "users", uidPerfil, "comments"), {
+    authorUid: miUid,
+    authorName: miData.displayName || "Usuario CITZ",
+    text: texto,
+    timestamp: serverTimestamp()
+  });
+
+  document.getElementById("textoComentario").value = "";
+  cargarComentarios();
+};
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str || "";
+  return div.innerHTML;
+}
+
+// ---------- NAVEGACIÓN ----------
+window.editar = () => {
+  window.location.href = `editor.html?uid=${uidPerfil}`;
+};
+
+// ---------- SESIÓN ----------
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    miUid = user.uid;
+    esMiPerfil = (miUid === uidPerfil);
+    window.esMiPerfil = esMiPerfil;
+
+    // Guarda/actualiza datos básicos del usuario logueado (nombre y foto de Google si no tiene una propia)
+    const refMiUser = doc(db, "users", miUid);
+    const snapMiUser = await getDoc(refMiUser);
+    const dataActual = snapMiUser.exists() ? snapMiUser.data() : {};
+    await setDoc(refMiUser, {
+      displayName: dataActual.displayName || user.displayName || "Usuario CITZ",
+      photoURL: dataActual.photoURL || user.photoURL || ""
+    }, { merge: true });
+
+    if (esMiPerfil) {
+      document.getElementById("editarBtn").style.display = "inline-block";
+      document.getElementById("nuevoComentario").style.display = "flex";
+    }
+
+    cargarNotificaciones();
+    actualizarBotonAmistad();
+  }
+
+  cargarPerfil();
+  cargarAmigos();
+  cargarComentarios();
+});
+
+// Si no hay sesión activa todavía, igual mostramos el perfil en modo lectura
+setTimeout(() => {
+  if (!miUid) {
+    cargarPerfil();
+    cargarAmigos();
+    cargarComentarios();
+  }
+}, 1500);
 </script>
 
 </body>
