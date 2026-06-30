@@ -298,7 +298,6 @@ input[type=file] { display: none; }
     <button id="bellBtn" onclick="toggleNotif()">🔔<span id="bellCount" style="display:none;">0</span></button>
     <div id="notifPanel"></div>
   </div>
-  <button id="agregarAmigoBtnTop" style="display:none;" onclick="enviarSolicitud()">➕ Agregar amigo</button>
   <button id="editarBtn" style="display:none;" onclick="editar()">✏️ Editar perfil</button>
 </div>
 
@@ -310,6 +309,7 @@ input[type=file] { display: none; }
     </div>
     <input type="file" id="fotoInput" accept="image/*">
     <div id="nombrePerfil">Cargando...</div>
+    <button id="agregarAmigoBtnTop" style="display:none;" onclick="enviarSolicitud()">➕ Agregar amigo</button>
   </div>
 
   <div id="amigosBar">
@@ -351,9 +351,25 @@ import {
 import {
   getAuth, onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getStorage, ref as storageRef, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+// ---------- CLOUDINARY ----------
+const CLOUDINARY_CLOUD_NAME = "subyy7sq";
+const CLOUDINARY_UPLOAD_PRESET = "citz_uploads";
+
+async function subirACloudinary(archivo) {
+  const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`;
+  const formData = new FormData();
+  formData.append("file", archivo);
+  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+  const respuesta = await fetch(url, { method: "POST", body: formData });
+  if (!respuesta.ok) {
+    const errorTexto = await respuesta.text();
+    throw new Error(`Cloudinary respondió ${respuesta.status}: ${errorTexto}`);
+  }
+  const data = await respuesta.json();
+  return data.secure_url;
+}
 
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
@@ -367,7 +383,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app);
 
 // Perfil que se está viendo (de la URL)
 const params = new URLSearchParams(window.location.search);
@@ -559,10 +574,7 @@ document.getElementById("fotoInput").addEventListener("change", async (e) => {
   }
 
   try {
-    const refStorage = storageRef(storage, `profile_photos/${miUid}/foto.jpg`);
-    await uploadBytes(refStorage, file);
-    const url = await getDownloadURL(refStorage);
-
+    const url = await subirACloudinary(file);
     await setDoc(doc(db, "users", miUid), { photoURL: url }, { merge: true });
     document.getElementById("fotoPerfil").src = url;
     console.log("Foto subida correctamente:", url);
@@ -705,9 +717,7 @@ window.guardarMusica = async () => {
 
     if (archivo) {
       try {
-        const refStorage = storageRef(storage, `music/${miUid}/cancion${i}.mp3`);
-        await uploadBytes(refStorage, archivo);
-        urlFinal = await getDownloadURL(refStorage);
+        urlFinal = await subirACloudinary(archivo);
         subida = true;
       } catch (error) {
         console.error("Error al subir canción", i, error);
