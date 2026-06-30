@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Perfil CITZ</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0d0d0d;
+  color: white;
+}
+/* 🔥 MENÚ SUPERIOR */
+#menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px;
+  text-align: right;
+  z-index: 9999;
+}
+/* BOTÓN EDITAR */
+#menu button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #8B5CF6;
+  color: white;
+  cursor: pointer;
+}
+/* CONTENIDO */
+#contenido {
+  margin-top: 60px;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+<div id="menu">
+  <button onclick="editar()">✏️ Editar perfil</button>
+</div>
+<div id="contenido"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
+  authDomain: "daniel-web-9d96f.firebaseapp.com",
+  projectId: "daniel-web-9d96f",
+  storageBucket: "daniel-web-9d96f.firebasestorage.app",
+  messagingSenderId: "97835808356",
+  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+// UID
+const params = new URLSearchParams(window.location.search);
+const uid = params.get("uid");
+// Cargar perfil
+async function cargarPerfil() {
+  const ref = doc(db, "users", uid);
+  const snap = await getDoc(ref);
+  if (snap.exists() && snap.data().html) {
+    document.getElementById("contenido").innerHTML = snap.data().html;
+  } else {
+    document.getElementById("contenido").innerHTML = "<h2>Perfil vacío</h2>";
+  }
+}
+// Ir a editar
+window.editar = () => {
+  window.location.href = `editor.html?uid=${uid}`;
+};
+cargarPerfil();
+</script>
+</body>
+</html>
