@@ -1,77 +1,261 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Perfil CITZ</title>
-<style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial;
   background: #0d0d0d;
   color: white;
 }
-/* 🔥 MENÚ SUPERIOR */
+
+/* ================= MENÚ ================= */
 #menu {
   position: fixed;
   top: 0;
   width: 100%;
-  background: #111;
-  padding: 10px;
-  text-align: right;
+  background: rgba(17, 17, 17, 0.55);
+  backdrop-filter: blur(14px);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
   z-index: 9999;
 }
-/* BOTÓN EDITAR */
-#menu button {
-  padding: 10px 15px;
+
+button {
+  padding: 12px 16px;
   border: none;
   border-radius: 10px;
   background: #8B5CF6;
   color: white;
   cursor: pointer;
 }
-/* CONTENIDO */
-#contenido {
-  margin-top: 60px;
+
+button:hover {
+  box-shadow: 0 0 10px #8B5CF6;
+}
+
+/* ================= LAYOUT 3 COLUMNAS ================= */
+#contenidoWrap {
+  margin-top: 90px;
+  padding: 25px;
+
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  gap: 25px;
+
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================= GLASS ================= */
+.glass {
+  background: rgba(13, 13, 13, 0.45);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
   padding: 20px;
 }
-</style>
-</head>
-<body>
-<div id="menu">
-  <button onclick="editar()">✏️ Editar perfil</button>
-</div>
-<div id="contenido"></div>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
-  authDomain: "daniel-web-9d96f.firebaseapp.com",
-  projectId: "daniel-web-9d96f",
-  storageBucket: "daniel-web-9d96f.firebasestorage.app",
-  messagingSenderId: "97835808356",
-  appId: "1:97835808356:web:78bd82b50bf4cdd8f59171"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-// UID
-const params = new URLSearchParams(window.location.search);
-const uid = params.get("uid");
-// Cargar perfil
-async function cargarPerfil() {
-  const ref = doc(db, "users", uid);
-  const snap = await getDoc(ref);
-  if (snap.exists() && snap.data().html) {
-    document.getElementById("contenido").innerHTML = snap.data().html;
-  } else {
-    document.getElementById("contenido").innerHTML = "<h2>Perfil vacío</h2>";
-  }
+
+/* ================= IZQUIERDA ================= */
+#leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-// Ir a editar
-window.editar = () => {
-  window.location.href = `editor.html?uid=${uid}`;
-};
-cargarPerfil();
-</script>
+
+/* PERFIL */
+#cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#fotoPerfilWrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #8B5CF6;
+  cursor: pointer;
+}
+
+#fotoPerfilWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#nombrePerfil {
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+/* AMIGOS */
+.amigoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+}
+
+.amigoItem img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+}
+
+/* MUSICA */
+.cancionItem {
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* ================= CENTRO ================= */
+#album {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.albumGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.photoSlot {
+  width: 100%;
+  height: 220px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #1a1a1a;
+  cursor: pointer;
+  position: relative;
+}
+
+.photoSlot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoSlot input {
+  display: none;
+}
+
+/* ================= DERECHA ================= */
+#rightPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.update {
+  background: rgba(255,255,255,0.06);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* COMENTARIOS */
+.comentarioItem {
+  background: #141414;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Perfil CITZ</title>
+
+<link rel="stylesheet" href="perfil.css">
+</head>
+
+<body>
+
+<div id="menu">
+  <button onclick="toggleNotif()">🔔 Notificaciones</button>
+</div>
+
+<div id="contenidoWrap">
+
+  <!-- ================= IZQUIERDA ================= -->
+  <div id="leftPanel">
+
+    <div class="glass" id="cabecera">
+      <div id="fotoPerfilWrap">
+        <img id="fotoPerfil">
+      </div>
+      <div id="nombrePerfil">Cargando...</div>
+    </div>
+
+    <div class="glass">
+      <h3>Amigos</h3>
+      <div id="listaAmigos"></div>
+    </div>
+
+    <div class="glass">
+      <h3>Música</h3>
+      <div id="listaMusica"></div>
+    </div>
+
+    <div class="glass">
+      <h3>Comentarios</h3>
+      <div id="listaComentarios"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= CENTRO ================= -->
+  <div id="album" class="glass">
+
+    <h2>📷 Álbum</h2>
+
+    <div class="albumGrid">
+
+      <label class="photoSlot">
+        <input type="file" accept="image/*">
+        <img>
+      </label>
+
+      <label class="photoSlot">
+        <input type="file" accept="image/*">
+        <img>
+      </label>
+
+      <label class="photoSlot">
+        <input type="file" accept="image/*">
+        <img>
+      </label>
+
+    </div>
+
+  </div>
+
+  <!-- ================= DERECHA ================= -->
+  <div id="rightPanel">
+
+    <div class="glass">
+      <h3>🔥 Actualizaciones</h3>
+
+      <div class="update">Pedro subió una foto</div>
+      <div class="update">Ana comentó una publicación</div>
+      <div class="update">Luis agregó música</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="perfil.js"></script>
+
 </body>
 </html>
