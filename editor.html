@@ -43,11 +43,20 @@ button {
   color: white;
   cursor: pointer;
 }
+button:disabled { opacity: 0.5; cursor: wait; }
+#estadoUid {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
 </style>
 </head>
 <body>
 <div class="editor">
   <h2>Editar perfil</h2>
+
+  <div id="estadoUid">Cargando UID...</div>
 
   <label style="display:block; font-size:13px; opacity:0.8; margin-bottom:6px;">Tu nombre (se muestra en tu perfil, amigos y comentarios)</label>
   <input type="text" id="nombreEditor" placeholder="Tu nombre" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #333; background:#1a1a1a; color:white; box-sizing:border-box;">
@@ -59,13 +68,15 @@ button {
 <img src="https://via.placeholder.com/200">
   </textarea>
   <button onclick="preview()">Vista previa</button>
-  <button onclick="guardar()">Guardar</button>
+  <button id="btnGuardar" onclick="guardar()">Guardar</button>
   <button onclick="volver()">Volver al perfil</button>
 </div>
 <div class="preview" id="preview"></div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBa4g0hbd1FckmtVsyStwSn-eiAdrmAOd0",
   authDomain: "daniel-web-9d96f.firebaseapp.com",
@@ -76,44 +87,96 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// UID
+const auth = getAuth(app);
+
+// UID del perfil que se está editando (de la URL)
 const params = new URLSearchParams(window.location.search);
 const uid = params.get("uid");
+
+let usuarioLogueadoUid = null;
+
 // Vista previa
 window.preview = () => {
   const html = document.getElementById("htmlEditor").value;
   document.getElementById("preview").innerHTML = html;
 };
+
 // Guardar
 window.guardar = async () => {
+  const btn = document.getElementById("btnGuardar");
+  btn.disabled = true;
+  btn.textContent = "Guardando...";
+
   const html = document.getElementById("htmlEditor").value;
   const nombre = document.getElementById("nombreEditor").value.trim();
 
-  await setDoc(doc(db, "users", uid), {
-    html: html,
-    displayName: nombre || "Usuario CITZ"
-  }, { merge: true });
-  alert("Guardado 🚀");
+  console.log("Intentando guardar. UID de la URL:", uid, "| UID logueado:", usuarioLogueadoUid);
+
+  if (!usuarioLogueadoUid) {
+    alert("⚠️ No hay sesión activa todavía. Espera un segundo a que cargue tu cuenta de Google e intenta de nuevo.");
+    btn.disabled = false;
+    btn.textContent = "Guardar";
+    return;
+  }
+
+  if (usuarioLogueadoUid !== uid) {
+    alert("⚠️ El UID de la URL (" + uid + ") no coincide con tu sesión actual (" + usuarioLogueadoUid + "). Por eso Firestore rechaza el guardado: las reglas solo permiten que cada quien edite su propio perfil.");
+    btn.disabled = false;
+    btn.textContent = "Guardar";
+    return;
+  }
+
+  try {
+    await setDoc(doc(db, "users", uid), {
+      html: html,
+      displayName: nombre || "Usuario CITZ"
+    }, { merge: true });
+    alert("Guardado 🚀");
+  } catch (error) {
+    console.error("Error real al guardar:", error);
+    alert("❌ No se pudo guardar. Error: " + error.code + " — " + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Guardar";
+  }
 };
+
 // Volver
 window.volver = () => {
   window.location.href = `perfil.html?uid=${uid}`;
 };
-// Cargar
+
+// Cargar datos existentes
 async function cargar() {
-  const ref = doc(db, "users", uid);
-  const snap = await getDoc(ref);
-  if (snap.exists()) {
-    const data = snap.data();
-    if (data.html) {
-      document.getElementById("htmlEditor").value = data.html;
+  try {
+    const ref = doc(db, "users", uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data.html) {
+        document.getElementById("htmlEditor").value = data.html;
+      }
+      if (data.displayName) {
+        document.getElementById("nombreEditor").value = data.displayName;
+      }
     }
-    if (data.displayName) {
-      document.getElementById("nombreEditor").value = data.displayName;
-    }
+  } catch (error) {
+    console.error("Error al cargar el perfil:", error);
   }
   preview();
 }
+
+// Verificar sesión
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    usuarioLogueadoUid = user.uid;
+    document.getElementById("estadoUid").textContent =
+      "Sesión: " + user.uid + (user.uid === uid ? " ✅ (coincide con el perfil)" : " ⚠️ (NO coincide con uid=" + uid + " de la URL)");
+  } else {
+    document.getElementById("estadoUid").textContent = "⚠️ No has iniciado sesión.";
+  }
+});
+
 cargar();
 </script>
 </body>
