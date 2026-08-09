@@ -1,0 +1,3821 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TechFix Pro | Servicio Técnico</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f4f7fb;
+    --sidebar:#111827;
+    --sidebar-light:#1f2937;
+    --text:#172033;
+    --muted:#718096;
+    --border:#e5eaf1;
+    --white:#ffffff;
+    --green:#10b981;
+    --orange:#f59e0b;
+    --red:#ef4444;
+    --purple:#8b5cf6;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ================= APP ================= */
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:260px;
+    background:linear-gradient(180deg,#111827,#0b1220);
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    display:flex;
+    flex-direction:column;
+    z-index:20;
+}
+
+.brand{
+    height:90px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 25px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#3b82f6,#6366f1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+}
+
+.brand h2{
+    font-size:20px;
+}
+
+.brand small{
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.menu-title{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    color:#64748b;
+    padding:25px 25px 10px;
+}
+
+.menu{
+    width:100%;
+    border:0;
+    background:none;
+    color:#94a3b8;
+    padding:13px 25px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    font-size:14px;
+    text-align:left;
+    transition:.2s;
+}
+
+.menu span{
+    width:20px;
+    text-align:center;
+    font-size:17px;
+}
+
+.menu b{
+    margin-left:auto;
+    background:#334155;
+    color:#cbd5e1;
+    border-radius:20px;
+    padding:2px 7px;
+    font-size:10px;
+}
+
+.menu:hover{
+    background:rgba(255,255,255,.05);
+    color:white;
+}
+
+.menu.active{
+    color:white;
+    background:linear-gradient(90deg,rgba(37,99,235,.3),rgba(37,99,235,.05));
+    border-right:3px solid #3b82f6;
+}
+
+.sidebar-bottom{
+    margin-top:auto;
+    padding:20px;
+}
+
+.user-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:rgba(255,255,255,.05);
+    border-radius:12px;
+}
+
+.user-card strong{
+    display:block;
+    font-size:12px;
+}
+
+.user-card small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.user-card>span{
+    margin-left:auto;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    font-weight:800;
+}
+
+.avatar.small{
+    width:34px;
+    height:34px;
+    font-size:12px;
+}
+
+.version{
+    text-align:center;
+    color:#475569;
+    font-size:9px;
+    margin-top:12px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    min-height:100vh;
+}
+
+.topbar{
+    height:90px;
+    background:white;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+}
+
+.page-title h1{
+    font-size:22px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.icon-button{
+    border:1px solid var(--border);
+    background:white;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    position:relative;
+}
+
+.icon-button i{
+    position:absolute;
+    width:7px;
+    height:7px;
+    background:#ef4444;
+    border-radius:50%;
+    right:8px;
+    top:7px;
+}
+
+.top-user{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding-left:10px;
+    border-left:1px solid var(--border);
+}
+
+.top-user strong{
+    font-size:12px;
+    display:block;
+}
+
+.top-user small{
+    font-size:10px;
+    color:var(--muted);
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+    display:none;
+    padding:30px 35px;
+    animation:fade .25s ease;
+}
+
+.section.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= WELCOME ================= */
+
+.welcome{
+    padding:28px 30px;
+    border-radius:18px;
+    background:
+        radial-gradient(circle at 80% 20%,rgba(96,165,250,.35),transparent 30%),
+        linear-gradient(120deg,#1d4ed8,#312e81);
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+    margin-bottom:25px;
+}
+
+.welcome h2{
+    font-size:27px;
+    margin:8px 0;
+}
+
+.welcome p{
+    color:#dbeafe;
+    font-size:13px;
+}
+
+.welcome-label,
+.eyebrow{
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    opacity:.8;
+}
+
+/* ================= BUTTONS ================= */
+
+.primary-btn{
+    border:0;
+    background:linear-gradient(135deg,var(--primary),#4f46e5);
+    color:white;
+    padding:11px 18px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:12px;
+    box-shadow:0 6px 16px rgba(37,99,235,.22);
+}
+
+.primary-btn:hover{
+    transform:translateY(-1px);
+}
+
+.primary-btn.big{
+    padding:13px 20px;
+}
+
+.primary-btn.full{
+    width:100%;
+    margin-top:15px;
+}
+
+.outline-btn{
+    border:1px solid #dbe3ef;
+    background:white;
+    padding:9px 13px;
+    border-radius:9px;
+    color:#475569;
+    font-weight:600;
+    font-size:11px;
+}
+
+.print-button{
+    width:100%;
+    border:1px solid var(--border);
+    background:white;
+    padding:10px;
+    border-radius:9px;
+    margin-top:8px;
+    font-weight:600;
+    color:#475569;
+}
+
+.link-btn{
+    border:0;
+    background:none;
+    color:var(--primary);
+    font-size:11px;
+    font-weight:700;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(15,23,42,.025);
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.stat-icon{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.blue{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.orange{
+    background:#fff7ed;
+    color:#f59e0b;
+}
+
+.green{
+    background:#ecfdf5;
+    color:#10b981;
+}
+
+.purple{
+    background:#f5f3ff;
+    color:#8b5cf6;
+}
+
+.trend{
+    font-size:9px;
+    background:#f1f5f9;
+    padding:5px 8px;
+    border-radius:20px;
+    color:#64748b;
+}
+
+.trend.positive{
+    color:#059669;
+    background:#ecfdf5;
+}
+
+.stat-label{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.stat-card strong{
+    font-size:24px;
+    display:block;
+}
+
+.progress{
+    height:4px;
+    background:#eef2f7;
+    border-radius:10px;
+    margin-top:15px;
+    overflow:hidden;
+}
+
+.progress span{
+    height:100%;
+    display:block;
+    background:#2563eb;
+    border-radius:10px;
+}
+
+.orange-progress span{
+    background:#f59e0b;
+}
+
+.green-progress span{
+    background:#10b981;
+}
+
+.purple-progress span{
+    background:#8b5cf6;
+}
+
+/* ================= PANELS ================= */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.panel{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(15,23,42,.025);
+}
+
+.panel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.panel-header h3{
+    font-size:14px;
+}
+
+.panel-header p{
+    color:#94a3b8;
+    font-size:10px;
+    margin-top:3px;
+}
+
+/* ================= TABLE ================= */
+
+.table-container{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th{
+    text-align:left;
+    color:#94a3b8;
+    font-size:9px;
+    letter-spacing:.7px;
+    padding:11px 10px;
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:13px 10px;
+    border-bottom:1px solid #f1f5f9;
+    font-size:11px;
+}
+
+tr:last-child td{
+    border-bottom:0;
+}
+
+.client-cell strong{
+    display:block;
+    font-size:11px;
+}
+
+.client-cell small{
+    color:#94a3b8;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.status.recibido{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.status.reparacion{
+    background:#fff7ed;
+    color:#d97706;
+}
+
+.status.listo{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.status.entregado{
+    background:#f1f5f9;
+    color:#64748b;
+}
+
+.status.diagnostico{
+    background:#f5f3ff;
+    color:#7c3aed;
+}
+
+.status.refaccion{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+/* ================= QUICK ================= */
+
+.quick-action{
+    width:100%;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:13px;
+    display:flex;
+    align-items:center;
+    text-align:left;
+    gap:12px;
+    margin-bottom:10px;
+}
+
+.quick-action:hover{
+    border-color:#bfdbfe;
+    background:#f8fbff;
+}
+
+.quick-action div{
+    flex:1;
+}
+
+.quick-action strong{
+    display:block;
+    font-size:11px;
+}
+
+.quick-action small{
+    display:block;
+    color:#94a3b8;
+    font-size:9px;
+    margin-top:2px;
+}
+
+.quick-icon,
+.mini-icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.blue-bg{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.green-bg{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.purple-bg{
+    background:#f5f3ff;
+    color:#7c3aed;
+}
+
+/* ================= HEADINGS ================= */
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.section-heading h2{
+    font-size:24px;
+    margin:6px 0;
+}
+
+.section-heading p{
+    color:#718096;
+    font-size:12px;
+}
+
+.order-badge{
+    background:#eff6ff;
+    border:1px solid #dbeafe;
+    padding:12px 18px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.order-badge small{
+    display:block;
+    color:#64748b;
+    font-size:8px;
+}
+
+.order-badge strong{
+    color:#2563eb;
+}
+
+/* ================= FORM ================= */
+
+.title-with-icon{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.form-grid.two{
+    grid-template-columns:1fr 1fr;
+    margin-top:18px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.field label{
+    font-size:10px;
+    color:#64748b;
+    font-weight:700;
+}
+
+input,
+textarea,
+select{
+    border:1px solid #dfe5ee;
+    background:#fff;
+    border-radius:9px;
+    padding:11px 12px;
+    font-size:11px;
+    color:#172033;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#60a5fa;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.input-icon{
+    position:relative;
+}
+
+.input-icon span{
+    position:absolute;
+    left:11px;
+    top:10px;
+    color:#94a3b8;
+}
+
+.input-icon input{
+    width:100%;
+    padding-left:32px;
+}
+
+/* ================= DEVICE ================= */
+
+.device-selector{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.device{
+    border:1px solid #e2e8f0;
+    background:white;
+    padding:12px 18px;
+    border-radius:10px;
+    color:#64748b;
+    font-size:11px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.device:hover{
+    border-color:#93c5fd;
+}
+
+.device.active{
+    border-color:#3b82f6;
+    background:#eff6ff;
+    color:#2563eb;
+    font-weight:700;
+}
+
+/* ================= ITEMS ================= */
+
+.items-header{
+    display:grid;
+    grid-template-columns:1fr 90px 130px 35px;
+    gap:10px;
+    color:#94a3b8;
+    font-size:9px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.item-row{
+    display:grid;
+    grid-template-columns:1fr 90px 130px 35px;
+    gap:10px;
+    margin-bottom:8px;
+}
+
+.remove-btn{
+    border:0;
+    background:#fef2f2;
+    color:#ef4444;
+    border-radius:8px;
+}
+
+/* ================= CHECKOUT ================= */
+
+.checkout{
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:20px;
+}
+
+.invoice{
+    background:#f8fafc;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.invoice h3{
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.invoice>div{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    color:#64748b;
+    font-size:11px;
+}
+
+.invoice-total{
+    border-top:1px solid #dce3eb;
+    margin-top:8px;
+    padding-top:15px!important;
+    color:#172033!important;
+}
+
+.invoice-total strong{
+    font-size:18px;
+    color:#2563eb;
+}
+
+/* ================= FILTERS ================= */
+
+.filters{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search-box{
+    flex:1;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding-left:35px;
+}
+
+.search-box{
+    color:#94a3b8;
+}
+
+/* ================= INVENTORY ================= */
+
+.inventory-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.inventory-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+}
+
+.inventory-card span{
+    display:block;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.inventory-card small{
+    display:block;
+    color:#718096;
+}
+
+.inventory-card strong{
+    display:block;
+    font-size:22px;
+    margin-top:5px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+    }
+
+    .brand{
+        justify-content:center;
+        padding:0;
+    }
+
+    .brand>div:last-child,
+    .menu-title,
+    .menu:not(.active) span~*,
+    .menu b,
+    .sidebar-bottom{
+        display:none;
+    }
+
+    .menu{
+        justify-content:center;
+        padding:15px 0;
+    }
+
+    .menu span{
+        margin:0;
+    }
+
+    .main{
+        margin-left:70px;
+        width:calc(100% - 70px);
+    }
+
+    .topbar{
+        padding:0 20px;
+    }
+
+    .top-user{
+        display:none;
+    }
+
+    .section{
+        padding:20px;
+    }
+
+    .form-grid,
+    .form-grid.two,
+    .checkout{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .stats,
+    .inventory-grid{
+        grid-template-columns:1fr;
+    }
+
+    .welcome{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .top-actions .icon-button{
+        display:none;
+    }
+
+    .section-heading{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .filters{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            ⚡
+        </div>
+
+        <div>
+            <h2>TechFix</h2>
+            <small>Service Pro</small>
+        </div>
+
+    </div>
+
+    <div class="menu-title">
+        PRINCIPAL
+    </div>
+
+    <nav>
+
+        <button class="menu active"
+                onclick="mostrarSeccion('dashboard',this)">
+            <span>▦</span>
+            Dashboard
+        </button>
+
+        <button class="menu"
+                onclick="mostrarSeccion('nuevaOrden',this)">
+            <span>＋</span>
+            Nueva orden
+        </button>
+
+        <button class="menu"
+                onclick="mostrarSeccion('ordenes',this)">
+            <span>▤</span>
+            Órdenes
+            <b id="menuOrdenes">0</b>
+        </button>
+
+        <button class="menu"
+                onclick="mostrarSeccion('clientes',this)">
+            <span>♙</span>
+            Clientes
+        </button>
+
+    </nav>
+
+    <div class="menu-title">
+        ADMINISTRACIÓN
+    </div>
+
+    <nav>
+
+        <button class="menu"
+                onclick="mostrarSeccion('inventario',this)">
+            <span>▧</span>
+            Inventario
+        </button>
+
+        <button class="menu"
+                onclick="mostrarSeccion('caja',this)">
+            <span>▣</span>
+            Caja
+        </button>
+
+        <button class="menu"
+                onclick="mostrarSeccion('reportes',this)">
+            <span>◫</span>
+            Reportes
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="user-card">
+
+            <div class="avatar">
+                T
+            </div>
+
+            <div>
+                <strong>Técnico</strong>
+                <small>Administrador</small>
+            </div>
+
+            <span>⋮</span>
+
+        </div>
+
+        <div class="version">
+            TechFix Pro v1.0
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div class="page-title">
+
+        <h1 id="tituloSeccion">
+            Dashboard
+        </h1>
+
+        <p id="subtitulo">
+            Resumen general de tu taller
+        </p>
+
+    </div>
+
+    <div class="top-actions">
+
+        <button class="icon-button">
+            🔔
+            <i></i>
+        </button>
+
+        <button class="icon-button">
+            ⚙
+        </button>
+
+        <div class="top-user">
+
+            <div class="avatar small">
+                T
+            </div>
+
+            <div>
+                <strong>Técnico</strong>
+                <small>Administrador</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section id="dashboard" class="section active">
+
+<div class="welcome">
+
+    <div>
+
+        <span class="welcome-label">
+            PANEL GENERAL
+        </span>
+
+        <h2>
+            ¡Hola, Técnico! 👋
+        </h2>
+
+        <p>
+            Aquí tienes un resumen de la actividad de tu taller.
+        </p>
+
+    </div>
+
+    <button class="primary-btn big"
+            onclick="mostrarSeccion('nuevaOrden')">
+        ＋ Nueva orden
+    </button>
+
+</div>
+
+
+<div class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <div class="stat-icon blue">
+                🛠
+            </div>
+
+            <span class="trend positive">
+                Activas
+            </span>
+
+        </div>
+
+        <span class="stat-label">
+            Órdenes activas
+        </span>
+
+        <strong id="ordenesActivas">
+            0
+        </strong>
+
+        <div class="progress">
+            <span style="width:72%"></span>
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <div class="stat-icon orange">
+                ◷
+            </div>
+
+            <span class="trend">
+                Proceso
+            </span>
+
+        </div>
+
+        <span class="stat-label">
+            En reparación
+        </span>
+
+        <strong id="enReparacion">
+            0
+        </strong>
+
+        <div class="progress orange-progress">
+            <span style="width:48%"></span>
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <div class="stat-icon green">
+                $
+            </div>
+
+            <span class="trend positive">
+                MXN
+            </span>
+
+        </div>
+
+        <span class="stat-label">
+            Ventas acumuladas
+        </span>
+
+        <strong id="ventas">
+            $0.00
+        </strong>
+
+        <div class="progress green-progress">
+            <span style="width:65%"></span>
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <div class="stat-icon purple">
+                ♙
+            </div>
+
+            <span class="trend positive">
+                Clientes
+            </span>
+
+        </div>
+
+        <span class="stat-label">
+            Clientes registrados
+        </span>
+
+        <strong id="totalClientes">
+            0
+        </strong>
+
+        <div class="progress purple-progress">
+            <span style="width:82%"></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3>
+                Órdenes recientes
+            </h3>
+
+            <p>
+                Últimos trabajos registrados
+            </p>
+
+        </div>
+
+        <button class="link-btn"
+                onclick="mostrarSeccion('ordenes')">
+            Ver todas →
+        </button>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ORDEN</th>
+                    <th>CLIENTE</th>
+                    <th>EQUIPO</th>
+                    <th>ESTADO</th>
+                    <th>TOTAL</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaDashboard"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3>
+                Acciones rápidas
+            </h3>
+
+            <p>
+                Accesos frecuentes
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button class="quick-action"
+            onclick="mostrarSeccion('nuevaOrden')">
+
+        <span class="quick-icon blue-bg">
+            ＋
+        </span>
+
+        <div>
+
+            <strong>
+                Nueva reparación
+            </strong>
+
+            <small>
+                Registrar equipo
+            </small>
+
+        </div>
+
+        <span>›</span>
+
+    </button>
+
+
+    <button class="quick-action"
+            onclick="mostrarSeccion('caja')">
+
+        <span class="quick-icon green-bg">
+            $
+        </span>
+
+        <div>
+
+            <strong>
+                Registrar venta
+            </strong>
+
+            <small>
+                Venta rápida
+            </small>
+
+        </div>
+
+        <span>›</span>
+
+    </button>
+
+
+    <button class="quick-action"
+            onclick="mostrarSeccion('clientes')">
+
+        <span class="quick-icon purple-bg">
+            ♙
+        </span>
+
+        <div>
+
+            <strong>
+                Clientes
+            </strong>
+
+            <small>
+                Ver contactos
+            </small>
+
+        </div>
+
+        <span>›</span>
+
+    </button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NUEVA ORDEN
+====================================================== -->
+
+<section id="nuevaOrden" class="section">
+
+<div class="section-heading">
+
+    <div>
+
+        <span class="eyebrow">
+            SERVICIO TÉCNICO
+        </span>
+
+        <h2>
+            Nueva orden de servicio
+        </h2>
+
+        <p>
+            Registra toda la información del equipo y reparación.
+        </p>
+
+    </div>
+
+    <div class="order-badge">
+
+        <small>
+            FOLIO
+        </small>
+
+        <strong>
+            #<span id="numeroOrden"></span>
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+    <div class="title-with-icon">
+
+        <div class="mini-icon blue-bg">
+            ♙
+        </div>
+
+        <div>
+
+            <h3>
+                Información del cliente
+            </h3>
+
+            <p>
+                Datos de contacto
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+Nombre completo
+</label>
+
+<div class="input-icon">
+
+<span>♙</span>
+
+<input id="cliente"
+       placeholder="Juan Pérez">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Teléfono
+</label>
+
+<div class="input-icon">
+
+<span>☎</span>
+
+<input id="telefono"
+       placeholder="33 1234 5678">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Correo electrónico
+</label>
+
+<div class="input-icon">
+
+<span>@</span>
+
+<input id="correo"
+       type="email"
+       placeholder="cliente@email.com">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<div class="title-with-icon">
+
+<div class="mini-icon purple-bg">
+💻
+</div>
+
+<div>
+
+<h3>
+Información del equipo
+</h3>
+
+<p>
+Identificación del dispositivo
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="device-selector">
+
+<button class="device active"
+        data-type="Laptop">
+💻 <span>Laptop</span>
+</button>
+
+<button class="device"
+        data-type="PC de escritorio">
+🖥 <span>Desktop</span>
+</button>
+
+<button class="device"
+        data-type="Mac">
+🍎 <span>Mac</span>
+</button>
+
+<button class="device"
+        data-type="Impresora">
+🖨 <span>Impresora</span>
+</button>
+
+<button class="device"
+        data-type="Otro">
+📱 <span>Otro</span>
+</button>
+
+</div>
+
+<input type="hidden"
+       id="tipoEquipo"
+       value="Laptop">
+
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+Marca
+</label>
+
+<input id="marca"
+       placeholder="Lenovo">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Modelo
+</label>
+
+<input id="modelo"
+       placeholder="ThinkPad E14">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Número de serie
+</label>
+
+<input id="serie"
+       placeholder="PF-123456">
+
+</div>
+
+</div>
+
+
+<div class="form-grid two">
+
+<div class="field">
+
+<label>
+Falla reportada
+</label>
+
+<textarea id="problema"
+placeholder="Describe la falla que reporta el cliente..."></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Diagnóstico técnico
+</label>
+
+<textarea id="diagnostico"
+placeholder="Resultado del diagnóstico..."></textarea>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+Servicios y mano de obra
+</h3>
+
+<p>
+Agrega los trabajos realizados
+</p>
+
+</div>
+
+<button class="outline-btn"
+        onclick="agregarServicio()">
+＋ Agregar servicio
+</button>
+
+</div>
+
+
+<div class="items-header">
+
+<span>
+DESCRIPCIÓN
+</span>
+
+<span>
+CANT.
+</span>
+
+<span>
+PRECIO
+</span>
+
+<span></span>
+
+</div>
+
+<div id="servicios"></div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+Refacciones
+</h3>
+
+<p>
+Componentes utilizados
+</p>
+
+</div>
+
+<button class="outline-btn"
+        onclick="agregarRefaccion()">
+＋ Agregar refacción
+</button>
+
+</div>
+
+
+<div class="items-header">
+
+<span>
+PRODUCTO
+</span>
+
+<span>
+CANT.
+</span>
+
+<span>
+PRECIO
+</span>
+
+<span></span>
+
+</div>
+
+<div id="refacciones"></div>
+
+</div>
+
+
+<div class="checkout">
+
+<div>
+
+<div class="field">
+
+<label>
+Estado de la orden
+</label>
+
+<select id="estado">
+
+<option>Recibido</option>
+<option>En diagnóstico</option>
+<option>En reparación</option>
+<option>Esperando refacción</option>
+<option>Listo para entregar</option>
+<option>Entregado</option>
+
+</select>
+
+</div>
+
+
+<div class="field" style="margin-top:15px">
+
+<label>
+Anticipo
+</label>
+
+<input type="number"
+       id="anticipo"
+       value="0"
+       min="0"
+       oninput="calcularTotal()">
+
+</div>
+
+
+<div class="field" style="margin-top:15px">
+
+<label>
+Notas internas
+</label>
+
+<textarea id="notas"
+placeholder="Notas para el técnico..."></textarea>
+
+</div>
+
+</div>
+
+
+<div class="invoice">
+
+<h3>
+Resumen de cobro
+</h3>
+
+<div>
+
+<span>
+Subtotal
+</span>
+
+<strong id="subtotal">
+$0.00
+</strong>
+
+</div>
+
+
+<div>
+
+<span>
+IVA (16%)
+</span>
+
+<strong id="iva">
+$0.00
+</strong>
+
+</div>
+
+
+<div>
+
+<span>
+Total
+</span>
+
+<strong id="total">
+$0.00
+</strong>
+
+</div>
+
+
+<div class="invoice-total">
+
+<span>
+Saldo
+</span>
+
+<strong id="saldo">
+$0.00
+</strong>
+
+</div>
+
+
+<button class="primary-btn full"
+        onclick="guardarOrden()">
+💾 Guardar orden
+</button>
+
+
+<button class="print-button"
+        onclick="imprimirOrden()">
+🖨 Imprimir orden
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ORDENES
+====================================================== -->
+
+<section id="ordenes" class="section">
+
+<div class="section-heading">
+
+<div>
+
+<span class="eyebrow">
+SERVICIO
+</span>
+
+<h2>
+Órdenes de servicio
+</h2>
+
+<p>
+Controla todas las reparaciones.
+</p>
+
+</div>
+
+<button class="primary-btn"
+        onclick="mostrarSeccion('nuevaOrden')">
+＋ Nueva orden
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<div class="filters">
+
+<div class="search-box">
+
+🔍
+
+<input id="buscarOrden"
+       onkeyup="filtrarOrdenes()"
+       placeholder="Buscar cliente, folio o equipo...">
+
+</div>
+
+
+<select id="filtroEstado"
+        onchange="filtrarOrdenes()">
+
+<option value="">
+Todos los estados
+</option>
+
+<option>Recibido</option>
+<option>En diagnóstico</option>
+<option>En reparación</option>
+<option>Esperando refacción</option>
+<option>Listo para entregar</option>
+<option>Entregado</option>
+
+</select>
+
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+FOLIO
+</th>
+
+<th>
+CLIENTE
+</th>
+
+<th>
+EQUIPO
+</th>
+
+<th>
+FECHA
+</th>
+
+<th>
+ESTADO
+</th>
+
+<th>
+TOTAL
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaOrdenes"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CLIENTES
+====================================================== -->
+
+<section id="clientes" class="section">
+
+<div class="section-heading">
+
+<div>
+
+<span class="eyebrow">
+CRM
+</span>
+
+<h2>
+Clientes
+</h2>
+
+<p>
+Historial de clientes y reparaciones.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+CLIENTE
+</th>
+
+<th>
+TELÉFONO
+</th>
+
+<th>
+ÓRDENES
+</th>
+
+<th>
+TOTAL GENERADO
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaClientes"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     INVENTARIO
+====================================================== -->
+
+<section id="inventario" class="section">
+
+<div class="section-heading">
+
+<div>
+
+<span class="eyebrow">
+ALMACÉN
+</span>
+
+<h2>
+Inventario
+</h2>
+
+<p>
+Control de refacciones y productos.
+</p>
+
+</div>
+
+<button class="primary-btn"
+        onclick="nuevoProducto()">
+＋ Nuevo producto
+</button>
+
+</div>
+
+
+<div class="inventory-grid">
+
+<div class="inventory-card">
+
+<span>
+📦
+</span>
+
+<small>
+Productos
+</small>
+
+<strong id="totalProductos">
+0
+</strong>
+
+</div>
+
+
+<div class="inventory-card">
+
+<span>
+⚠️
+</span>
+
+<small>
+Stock bajo
+</small>
+
+<strong id="stockBajo">
+0
+</strong>
+
+</div>
+
+
+<div class="inventory-card">
+
+<span>
+💰
+</span>
+
+<small>
+Valor inventario
+</small>
+
+<strong id="valorInventario">
+$0.00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+PRODUCTO
+</th>
+
+<th>
+CATEGORÍA
+</th>
+
+<th>
+STOCK
+</th>
+
+<th>
+PRECIO
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaInventario"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CAJA
+====================================================== -->
+
+<section id="caja" class="section">
+
+<div class="section-heading">
+
+<div>
+
+<span class="eyebrow">
+FINANZAS
+</span>
+
+<h2>
+Caja
+</h2>
+
+<p>
+Resumen financiero del taller.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat-card">
+
+<span class="stat-label">
+Ingresos
+</span>
+
+<strong id="cajaIngresos">
+$0.00
+</strong>
+
+</div>
+
+<div class="stat-card">
+
+<span class="stat-label">
+Anticipos
+</span>
+
+<strong id="cajaAnticipos">
+$0.00
+</strong>
+
+</div>
+
+<div class="stat-card">
+
+<span class="stat-label">
+Saldos pendientes
+</span>
+
+<strong id="cajaPendientes">
+$0.00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3 style="margin-bottom:15px">
+Resumen de operaciones
+</h3>
+
+<p style="font-size:12px;color:#718096">
+Los ingresos se calculan automáticamente con las órdenes registradas.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     REPORTES
+====================================================== -->
+
+<section id="reportes" class="section">
+
+<div class="section-heading">
+
+<div>
+
+<span class="eyebrow">
+ANÁLISIS
+</span>
+
+<h2>
+Reportes
+</h2>
+
+<p>
+Indicadores generales de tu negocio.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat-card">
+
+<span class="stat-label">
+Total de órdenes
+</span>
+
+<strong id="reporteOrdenes">
+0
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span class="stat-label">
+Clientes
+</span>
+
+<strong id="reporteClientes">
+0
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span class="stat-label">
+Ventas
+</span>
+
+<strong id="reporteVentas">
+$0.00
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span class="stat-label">
+Ticket promedio
+</span>
+
+<strong id="ticketPromedio">
+$0.00
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATOS
+====================================================== */
+
+let ordenes =
+JSON.parse(localStorage.getItem("techfix_ordenes")) || [];
+
+let inventario =
+JSON.parse(localStorage.getItem("techfix_inventario")) || [
+
+    {
+        nombre:"SSD 480GB",
+        categoria:"Almacenamiento",
+        stock:8,
+        precio:850
+    },
+
+    {
+        nombre:"Memoria RAM 8GB",
+        categoria:"Memoria",
+        stock:4,
+        precio:550
+    },
+
+    {
+        nombre:"Cargador Universal",
+        categoria:"Accesorios",
+        stock:2,
+        precio:450
+    },
+
+    {
+        nombre:"Pasta térmica",
+        categoria:"Mantenimiento",
+        stock:10,
+        precio:120
+    }
+
+];
+
+
+/* =====================================================
+   SECCIONES
+====================================================== */
+
+function mostrarSeccion(id, boton){
+
+    document.querySelectorAll(".section")
+        .forEach(s => s.classList.remove("active"));
+
+    const seccion =
+        document.getElementById(id);
+
+    if(seccion){
+        seccion.classList.add("active");
+    }
+
+    document.querySelectorAll(".menu")
+        .forEach(m => m.classList.remove("active"));
+
+    if(boton){
+        boton.classList.add("active");
+    }
+
+    const titulos = {
+
+        dashboard:[
+            "Dashboard",
+            "Resumen general de tu taller"
+        ],
+
+        nuevaOrden:[
+            "Nueva orden",
+            "Registrar reparación"
+        ],
+
+        ordenes:[
+            "Órdenes",
+            "Control de reparaciones"
+        ],
+
+        clientes:[
+            "Clientes",
+            "Directorio de clientes"
+        ],
+
+        inventario:[
+            "Inventario",
+            "Control de productos"
+        ],
+
+        caja:[
+            "Caja",
+            "Control financiero"
+        ],
+
+        reportes:[
+            "Reportes",
+            "Indicadores del negocio"
+        ]
+
+    };
+
+    if(titulos[id]){
+
+        document.getElementById("tituloSeccion")
+            .textContent=titulos[id][0];
+
+        document.getElementById("subtitulo")
+            .textContent=titulos[id][1];
+
+    }
+
+    if(id==="ordenes")
+        renderOrdenes();
+
+    if(id==="clientes")
+        renderClientes();
+
+    if(id==="inventario")
+        renderInventario();
+
+    if(id==="caja")
+        actualizarCaja();
+
+    if(id==="reportes")
+        actualizarReportes();
+
+}
+
+
+/* =====================================================
+   FOLIO
+====================================================== */
+
+function siguienteFolio(){
+
+    let ultimo =
+        Number(localStorage.getItem("techfix_folio")) || 1000;
+
+    ultimo++;
+
+    localStorage.setItem(
+        "techfix_folio",
+        ultimo
+    );
+
+    return ultimo;
+
+}
+
+function prepararNuevaOrden(){
+
+    document.getElementById("numeroOrden")
+        .textContent =
+        (Number(localStorage.getItem("techfix_folio")) || 1000)+1;
+
+}
+
+
+/* =====================================================
+   DISPOSITIVOS
+====================================================== */
+
+document.querySelectorAll(".device")
+.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        document.querySelectorAll(".device")
+            .forEach(x=>x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        document.getElementById("tipoEquipo")
+            .value=btn.dataset.type;
+
+    });
+
+});
+
+
+/* =====================================================
+   SERVICIOS
+====================================================== */
+
+function agregarServicio(
+    descripcion="",
+    cantidad=1,
+    precio=0
+){
+
+    const container =
+        document.getElementById("servicios");
+
+    const row =
+        document.createElement("div");
+
+    row.className="item-row";
+
+    row.innerHTML=`
+
+        <input
+            class="servicio-desc"
+            placeholder="Ej. Mantenimiento preventivo"
+            value="${descripcion}"
+        >
+
+        <input
+            class="servicio-cantidad"
+            type="number"
+            min="1"
+            value="${cantidad}"
+            oninput="calcularTotal()"
+        >
+
+        <input
+            class="servicio-precio"
+            type="number"
+            min="0"
+            value="${precio}"
+            oninput="calcularTotal()"
+        >
+
+        <button
+            class="remove-btn"
+            onclick="this.parentElement.remove();calcularTotal()"
+        >
+            ×
+        </button>
+
+    `;
+
+    container.appendChild(row);
+
+    calcularTotal();
+
+}
+
+
+/* =====================================================
+   REFACCIONES
+====================================================== */
+
+function agregarRefaccion(
+    descripcion="",
+    cantidad=1,
+    precio=0
+){
+
+    const container =
+        document.getElementById("refacciones");
+
+    const row =
+        document.createElement("div");
+
+    row.className="item-row";
+
+    row.innerHTML=`
+
+        <input
+            class="ref-desc"
+            placeholder="Ej. SSD 480GB"
+            value="${descripcion}"
+        >
+
+        <input
+            class="ref-cantidad"
+            type="number"
+            min="1"
+            value="${cantidad}"
+            oninput="calcularTotal()"
+        >
+
+        <input
+            class="ref-precio"
+            type="number"
+            min="0"
+            value="${precio}"
+            oninput="calcularTotal()"
+        >
+
+        <button
+            class="remove-btn"
+            onclick="this.parentElement.remove();calcularTotal()"
+        >
+            ×
+        </button>
+
+    `;
+
+    container.appendChild(row);
+
+    calcularTotal();
+
+}
+
+
+/* =====================================================
+   CALCULAR TOTAL
+====================================================== */
+
+function calcularTotal(){
+
+    let subtotal=0;
+
+    document.querySelectorAll(".servicio-desc")
+    .forEach((x,i)=>{
+
+        const cantidad =
+            Number(
+                document.querySelectorAll(".servicio-cantidad")[i]
+                ?.value
+            ) || 0;
+
+        const precio =
+            Number(
+                document.querySelectorAll(".servicio-precio")[i]
+                ?.value
+            ) || 0;
+
+        subtotal += cantidad*precio;
+
+    });
+
+
+    document.querySelectorAll(".ref-desc")
+    .forEach((x,i)=>{
+
+        const cantidad =
+            Number(
+                document.querySelectorAll(".ref-cantidad")[i]
+                ?.value
+            ) || 0;
+
+        const precio =
+            Number(
+                document.querySelectorAll(".ref-precio")[i]
+                ?.value
+            ) || 0;
+
+        subtotal += cantidad*precio;
+
+    });
+
+
+    const iva =
+        subtotal*0.16;
+
+    const total =
+        subtotal+iva;
+
+    const anticipo =
+        Number(
+            document.getElementById("anticipo").value
+        ) || 0;
+
+    const saldo =
+        Math.max(total-anticipo,0);
+
+
+    document.getElementById("subtotal")
+        .textContent=formatoMoneda(subtotal);
+
+    document.getElementById("iva")
+        .textContent=formatoMoneda(iva);
+
+    document.getElementById("total")
+        .textContent=formatoMoneda(total);
+
+    document.getElementById("saldo")
+        .textContent=formatoMoneda(saldo);
+
+    return {
+        subtotal,
+        iva,
+        total,
+        anticipo,
+        saldo
+    };
+
+}
+
+
+/* =====================================================
+   GUARDAR ORDEN
+====================================================== */
+
+function guardarOrden(){
+
+    const cliente =
+        document.getElementById("cliente").value.trim();
+
+    const telefono =
+        document.getElementById("telefono").value.trim();
+
+    const marca =
+        document.getElementById("marca").value.trim();
+
+    const modelo =
+        document.getElementById("modelo").value.trim();
+
+    const problema =
+        document.getElementById("problema").value.trim();
+
+
+    if(!cliente){
+
+        alert("Escribe el nombre del cliente.");
+
+        document.getElementById("cliente").focus();
+
+        return;
+
+    }
+
+    if(!telefono){
+
+        alert("Escribe el teléfono del cliente.");
+
+        return;
+
+    }
+
+    if(!marca){
+
+        alert("Escribe la marca del equipo.");
+
+        return;
+
+    }
+
+    if(!problema){
+
+        alert("Describe la falla reportada.");
+
+        return;
+
+    }
+
+
+    const folio =
+        siguienteFolio();
+
+    const fecha =
+        new Date().toLocaleDateString("es-MX");
+
+
+    const calculo =
+        calcularTotal();
+
+
+    const servicios=[];
+
+    document.querySelectorAll("#servicios .item-row")
+    .forEach(row=>{
+
+        servicios.push({
+
+            descripcion:
+                row.querySelector(".servicio-desc").value,
+
+            cantidad:
+                Number(row.querySelector(".servicio-cantidad").value),
+
+            precio:
+                Number(row.querySelector(".servicio-precio").value)
+
+        });
+
+    });
+
+
+    const refacciones=[];
+
+    document.querySelectorAll("#refacciones .item-row")
+    .forEach(row=>{
+
+        refacciones.push({
+
+            descripcion:
+                row.querySelector(".ref-desc").value,
+
+            cantidad:
+                Number(row.querySelector(".ref-cantidad").value),
+
+            precio:
+                Number(row.querySelector(".ref-precio").value)
+
+        });
+
+    });
+
+
+    const orden={
+
+        folio,
+
+        fecha,
+
+        cliente,
+
+        telefono,
+
+        correo:
+            document.getElementById("correo").value,
+
+        tipoEquipo:
+            document.getElementById("tipoEquipo").value,
+
+        marca,
+
+        modelo,
+
+        serie:
+            document.getElementById("serie").value,
+
+        problema,
+
+        diagnostico:
+            document.getElementById("diagnostico").value,
+
+        estado:
+            document.getElementById("estado").value,
+
+        servicios,
+
+        refacciones,
+
+        subtotal:
+            calculo.subtotal,
+
+        iva:
+            calculo.iva,
+
+        total:
+            calculo.total,
+
+        anticipo:
+            calculo.anticipo,
+
+        saldo:
+            calculo.saldo,
+
+        notas:
+            document.getElementById("notas").value
+
+    };
+
+
+    ordenes.unshift(orden);
+
+    localStorage.setItem(
+        "techfix_ordenes",
+        JSON.stringify(ordenes)
+    );
+
+
+    alert(
+        `Orden #${folio} guardada correctamente.`
+    );
+
+
+    limpiarFormulario();
+
+    actualizarDashboard();
+
+    prepararNuevaOrden();
+
+    mostrarSeccion("ordenes");
+
+}
+
+
+/* =====================================================
+   LIMPIAR
+====================================================== */
+
+function limpiarFormulario(){
+
+    [
+
+        "cliente",
+        "telefono",
+        "correo",
+        "marca",
+        "modelo",
+        "serie",
+        "problema",
+        "diagnostico",
+        "notas"
+
+    ].forEach(id=>{
+
+        document.getElementById(id).value="";
+
+    });
+
+
+    document.getElementById("anticipo").value=0;
+
+    document.getElementById("servicios").innerHTML="";
+
+    document.getElementById("refacciones").innerHTML="";
+
+    document.getElementById("estado").value="Recibido";
+
+    calcularTotal();
+
+}
+
+
+/* =====================================================
+   TABLA ORDENES
+====================================================== */
+
+function renderOrdenes(lista=ordenes){
+
+    const tbody =
+        document.getElementById("tablaOrdenes");
+
+    tbody.innerHTML="";
+
+
+    if(lista.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+            <td colspan="6"
+                style="text-align:center;color:#94a3b8;padding:30px">
+
+                No hay órdenes registradas.
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    lista.forEach(o=>{
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML=`
+
+        <td>
+            <strong>#${o.folio}</strong>
+        </td>
+
+        <td>
+
+            <div class="client-cell">
+
+                <strong>
+                    ${escapar(o.cliente)}
+                </strong>
+
+                <small>
+                    ${escapar(o.telefono)}
+                </small>
+
+            </div>
+
+        </td>
+
+        <td>
+            ${escapar(o.marca)}
+            ${escapar(o.modelo)}
+        </td>
+
+        <td>
+            ${o.fecha}
+        </td>
+
+        <td>
+            ${badgeEstado(o.estado)}
+        </td>
+
+        <td>
+            <strong>
+                ${formatoMoneda(o.total)}
+            </strong>
+        </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+====================================================== */
+
+function actualizarDashboard(){
+
+    const activas =
+        ordenes.filter(o=>o.estado!=="Entregado").length;
+
+    const reparacion =
+        ordenes.filter(
+            o=>o.estado==="En reparación"
+        ).length;
+
+    const ventas =
+        ordenes.reduce(
+            (sum,o)=>sum+Number(o.total||0),
+            0
+        );
+
+
+    document.getElementById("ordenesActivas")
+        .textContent=activas;
+
+    document.getElementById("enReparacion")
+        .textContent=reparacion;
+
+    document.getElementById("ventas")
+        .textContent=formatoMoneda(ventas);
+
+    document.getElementById("menuOrdenes")
+        .textContent=ordenes.length;
+
+
+    const clientes =
+        obtenerClientes();
+
+    document.getElementById("totalClientes")
+        .textContent=clientes.length;
+
+
+    const tbody =
+        document.getElementById("tablaDashboard");
+
+    tbody.innerHTML="";
+
+
+    ordenes.slice(0,6)
+    .forEach(o=>{
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML=`
+
+        <td>
+            <strong>#${o.folio}</strong>
+        </td>
+
+        <td>
+            ${escapar(o.cliente)}
+        </td>
+
+        <td>
+            ${escapar(o.marca)} ${escapar(o.modelo)}
+        </td>
+
+        <td>
+            ${badgeEstado(o.estado)}
+        </td>
+
+        <td>
+            ${formatoMoneda(o.total)}
+        </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* =====================================================
+   ESTADOS
+====================================================== */
+
+function badgeEstado(estado){
+
+    let clase="recibido";
+
+    if(estado==="En reparación")
+        clase="reparacion";
+
+    if(estado==="Listo para entregar")
+        clase="listo";
+
+    if(estado==="Entregado")
+        clase="entregado";
+
+    if(estado==="En diagnóstico")
+        clase="diagnostico";
+
+    if(estado==="Esperando refacción")
+        clase="refaccion";
+
+
+    return `
+        <span class="status ${clase}">
+            ${escapar(estado)}
+        </span>
+    `;
+
+}
+
+
+/* =====================================================
+   BUSCAR
+====================================================== */
+
+function filtrarOrdenes(){
+
+    const texto =
+        document.getElementById("buscarOrden")
+        .value.toLowerCase();
+
+    const estado =
+        document.getElementById("filtroEstado")
+        .value;
+
+
+    const filtradas =
+        ordenes.filter(o=>{
+
+            const coincideTexto =
+
+                String(o.folio)
+                .includes(texto)
+
+                ||
+
+                o.cliente
+                .toLowerCase()
+                .includes(texto)
+
+                ||
+
+                o.marca
+                .toLowerCase()
+                .includes(texto)
+
+                ||
+
+                o.modelo
+                .toLowerCase()
+                .includes(texto);
+
+
+            const coincideEstado =
+                !estado || o.estado===estado;
+
+
+            return coincideTexto && coincideEstado;
+
+        });
+
+
+    renderOrdenes(filtradas);
+
+}
+
+
+/* =====================================================
+   CLIENTES
+====================================================== */
+
+function obtenerClientes(){
+
+    const mapa={};
+
+
+    ordenes.forEach(o=>{
+
+        if(!mapa[o.cliente]){
+
+            mapa[o.cliente]={
+
+                nombre:o.cliente,
+
+                telefono:o.telefono,
+
+                ordenes:0,
+
+                total:0
+
+            };
+
+        }
+
+
+        mapa[o.cliente].ordenes++;
+
+        mapa[o.cliente].total +=
+            Number(o.total||0);
+
+    });
+
+
+    return Object.values(mapa);
+
+}
+
+
+function renderClientes(){
+
+    const clientes =
+        obtenerClientes();
+
+    const tbody =
+        document.getElementById("tablaClientes");
+
+    tbody.innerHTML="";
+
+
+    clientes.forEach(c=>{
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML=`
+
+        <td>
+            <strong>${escapar(c.nombre)}</strong>
+        </td>
+
+        <td>
+            ${escapar(c.telefono)}
+        </td>
+
+        <td>
+            ${c.ordenes}
+        </td>
+
+        <td>
+            <strong>
+                ${formatoMoneda(c.total)}
+            </strong>
+        </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+
+    if(!clientes.length){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+        <td colspan="4"
+            style="text-align:center;color:#94a3b8;padding:30px">
+
+            Aún no hay clientes registrados.
+
+        </td>
+
+        </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   INVENTARIO
+====================================================== */
+
+function renderInventario(){
+
+    const tbody =
+        document.getElementById("tablaInventario");
+
+    tbody.innerHTML="";
+
+
+    inventario.forEach(p=>{
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML=`
+
+        <td>
+            <strong>${escapar(p.nombre)}</strong>
+        </td>
+
+        <td>
+            ${escapar(p.categoria)}
+        </td>
+
+        <td>
+            ${p.stock}
+        </td>
+
+        <td>
+            ${formatoMoneda(p.precio)}
+        </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+
+    document.getElementById("totalProductos")
+        .textContent=inventario.length;
+
+
+    document.getElementById("stockBajo")
+        .textContent=
+        inventario.filter(p=>p.stock<=3).length;
+
+
+    const valor =
+        inventario.reduce(
+            (sum,p)=>
+                sum+(p.stock*p.precio),
+            0
+        );
+
+
+    document.getElementById("valorInventario")
+        .textContent=
+        formatoMoneda(valor);
+
+}
+
+
+/* =====================================================
+   NUEVO PRODUCTO
+====================================================== */
+
+function nuevoProducto(){
+
+    const nombre =
+        prompt("Nombre del producto:");
+
+    if(!nombre)
+        return;
+
+
+    const categoria =
+        prompt("Categoría:");
+
+    const stock =
+        Number(prompt("Cantidad en stock:",0));
+
+    const precio =
+        Number(prompt("Precio:",0));
+
+
+    inventario.push({
+
+        nombre,
+
+        categoria:
+
+            categoria || "General",
+
+        stock,
+
+        precio
+
+    });
+
+
+    localStorage.setItem(
+        "techfix_inventario",
+        JSON.stringify(inventario)
+    );
+
+
+    renderInventario();
+
+    alert("Producto agregado.");
+
+}
+
+
+/* =====================================================
+   CAJA
+====================================================== */
+
+function actualizarCaja(){
+
+    const ingresos =
+        ordenes.reduce(
+            (sum,o)=>
+                sum+Number(o.total||0),
+            0
+        );
+
+
+    const anticipos =
+        ordenes.reduce(
+            (sum,o)=>
+                sum+Number(o.anticipo||0),
+            0
+        );
+
+
+    const pendientes =
+        ordenes.reduce(
+            (sum,o)=>
+                sum+Number(o.saldo||0),
+            0
+        );
+
+
+    document.getElementById("cajaIngresos")
+        .textContent=formatoMoneda(ingresos);
+
+    document.getElementById("cajaAnticipos")
+        .textContent=formatoMoneda(anticipos);
+
+    document.getElementById("cajaPendientes")
+        .textContent=formatoMoneda(pendientes);
+
+}
+
+
+/* =====================================================
+   REPORTES
+====================================================== */
+
+function actualizarReportes(){
+
+    const clientes =
+        obtenerClientes();
+
+    const ventas =
+        ordenes.reduce(
+            (sum,o)=>sum+Number(o.total||0),
+            0
+        );
+
+    const promedio =
+        ordenes.length
+        ? ventas/ordenes.length
+        : 0;
+
+
+    document.getElementById("reporteOrdenes")
+        .textContent=ordenes.length;
+
+    document.getElementById("reporteClientes")
+        .textContent=clientes.length;
+
+    document.getElementById("reporteVentas")
+        .textContent=formatoMoneda(ventas);
+
+    document.getElementById("ticketPromedio")
+        .textContent=formatoMoneda(promedio);
+
+}
+
+
+/* =====================================================
+   IMPRIMIR
+====================================================== */
+
+function imprimirOrden(){
+
+    const calculo =
+        calcularTotal();
+
+    const cliente =
+        document.getElementById("cliente").value || "Cliente";
+
+    const equipo =
+        document.getElementById("tipoEquipo").value;
+
+    const marca =
+        document.getElementById("marca").value;
+
+    const modelo =
+        document.getElementById("modelo").value;
+
+    const problema =
+        document.getElementById("problema").value;
+
+
+    const ventana =
+        window.open("","_blank");
+
+
+    ventana.document.write(`
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+
+    <title>Orden de Servicio</title>
+
+    <style>
+
+    body{
+        font-family:Arial;
+        padding:40px;
+        color:#222;
+    }
+
+    h1{
+        margin-bottom:5px;
+    }
+
+    .header{
+        border-bottom:2px solid #222;
+        padding-bottom:20px;
+        margin-bottom:25px;
+    }
+
+    .box{
+        border:1px solid #ccc;
+        padding:15px;
+        margin-bottom:15px;
+    }
+
+    .total{
+        font-size:24px;
+        font-weight:bold;
+        text-align:right;
+    }
+
+    </style>
+
+    </head>
+
+    <body>
+
+    <div class="header">
+
+        <h1>TECHFIX PRO</h1>
+
+        <p>
+            Servicio Técnico de Computadoras
+        </p>
+
+    </div>
+
+    <div class="box">
+
+        <strong>CLIENTE</strong>
+
+        <p>${escapar(cliente)}</p>
+
+    </div>
+
+    <div class="box">
+
+        <strong>EQUIPO</strong>
+
+        <p>
+            ${escapar(equipo)}
+            ${escapar(marca)}
+            ${escapar(modelo)}
+        </p>
+
+    </div>
+
+    <div class="box">
+
+        <strong>FALLA REPORTADA</strong>
+
+        <p>${escapar(problema)}</p>
+
+    </div>
+
+    <div class="box">
+
+        <p>
+            Subtotal:
+            ${formatoMoneda(calculo.subtotal)}
+        </p>
+
+        <p>
+            IVA:
+            ${formatoMoneda(calculo.iva)}
+        </p>
+
+        <p class="total">
+            TOTAL:
+            ${formatoMoneda(calculo.total)}
+        </p>
+
+    </div>
+
+    <br>
+
+    <p>
+        Firma del cliente:
+        ______________________________
+    </p>
+
+    <script>
+        window.print();
+    <\/script>
+
+    </body>
+
+    </html>
+
+    `);
+
+    ventana.document.close();
+
+}
+
+
+/* =====================================================
+   UTILIDADES
+====================================================== */
+
+function formatoMoneda(valor){
+
+    return new Intl.NumberFormat(
+        "es-MX",
+        {
+            style:"currency",
+            currency:"MXN"
+        }
+    ).format(valor||0);
+
+}
+
+
+function escapar(texto){
+
+    return String(texto||"")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   INICIO
+====================================================== */
+
+prepararNuevaOrden();
+
+actualizarDashboard();
+
+renderInventario();
+
+</script>
+
+</body>
+</html>
+```
